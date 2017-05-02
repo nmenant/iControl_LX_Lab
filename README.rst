@@ -5,44 +5,72 @@ F5 iControlLX Extensions Training Lab
 About
 -----
 
-*What is iControl?*
+This lab will teach you how to create F5 iControl REST API extensions. If you
+are NOT familiar with the iControl REST API, here are the labs you are looking
+for `Automation & Orchestration Introduction Course
+<http://f5-automation-labs.readthedocs.io/en/v2.0/index.html>`_.
 
-iControl is the REST API implemented on F5's BIG-IP devices and the iWorkflow platform.
+While this guide assumes no prior experience with the iControlLX framework, it
+does assume that the reader has obtained a basic understanding of Javascript,
+and asynchronous, event-driven programming.
 
-*What is iControlLX?*
+For more about Node.js, refer to: `Nodejs.org <https://nodejs.org/en/about/>`_.
 
-iControlLX (iControl Language eXtension) is the framework upon which F5's iControl REST API is developed.
+If you want to get in on the awesome world of Node.js, I highly recommend the
+free on-line training resource, `Codecademy
+<https://www.codecademy.com/learn/javascript>`_.
 
-|image001|
+**What is iControl?**
 
-*What is an iControlLX extension?*
+iControl is the REST API implemented on F5's BIG-IP devices and the iWorkflow
+platform. This of us focussed on automation use the REST API over the GUI/CLI.
 
-An iControlLX extension represents custom functionality presented through the iControl REST API.
-In the same way that iControl was built, custom REST API extensions can be developed.
+**What is iControlLX?**
 
-|image002|
+iControlLX (iControl Language eXtension) is the framework upon which F5's
+iControl REST API is developed, among other things, as show in the following
+diagram:
 
-F5 has developed some iControlLX extensions to simlify operational processes. These extensions are available at: https://devcentral.f5.com/wiki/DevOps.Default.aspx
+.. image:: _static/image001.png
 
-|image003|
+**What is an iControlLX extension?**
+
+An iControlLX extension represents additional functionality built upon the
+iControlLX framework, and presented through the iControl REST API.
+
+.. image:: _static/image002.png
+
+F5 has already developed some iControlLX extensions to simplify operational
+processes. These extensions are available on `DevCentral
+<https://devcentral.f5.com/wiki/DevOps.Default.aspx>`_ and are built to address
+the following use cases:
 
 * BIG-IP Device On-boarding / Device config reset
 * Create BIG-IP Cluster
 
-This Trianing Lab will teach you how to create you own iControlLX extenions using the F5 iControlLX framework.
+This training lab concerns itself with teaching you how to develop your own
+iControlLX extensions.
 
-*What else does the iControlLX framework do?*
-
-You will also hear F5 iAppsLX  use spcialist iControlLX workers, in addition to an option presentation layer, to deliver F5's net generation application templating system. They are dynami provrammable, declarative interfaces.
-
-|image004|
+.. image:: _static/image003.png
 
 
-*iControlLX architectural *
-The iControlLX
+**What else does the iControlLX framework do?**
+
+You will notice that the iControlLX framwork is references in F5 iAppsLX.
+iAppsLX use spcialist iControlLX workers, in addition to an optional
+presentation layer, to deliver F5's net generation application
+templating system.
+
+.. image:: _static/image004.png
 
 
-.. |image001| image:: _static/image001.png
-.. |image002| image:: _static/image002.png
-.. |image003| image:: _static/image003.png
-.. |image004| image:: _static/image004.png
+**What is iControlLX made of?**
+The iControlLX framework consists of a `Node.js
+<https://nodejs.org/>`_ implementation, in addition to supporting services that
+enable interaction with F5 technologies. For example, developers can use
+`restOperation()` to communicate with a *trusted* BIG-IP device, instead of
+crafting a HTTP transaction and cooding the auth/trust themselves. For more
+on these iControlLX services, visit the `iControlLX SDK <Get a link>`_. Or, just
+follow the lab and we will reference the SDK as appropriate.
+
+As the DevOps mantra says, "Fail Fast, Fail Forward!"
