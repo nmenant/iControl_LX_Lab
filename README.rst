@@ -13,7 +13,7 @@ iControl is the REST API implemented on F5's BIG-IP devices and iWorkflow platfo
 
 iControlLX (iControl **L**anguage e**X**tension) is the framework upon which F5's iControl REST API is developed.
 
-|image1|
+.. |image1| _static/image001.png
 
 *What is an iControlLX extension?*
 
