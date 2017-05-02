@@ -11,14 +11,14 @@ for `Automation & Orchestration Introduction Course
 <http://f5-automation-labs.readthedocs.io/en/v2.0/index.html>`_.
 
 While this guide assumes no prior experience with the iControlLX framework, it
-does assume that the reader has obtained a basic understanding of Javascript,
-and asynchronous, event-driven programming.
+does assume that the reader has obtained a basic understanding of REST APIs,
+Javascript, and asynchronous, event-driven programming.
 
 For more about Node.js, refer to: `Nodejs.org <https://nodejs.org/en/about/>`_.
 
 If you want to get in on the awesome world of Node.js, I highly recommend the
-free on-line training resource, `Codecademy
-<https://www.codecademy.com/learn/javascript>`_.
+free on-line training resource at `Codecademy
+<https://www.codecademy.com/learn/javascript>`_ to get you started.
 
 **What is iControl?**
 
