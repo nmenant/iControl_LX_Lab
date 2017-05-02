@@ -7,24 +7,24 @@ About
 
 *What is iControl?*
 
-iControl is the REST API implemented on F5's BIG-IP devices and iWorkflow platform.
+iControl is the REST API implemented on F5's BIG-IP devices and the iWorkflow platform.
 
 *What is iControlLX?*
 
-iControlLX (iControl **L**anguage e**X**tension) is the framework upon which F5's iControl REST API is developed.
+iControlLX (iControl Language eXtension) is the framework upon which F5's iControl REST API is developed.
 
-.. |image1| image:: _static/image001.png
+|image001|
 
 *What is an iControlLX extension?*
 
 An iControlLX extension represents custom functionality presented through the iControl REST API.
 In the same way that iControl was built, custom REST API extensions can be developed.
 
-|image2|
+|image002|
 
 F5 has developed some iControlLX extensions to simlify operational processes. These extensions are available at: https://devcentral.f5.com/wiki/DevOps.Default.aspx
 
-|image3|
+|image003|
 
 * BIG-IP Device On-boarding / Device config reset
 * Create BIG-IP Cluster
@@ -35,8 +35,14 @@ This Trianing Lab will teach you how to create you own iControlLX extenions usin
 
 You will also hear F5 iAppsLX  use spcialist iControlLX workers, in addition to an option presentation layer, to deliver F5's net generation application templating system. They are dynami provrammable, declarative interfaces.
 
-|image4|
+|image004|
 
 
 *iControlLX architectural *
 The iControlLX
+
+
+.. |image001| image:: _static/image001.png
+.. |image002| image:: _static/image002.png
+.. |image003| image:: _static/image003.png
+.. |image004| image:: _static/image004.png
