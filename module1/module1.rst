@@ -25,5 +25,13 @@ This is the environment for the Training Lab:
 .. Note
 This lab will NOT guide you through the iWorkflow or BIG-IP lab setup. For
 information on installing and configuring, please visit:
+
 * `iWorkflow <https://devcentral.f5.com/wiki/...>`_.
 * `BIG_IP <https://support.f5.com>`_.
+
+
+**Exercises in this Module**
+
+Exercise 1 - /mgmt/toc
+Exercise 2 - Edit an iControl REST resource via ToC
+Exercise 3 - Advanced (raw JSON)
