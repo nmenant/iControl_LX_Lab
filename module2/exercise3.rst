@@ -1,1 +1,1 @@
-Exercise 3 - iControlLX filesystem (/var/lib/...)
+Exercise 3 - Advanced (raw JSON)

@@ -5,12 +5,13 @@ Exercise 4 - Delete the package
 Review the extension
 --------------------
 
-
+```
 POST /mgmt/shared/iapp/package-management-tasks/
 {
   "operation": "UNINSTALL",
   "packageName": "HelloWorld-0.1.0-0001.noarch.rpm"
 }
+```
 
 Response:
 

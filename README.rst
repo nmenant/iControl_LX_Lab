@@ -8,7 +8,7 @@ About
 This lab will teach you how to create F5 iControl REST API extensions. If you
 are NOT familiar with the iControl REST API, here are the labs you are looking
 for `Automation & Orchestration Introduction Course
-<http://f5-automation-labs.readthedocs.io/en/v2.0/index.html>`_.
+<http://f5-automation-labs.readthedocs.io/en/latest/>`_.
 
 While this guide assumes no prior experience with the iControlLX framework, it
 does assume that the reader has obtained a basic understanding of REST APIs,

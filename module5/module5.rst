@@ -11,13 +11,18 @@ Module 5 - Creating an iControlLX package (RPM)
   Lab 4 - Uninstalling your package
 
 
-Lab 1
+Lab 1 - Prepare the files for iControlLX package creation
+
 On your iWorkflow platform, execute:
 
 `mkdir -p /var/config/rest/iapps/HelloWorld/nodejs/`
 
+Copy your javascript `hello_world.js` file into this directory.
 
-Lab 2 - build the package
+Lab 2 - Build the package
+
+The minimum requirement to build an iControlLX package is the `appName`, which
+must match that of the package directory created in the previous step.
 
 ```
 POST /mgmt/shared/iapp/build-package
@@ -25,6 +30,7 @@ POST /mgmt/shared/iapp/build-package
   "appName": "HelloWorld"
 }
 ```
+
 
 You'll get back a response that looks something like this:
 
