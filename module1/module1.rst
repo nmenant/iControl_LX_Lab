@@ -15,11 +15,11 @@ use, and some basic troubleshooting tools/tips to keep productive.
 
 **Exercises in this Module**
 
-Lab 1.1 - The daemons (and flow)
-  Task 1 - Understand the two primary daemons
-  Task 2 - Start/Stop/Restart the daemons
+- Lab 1.1 - The daemons (and flow)
+  - Task 1 - Understand the two primary daemons
+  - Task 2 - Start/Stop/Restart the daemons
 
-Lab 1.2 - Troubleshooting, Logs, etc
-  Task 1 - Understand the iControl & iControlLX logs
-  Task 2 - Reviewing the logs
-  Task 3 -
+- Lab 1.2 - Troubleshooting, Logs, etc
+  - Task 1 - Understand the iControl & iControlLX logs
+  - Task 2 - Reviewing the logs
+  - Task 3 -

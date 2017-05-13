@@ -26,8 +26,8 @@ This is the environment for the Training Lab:
 This lab will NOT guide you through the iWorkflow or BIG-IP lab setup. For
 information on installing and configuring, please visit:
 
-* `iWorkflow <https://devcentral.f5.com/wiki/iWorkflow.HomePage.ashx>`_.
-* `BIG_IP <https://support.f5.com/csp/knowledge-center/software/BIG-IP?module=BIG-IP%20LTM>`_.
+* `iWorkflow <https://devcentral.f5.com/wiki/iWorkflow.HomePage.ashx>`_
+* `BIG_IP <https://support.f5.com/csp/knowledge-center/software/BIG-IP?module=BIG-IP%20LTM>`_
 
 
 **Exercises in this Module**

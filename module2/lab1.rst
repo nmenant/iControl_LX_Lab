@@ -70,8 +70,8 @@ representation of the REST resource.
 
 3) Try editing the REST resource. Remove the 's' off the end of 'Authentication
 Works'. Note that it synchornizes between the textboxes and the raw 'JSON
-input' textfield.
+input' textfield. They are both representations of the same resource.
 
-You are now interacting with the iControlLX presentation extension.
+You are now interacting with the iControlLX 'presentation' extension.
 
 4) Click the blue 'cancel' button to discard your changes.
