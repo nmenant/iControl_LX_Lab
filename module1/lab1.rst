@@ -44,10 +44,14 @@ following:
 
 .. NOTE::
   The following bigstart commands are supported:
-  ``bigstart status <daemon>``
-  ``bigstart start <daemon>``
-  ``bigstart restart <daemon>``
-  ``bigstart stop <daemon>``
+  - ``bigstart status <daemon>``
+  - ``bigstart start <daemon>``
+  - ``bigstart restart <daemon>``
+  - ``bigstart stop <daemon>``
 
 Restart the restnoded & restjavad daemons by executing:
 ``bigstart restart restjavad restnoded``
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
