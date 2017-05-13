@@ -21,7 +21,7 @@ iWorkflow platform.
 to acting as the interface to *restjavad* and the iControl REST API.
 
 .. NOTE::
-    In the diagram above, the orange line represents an iControl REST services
+    In the diagram above, the orange line represents an iControl REST resource
     that ships with the iWorkflow platform. The green line represents a REST
     call to a custom iControlLX extension written for NodeJS.
 
@@ -34,20 +34,18 @@ following:
   ``bigstart status restnoded``
 
 .. NOTE::
-  You can specify multuple daemons with the bigstart command. For example:
+  You can specify multuple daemons with the ``bigstart`` command. For example:
     ``bigstart status restjavad restnoded``
 
-  You can also omit the daemon name to get the status of ALL F5 controlled
-  daemons, for example:
-    `bigstart status`
+  Or specify none to get the status of ALL F5 controlled daemons, for example:
+    ``bigstart status``
 
 
-.. NOTE::
-  The following bigstart commands are supported:
-  - ``bigstart status <daemon>``
-  - ``bigstart start <daemon>``
-  - ``bigstart restart <daemon>``
-  - ``bigstart stop <daemon>``
+The following bigstart commands are supported:
+- ``bigstart status <daemon>``
+- ``bigstart start <daemon>``
+- ``bigstart restart <daemon>``
+- ``bigstart stop <daemon>``
 
 Restart the restnoded & restjavad daemons by executing:
 ``bigstart restart restjavad restnoded``
