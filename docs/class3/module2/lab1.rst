@@ -72,6 +72,7 @@ representation of the REST resource.
 Works'. Note that it synchornizes between the textboxes and the raw 'JSON
 input' textfield. They are both representations of the same resource.
 
-You are now interacting with the iControlLX 'presentation' extension.
+You are now interacting with the iControl REST resource 'echo', via the
+iControlLX 'presentation' extension.
 
 4) Click the blue 'cancel' button to discard your changes.

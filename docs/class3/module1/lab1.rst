@@ -48,7 +48,8 @@ The following bigstart commands are supported:
 - ``bigstart restart <daemon>``
 - ``bigstart stop <daemon>``
 
-Restart the restnoded & restjavad daemons by executing:
+1. Restart the restnoded & restjavad daemons by executing:
+
 ``bigstart restart restjavad restnoded``
 
 .. toctree::

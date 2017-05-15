@@ -18,7 +18,20 @@ The two primary logs you will need are:
 
 
 Task 2 - Reviewing the logs
---------------------------------------------------
+---------------------------
+
+1. Review the restjavad log:
+
+``less /var/log/restjavad.0.log``
+
+2. Review the restnoded log:
+
+``less /var/log/restnoded/restnoded.log``
+
+
+
+Task 3 - Review the logs like a coder!
+--------------------------------------
 
 When testing changes you've made to an iControlLX extension, its very helpful
 to `tail` the restnoded.log file to see that it loaded properly and to read
@@ -32,6 +45,3 @@ To see the output from restnoded when it loads iControlLX extensions, execute:
 .. Note The `;` means to execute the first command 'bigstart restart restnoded'
    and then the second command `tail -f /var/log/restnoded/restnoded.log`
    immediately after.
-
-Task 3 -
---------------------------------------------------
