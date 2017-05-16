@@ -76,3 +76,10 @@ on these iControlLX services, visit the `iControlLX SDK <Get a link>`_. Or, just
 follow the lab and we will reference the SDK as appropriate.
 
 As the DevOps mantra says, "Fail Fast, Fail Forward!"
+
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   module*/module*
