@@ -1,11 +1,9 @@
-======================================
-F5 iControlLX Extensions Training Lab
-======================================
+==================================
+Class 3 - F5 iControlLX extensions
+==================================
 
-About
------
 
-This lab will teach you how to create F5 iControl REST API extensions. If you
+This class will teach you how to create F5 iControl REST API extensions. If you
 are NOT familiar with the iControl REST API, here are the labs you are looking
 for `Automation & Orchestration Introduction Course
 <http://f5-automation-labs.readthedocs.io/en/latest/>`_.
