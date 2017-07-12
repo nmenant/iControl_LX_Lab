@@ -1,8 +1,8 @@
 Lab 2.1 - Interact with a REST extension
 ----------------------------------------
 
-In this exercise we are going to look at an iControlLX extension that ships
-with iControl. This is the iControlLX 'presentation' extension.
+In this exercise we are going to look at an iControl LX extension that ships
+with iControl. This is the iControl LX 'presentation' extension.
 
 Typically, when you login to iWorkflow via the Web Interface you are redirected
 to `/mgmt/xui`. In this exercise we are going to review the REST API via the
@@ -43,7 +43,7 @@ Note that the URI has `/presentation#/` appended to the end of it. This is an
 iControlLX extension responsible for rendering the iControl REST resource in the
 web interface.
 
-1. Remove the appened presentation#/ and note the raw JSON representation:
+1. Remove the appended presentation#/ and note the raw JSON representation:
 
 .. image:: _static/image006.png
 
@@ -63,16 +63,16 @@ Task 4 - Editing a REST resource
 This allows you to edit the value of the '/mgmt/shared/echo' REST resource, via
 the 'presentation' extension.
 
-2) Click on the blue 'advanced' button. Now you can see the raw JSON
+2. Click on the blue 'advanced' button. Now you can see the raw JSON
 representation of the REST resource.
 
 .. image:: _static/image008.png
 
-3) Try editing the REST resource. Remove the 's' off the end of 'Authentication
+3. Try editing the REST resource. Remove the 's' off the end of 'Authentication
 Works'. Note that it synchornizes between the textboxes and the raw 'JSON
 input' textfield. They are both representations of the same resource.
 
 You are now interacting with the iControl REST resource 'echo', via the
 iControlLX 'presentation' extension.
 
-4) Click the blue 'cancel' button to discard your changes.
+4. Click the blue 'cancel' button to discard your changes.

@@ -2,43 +2,36 @@
 Lab 1.2 - Troubleshooting, Logs, etc
 =======================================
 
-Task 1 - Understand the iControl & iControlLX logs
---------------------------------------------------
+Task 1 - Understand the iControl & iControl LX logs
+---------------------------------------------------
 
-In the Training Lab intro I referenced the DevOps mantra:
-  "Fail fast, fail forward".
-
-Well, this is best achieved with a solid understanding of troubleshooting best-
-practices.
-
-The two primary logs you will need are:
+In Lab 1.1 we explored the two key daemons responsible for iControl
+REST, and iControl LX extensions. The two logs for these daemons are:
 
 `/var/log/restjavad/restjavad.0.log`
 `/var/log/restnoded/restnoded.log`
 
-
-Task 2 - Reviewing the logs
----------------------------
-
-1. Review the restjavad log:
-
-``less /var/log/restjavad.0.log``
-
-2. Review the restnoded log:
-
-``less /var/log/restnoded/restnoded.log``
+Its important to be familiar with both of these logs while developing
+iControl LX extensions. You will get to know 'restnoded.log' very well!
 
 
+Task 2 - Streaming the log output
+---------------------------------
 
-Task 3 - Review the logs like a coder!
---------------------------------------
+You can open these logs with any text editor/reader. However, its far more
+efficient to stream the output while operations such as starting the restnoded
+daemon are taking place.
 
-When testing changes you've made to an iControlLX extension, its very helpful
-to `tail` the restnoded.log file to see that it loaded properly and to read
-any debug information from you iControlLX extension.
+To 'stream' the output of restnoded, use the `tail` command. For example:
 
-Loading a new extension is performed by restarting the `restnoded` daemon.
-To see the output from restnoded when it loads iControlLX extensions, execute:
+`tail -f /var/log/restnoded/restnoded.log`
+
+Task 3 - Combining commands, for extra efficiency
+-------------------------------------------------
+
+To ensure you don't miss any output while your iControl LX extension
+is loading, you can exeute the 'restnoded' restart command, and the 'tail'
+commands together using the separator `;`. For example:
 
   `bigstart restart restnoded; tail -f /var/log/restnoded/restnoded.log`
 

@@ -5,7 +5,7 @@ Lab 1.1 - The daemons
 Task 1 - Understand the two primary daemons
 -------------------------------------------
 
-When developing iControlLX extensions, there are two daemons to be aware of:
+When developing iControl LX extensions, there are two daemons to be aware of:
 
 * restjavad
 * restnoded
@@ -17,7 +17,7 @@ When developing iControlLX extensions, there are two daemons to be aware of:
 *restjavad* presents F5 iControl REST, the interface to BIG-IP devices and the
 iWorkflow platform.
 
-*restnoded* presents services for developing iControlLX extensions, in addition
+*restnoded* presents services for developing iControl LX extensions, in addition
 to acting as the interface to *restjavad* and the iControl REST API.
 
 .. NOTE::
@@ -29,12 +29,13 @@ to acting as the interface to *restjavad* and the iControl REST API.
 Task 2 - Start/Stop/Restart the daemons
 ---------------------------------------
 
-On you're iWorkflow platform command prompt (ssh to iWorkfow), execute the
+On an iWorkflow platform command prompt (ssh to iWorkfow), execute the
 following:
   ``bigstart status restnoded``
 
 .. NOTE::
-  You can specify multuple daemons with the ``bigstart`` command. For example:
+  You can specify multiple daemons with the ``bigstart`` command. For example,
+  the following will get the status of both 'restavad' and 'restnoded':
     ``bigstart status restjavad restnoded``
 
   Or specify none to get the status of ALL F5 controlled daemons, for example:

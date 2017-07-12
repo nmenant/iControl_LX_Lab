@@ -1,13 +1,13 @@
-F5 iControlLX Extensions Training Lab
+F5 iControl LX Extensions Training Lab
 ======================================
 
-Module 1 - Understanding the iControlLX architecture
-----------------------------------------------------
+Module 1 - Understanding the iControl LX architecture
+-----------------------------------------------------
 
 Before we start installing iControlLX extensions it important to understand the
-iControlLX architecture.
+iControl LX architecture.
 
-In this section we will review the relevant iControlLX daemons, the logs they
+In this section we will review the relevant iControl LX daemons, the logs they
 use, and some basic troubleshooting tools/tips to keep productive.
 
 
@@ -21,9 +21,9 @@ use, and some basic troubleshooting tools/tips to keep productive.
 
 - Lab 1.2 - Troubleshooting, Logs, etc
 
-  - Task 1 - Understand the iControl & iControlLX logs
-  - Task 2 - Reviewing the logs
-  - Task 3 -
+  - Task 1 - Understand the iControl & iControl LX logs
+  - Task 2 - Streaming the log output
+  - Task 3 - Combining commands, for extra efficiency
 
 
   .. toctree::

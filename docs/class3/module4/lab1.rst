@@ -1,25 +1,24 @@
-============================================================
-Exercise 2 - Installing the Hello-World iControlLX extension
-============================================================
+Lab 4.1 - Installing the Hello-World iControlLX extension
+---------------------------------------------------------
 
-iControlLX packages
+iControl LX packages
 --------------------
 
-iControlLX extensions are distribiuted as RPMs (RedHat Package Management system).
+iControl LX extensions are distributed as RPMs (RedHat Package Management system).
 
-# Lab 1 - Put iControlLX extension onto your iWorkflow or BIG-IP.
+Task 1 - Put iControl LX extension onto your iWorkflow or BIG-IP.
 
-To install the iControlLX extension, first you need to copy the iControlLX
+To install the iControl LX extension, first you need to copy the iControlLX
 package onto you iWorkflow platform, or BIG-IP device, in the following
 directory:
 
 `/var/config/rest/downloads`
 
 
-`scp /var/tmp/HelloWorld-0.1.0-0001.noarch.rpm admin@1.1.1.1/var/config/rest/downloads/`
+`scp /var/tmp/HelloWorld-0.1.0-0001.noarch.rpm admin@<ip_address>/var/config/rest/downloads/`
 
 
-# Lab 2 - Review the installed iControlLX packages
+Task 2 - Review the installed iControl LX packages
 
 First lets take a look at the packages installed on your iWorkflow platform, or
 BIG-IP device, using:
@@ -38,7 +37,8 @@ Response:
 ```
 
 
-# Lab 3  - Perform the installation
+Task 3  - Perform the installation
+
 The installation is performed via the iControl REST API package-management-tasks
 service. Performing an HTTP POST to this service with the 'INSTALL' operation,
 and the location and name of the iControlLX package is all it takes:
@@ -88,6 +88,8 @@ Will return:
 
 
 If the package is already installed, you will see FAILED. For example:
+
+```
 {
   "packageFilePath": "/var/config/rest/downloads/HelloWorld-0.1.0-0001.noarch.rpm",
   "packageName": "HelloWorld-0.1.0-0001.noarch",
@@ -112,3 +114,4 @@ If the package is already installed, you will see FAILED. For example:
   "kind": "shared:iapp:package-management-tasks:iapppackagemanagementtaskstate",
   "selfLink": "https://localhost/mgmt/shared/iapp/package-management-tasks/64e37694-0ca2-4098-a8a3-f4b806114db7"
 }
+```
