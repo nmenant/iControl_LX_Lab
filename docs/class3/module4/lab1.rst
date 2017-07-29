@@ -9,7 +9,7 @@ iControl LX extensions are distributed as RPMs (RedHat Package Management system
 Task 1 - Put iControl LX extension onto your iWorkflow or BIG-IP.
 
 To install the iControl LX extension, first you need to copy the iControlLX
-package onto you iWorkflow platform, or BIG-IP device, in the following
+package onto your iWorkflow platform, or BIG-IP device, in the following
 directory:
 
 `/var/config/rest/downloads`
