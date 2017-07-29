@@ -8,11 +8,13 @@ Task 1 - View the JSON representation of a user account
 
 https://<ip_address>/mgmt/shared/authz/users/presentation#/
 
-2. Click on the user you created earlier.
+2. Click on the user you created earlier (user42 ?).
 
 3. Click the 'Edit' button.
 
-4. Click the 'Advanced' button.
+4. Click the 'Advanced' button. A JSON input window appear
+
+.. image:: _static/image013.png
 
 Note that the value in JSON match those presented above in the /presentation#/
 representation.

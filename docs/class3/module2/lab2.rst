@@ -12,6 +12,7 @@ Task 1 - Review the user accounts
 
 You are now looking at all of the user accounts on your iWorkflow platform.
 
+.. image:: _static/image009.png
 
 Task 2 - Create a new user
 
@@ -24,8 +25,9 @@ Task 2 - Create a new user
 
 4. Click 'save'
 
-Not the new user in the list.
+Note the new user in the list.
 
+.. image:: _static/image010.png
 
 Task 3 - Edit the new user
 
@@ -35,10 +37,11 @@ Note the displayName has been auto-populated  with the username value.
 
 2. Click the 'Edit' button.
 
-3. Change the value of 'displayName'
+3. Change the value of 'displayName'. We used: User 42
 
 4. Click 'Save'
 
+.. image:: _static/image011.png
 
 Task 4 - Login as the new user
 
@@ -48,5 +51,7 @@ Task 4 - Login as the new user
 
 Note the different display name and username.
 
+.. image:: _static/image012.png
+
 Also note that you can't do very much with this user. It has not been added to
-any roles or given any permissions. Go back to your
+any roles or given any permissions. Close this browser and go back to the previous one.
