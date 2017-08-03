@@ -5,7 +5,7 @@ F5 iControl LX Extensions Training Lab
 Module 4 - Installing the Hello_World extension
 -----------------------------------------------
 
-In module 3 we are going to install our first iControl LX extension, the
+In module 4, we are going to install our first iControl LX extension, the
 'hello_world' extension. It doesn't do much, other than reply hello_world,
 but its simple and perfect for illustrating the package management system.
 

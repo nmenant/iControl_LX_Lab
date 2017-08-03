@@ -51,7 +51,7 @@ A typical response looks like:
 
 Task 3 - [OPTIONAL] Verify the iControl LX extension is gone
 
-Perform a get request to `global-installed-packages` to confirm it is no
-longer there: 
+Perform a GET request to `global-installed-packages` to confirm it is no
+longer there:
 
 `GET /mgmt/shared/iapp/global-installed-packages`
