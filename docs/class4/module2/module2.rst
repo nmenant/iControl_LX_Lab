@@ -1,9 +1,8 @@
-======================================
-F5 iControl LX Extensions Training Lab
-======================================
-
 Module 2 - Interacting with an iControl LX extension
-----------------------------------------------------
+====================================================
+
+Interacting with an iControl LX extension
+-----------------------------------------
 
 In module 2 we are going to introduce the basic themes and then review an
 iControl LX extension.
@@ -46,4 +45,9 @@ Lab 2.3 - Advanced (raw JSON)
   Task 1 - View the JSON representation of a user account
   Task 2 - Edit a user account's JSON representation
   Task 3 - delete the user
-  
+
+ .. toctree::
+     :maxdepth: 1
+     :glob:
+
+     lab*  

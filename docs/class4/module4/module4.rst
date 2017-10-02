@@ -1,9 +1,8 @@
-======================================
-F5 iControl LX Extensions Training Lab
-======================================
-
 Module 4 - Installing the Hello_World extension
------------------------------------------------
+===============================================
+
+Installing the Hello_World extension
+------------------------------------
 
 In module 4, we are going to install our first iControl LX extension, the
 'hello_world' extension. It doesn't do much, other than reply hello_world,
@@ -22,3 +21,9 @@ Lab 4.3 - Delete the iControl LX extension
   Task 1 - Verify the 'packageName'
   Task 2 - Create the 'delete' task
   Task 3 - [OPTIONAL] Verify the iControl LX extension is gone
+
+ .. toctree::
+     :maxdepth: 1
+     :glob:
+
+     lab*

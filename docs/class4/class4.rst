@@ -1,5 +1,5 @@
 ===================================
-Class 3 - F5 iControl LX extensions
+Class 4 - F5 iControl LX extensions
 ===================================
 
 

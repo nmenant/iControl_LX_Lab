@@ -1,9 +1,8 @@
-======================================
-F5 iControl LX Extensions Training Lab
-======================================
-
 Module 3 - Understanding the iControl LX extensions
----------------------------------------------------
+===================================================
+
+Understanding the iControl LX extensions
+----------------------------------------
 
 In module 3 we are going to review the 'hello_world' extension, look at how to
 handle HTTP POSTs (and other methods), and interact with 3rd party systems.
@@ -18,3 +17,9 @@ Lab 3.2 - Beyond "GET"
 Lab 3.3 - Interacting with 3rd party systems
   Task 1 - Using restOperation
   Task 2 - Creating a REST call using Native Node.js HTTP Reqests.
+
+ .. toctree::
+     :maxdepth: 1
+     :glob:
+
+     lab*

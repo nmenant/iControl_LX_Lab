@@ -1,8 +1,8 @@
-F5 iControl LX Extensions Training Lab
-======================================
-
 Module 1 - Understanding the iControl LX architecture
------------------------------------------------------
+=====================================================
+
+Understanding the iControl LX architecture
+------------------------------------------
 
 Before we start installing iControl LX extensions, it is important to understand the
 iControl LX architecture.
@@ -26,6 +26,8 @@ use, and some basic troubleshooting tools/tips to keep productive.
   - Task 3 - Combining commands, for extra efficiency
 
 
-  .. toctree::
-     :maxdepth: 1
-     :glob:
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   lab*
