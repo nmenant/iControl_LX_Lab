@@ -8,14 +8,14 @@ Task 1 - Verify the iControl LX extension is working
 
 In your web browser, navigate to:
 
-`https://<ip_address>/mgmt/ilxe_lab/hello_world`
+``https://10.1.1.12/mgmt/ilxe_lab/hello_world``
 
 
-You could also use `curl`:
+You could also use `curl` in CLI:
 
-`curl -u username:password https://<ip_address>/mgmt/ilxe_lab/hello_world`
+``curl -u admin:admin https://10.1.1.12/mgmt/ilxe_lab/hello_world``
 
-Or a REST client like POSTMAN (which is awesome).
+Or a REST client like POSTMAN.
 
 
 Task 2 - Take a break!

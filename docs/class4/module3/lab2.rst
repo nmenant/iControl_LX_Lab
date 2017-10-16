@@ -26,23 +26,25 @@ have the following REST resource:
 
 with the properties:
 
-```
-{
-  "name": "new_user",
-  "role": "manager",
-  "password":"xyz1234"
-}
-```
+.. code ::
+
+    {
+        "name": "new_user",
+        "role": "manager",
+        "password":"xyz1234"
+    }
+
 
 If we were to perform the following 'PUT', the 'role' would no longer exist:
 
-```
-PUT /mgmt/shared/authz/users/new_user
-{
-  "name": "new_user"
-  "password":"xyz1234"
-}
-```
+.. code ::
+
+    PUT /mgmt/shared/authz/users/new_user
+    {
+       "name": "new_user"
+        "password":"xyz1234"
+    }
+
 
 Performing a PUT on a REST resource is like performing a 'select-all' and then
 'replace'.
@@ -57,12 +59,13 @@ Patch is for situations where you may want to change only parts of a REST
 resource. For example, lets say I want to change the 'role' of our 'new_user'
 resource:
 
-```
-PATCH /mgmt/shared/authz/users/new_user
-{
-  "role": "manager"
-}
-```
+.. code::
+
+    PATCH /mgmt/shared/authz/users/new_user
+    {
+        "role": "manager"
+    }
+
 
 The other properties, in this case 'name' and 'password', would remain
 untouched.
@@ -76,8 +79,10 @@ For your iControl LX extension to handle an HTTP PATCH you must implement the
 In the event that you want to delete a resource you would implement the
 onDelete() HTTP Method processor.
 
-`DELETE /mgmt/shared/authz/users/new_user`
+.. code::
 
-.. Note: You can delete a resource but not a collection. For example, you can
-  delete '/mgmt/shared/authz/users/new_user', but not
-  '/mgmt/shared/authz/users'.
+    DELETE /mgmt/shared/authz/users/new_user
+
+.. Note::
+
+    You can delete a resource but not a collection. For example, you can delete '/mgmt/shared/authz/users/new_user', but not '/mgmt/shared/authz/users'.

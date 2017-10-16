@@ -28,76 +28,75 @@ In this example we will modify the 'HelloWorld' extension to retrieve its
 operating state from a JSON file in GitHub:
 
 
-```
-/**
- * A simple iControlLX extension that handles only HTTP GET
- */
-function HelloWorld() {}
+.. code-block:: javascript
 
-HelloWorld.prototype.WORKER_URI_PATH = "ilxe_lab/hello_world";
-HelloWorld.prototype.isPublic = true;
 
-/**
- * Perform worker start functions
- */
+    /**
+    * A simple iControlLX extension that handles only HTTP GET
+    */
+    function HelloWorld() {}
 
-HelloWorld.prototype.onStart = function(success, error) {
+    HelloWorld.prototype.WORKER_URI_PATH = "ilxe_lab/hello_world";
+    HelloWorld.prototype.isPublic = true;
 
-   logger.info("HelloWorld onStart()");
+    /**
+    * Perform worker start functions
+    */
 
-   var options = {
-     "method": "GET",
-     "hostname": "raw.githubusercontent.com",
-     "port": null,
-     "path": "/n8labs/super-netops/master/worker_state.json",
-     "headers": {
-       "cache-control": "no-cache"
-     }
-   };
+    HelloWorld.prototype.onStart = function(success, error) {
 
-   var req = http.request(options, function (res) {
+      logger.info("HelloWorld onStart()");
 
-     var chunks = [];
+      var options = {
+        "method": "GET",
+        "hostname": "raw.githubusercontent.com",
+        "port": null,
+        "path": "/n8labs/super-netops/master/worker_state.json",
+        "headers": {
+          "cache-control": "no-cache"
+        }
+      };
 
-     res.on("data", function (chunk) {
-       chunks.push(chunk);
-     });
+      var req = http.request(options, function (res) {
 
-     res.on("end", function () {
-       var body = Buffer.concat(chunks);
-       this.state = JSON.parse(body);
-     });
-   });
+        var chunks = [];
 
-   req.end();
+        res.on("data", function (chunk) {
+          chunks.push(chunk);
+        });
 
-   success();
-};
+        res.on("end", function () {
+          var body = Buffer.concat(chunks);
+          this.state = JSON.parse(body);
+        });
+      });
 
-/**
- * handle onGet HTTP request
- */
-HelloWorld.prototype.onGet = function(restOperation) {
-  restOperation.setBody(this.state);
-  this.completeRestOperation(restOperation);
-};
+      req.end();
 
-/**
- * handle /example HTTP request
- */
-HelloWorld.prototype.getExampleState = function () {
-  return {
-    "supports":"none"
-  };
-};
+      success();
+    };
 
-module.exports = HelloWorld;
+    /**
+    * handle onGet HTTP request
+    */
+    HelloWorld.prototype.onGet = function(restOperation) {
+      restOperation.setBody(this.state);
+      this.completeRestOperation(restOperation);
+    };
 
-```
+    /**
+    * handle /example HTTP request
+    */
+    HelloWorld.prototype.getExampleState = function () {
+      return {
+        "supports":"none"
+      };
+    };
 
-With these modifications, any time a HTTP GET is sent to
-"/mgmt/ilxe_lab/hello_world" it will reply with the JSON blob that was
-retrieved from GitHub when the worker was initially loaded.
+    module.exports = HelloWorld;
+
+
+With these modifications, any time a HTTP GET is sent to "/mgmt/ilxe_lab/hello_world" it will reply with the JSON blob that was retrieved from GitHub when the worker was initially loaded.
 
 Also, not the change in `onGet()` to `restOperation.setBody()`
 
