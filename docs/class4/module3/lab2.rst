@@ -2,6 +2,7 @@ Lab 3.2 - Beyond "GET"
 ----------------------
 
 Task 1 - Understand the 'other' HTTP verbs
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The iControl LX Framework also provides access to the following HTTP verbs:
 `POST, PUT, PATCH, DELETE`. In this Lab we will cover when you should use which

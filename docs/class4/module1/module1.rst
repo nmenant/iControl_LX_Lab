@@ -1,6 +1,5 @@
-*****************************************************
 Module 1 - Understanding the iControl LX architecture
-*****************************************************
+=====================================================
 
 Before we start installing iControl LX extensions, it is important to understand the
 iControl LX architecture.

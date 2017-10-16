@@ -46,7 +46,7 @@ The Hello-World Javascript is as follows:
 
 
 Task 2 - Key parts of the HelloWorld extension
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. WORKER_URI_PATH
 
