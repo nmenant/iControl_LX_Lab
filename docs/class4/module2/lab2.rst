@@ -12,7 +12,9 @@ Task 1 - Review the user accounts
 
 You are now looking at all of the user accounts on your iWorkflow platform.
 
-.. image:: _static/image009.png
+.. image:: ../../_static/class4/module2/lab2-image001.png
+    :align: center
+    :scale: 50%
 
 Task 2 - Create a new user
 
@@ -27,7 +29,9 @@ Task 2 - Create a new user
 
 Note the new user in the list.
 
-.. image:: _static/image010.png
+.. image:: ../../_static/class4/module2/lab2-image002.png
+    :align: center
+    :scale: 50%
 
 Task 3 - Edit the new user
 
@@ -41,7 +45,9 @@ Note the displayName has been auto-populated  with the username value.
 
 4. Click 'Save'
 
-.. image:: _static/image011.png
+.. image:: ../../_static/class4/module2/lab2-image003.png
+    :align: center
+    :scale: 50%
 
 Task 4 - Login as the new user
 
@@ -51,7 +57,9 @@ Task 4 - Login as the new user
 
 Note the different display name and username.
 
-.. image:: _static/image012.png
+.. image:: ../../_static/class4/module2/lab2-image004.png
+    :align: center
+    :scale: 50%
 
 Also note that you can't do very much with this user. It has not been added to
 any roles or given any permissions. Close this browser and go back to the previous one.
