@@ -18,7 +18,17 @@ Lab 4.2 - Verify the newly installed extension
   * Task 1 - Verify the iControl LX extension is working
   * Task 2 - Take a break!
 
-Lab 4.3 - Delete the iControl LX extension
+Lab 4.3 - Update the iControl LX extension
+
+  * Task 1 - Update the iControl LX extenstion
+  * Task 2 - test the change
+
+Lab 4.4 - Create a new iControl LX RPM
+
+  * Task 1 - create a new RPM for the updated iControl LX extension
+  * Task 2 - retrieve the RPM
+
+Lab 4.5 - Delete the iControl LX extension
 
   * Task 1 - Verify the 'packageName'
   * Task 2 - Create the 'delete' task

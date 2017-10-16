@@ -1,10 +1,7 @@
-Module 6 - Creating an iControl LX package (RPM)
-================================================
+Lab 4.4 - Create a new iControl LX extension RPM
+------------------------------------------------
 
-Creating an iControl LX package (RPM)
--------------------------------------
-
-  Lab 1 - Overview of the package-managment services
+ Lab 1 - Overview of the package-managment services
   Lab 2 - Creating myFirstExtension-v0.0-1.rpm (versioning)
   Lab 3 - Installing your iControlLX package
   Lab 4 - Uninstalling your package
@@ -119,9 +116,3 @@ Now you can delete the rpm from `/var/config/rest/iapps/RPMS/`
 
 To install your iControlLX package onto an iWorkflow or BIG-IP, follow the
 instructions in Module 3, exercise 2.
-
- .. toctree::
-     :maxdepth: 1
-     :glob:
-
-     lab*

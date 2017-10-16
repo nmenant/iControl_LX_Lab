@@ -39,6 +39,7 @@ Response:
 
 
 Task 3  - Perform the installation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The installation is performed via the iControl REST API package-management-tasks
 service. Performing an HTTP POST to this service with the 'INSTALL' operation,
