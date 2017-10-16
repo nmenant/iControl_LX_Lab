@@ -3,6 +3,7 @@ Lab 2.2 - Edit an iControl REST resource via ToC
 
 
 Task 1 - Review the user accounts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Navigate to /mgmt/toc
 
@@ -17,7 +18,7 @@ You are now looking at all of the user accounts on your iWorkflow platform.
     :scale: 50%
 
 Task 2 - Create a new user
-
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Click the '+' at the top of the user list
 
@@ -34,6 +35,7 @@ Note the new user in the list.
     :scale: 50%
 
 Task 3 - Edit the new user
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Click on the new user.
 
@@ -50,6 +52,7 @@ Note the displayName has been auto-populated  with the username value.
     :scale: 50%
 
 Task 4 - Login as the new user
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Open a new browser window and navigate to: https://<ip_address>/
 

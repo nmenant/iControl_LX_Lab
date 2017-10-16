@@ -16,13 +16,15 @@ There are two communication methods supported by the iControl LX Framework:
 2. Natvie Node.js HTTP requests
 
 Task 1 - Using restOperation()
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 While you can use restOperation() to create REST transactions (using setURI(),
 setBody(), etc.) to 3rd party systems, F5 recommends you use the built-in
 Node.js functionality.
 
 
-Task 2 - Creating a REST call using Native Node.js HTTP Reqests.
+Task 2 - Creating a REST call using Native Node.js HTTP Reqests
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In this example we will modify the 'HelloWorld' extension to retrieve its
 operating state from a JSON file in GitHub:

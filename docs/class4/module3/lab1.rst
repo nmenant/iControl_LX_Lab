@@ -5,6 +5,7 @@ iControl LX extensions are provided as RPM (RedHat Package Manager) files.
 Lets review the JavaScript contents of the Hello-World RPM.
 
 Task 1 - Overview of the Hello-World extension
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This is about as short an extension as one can get.
 
@@ -45,7 +46,7 @@ The Hello-World Javascript is as follows:
 
 
 Task 2 - Key parts of the HelloWorld extension
-
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. WORKER_URI_PATH
 

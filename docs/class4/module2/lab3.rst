@@ -3,6 +3,7 @@ Lab 2.3 - Advanced (raw JSON)
 
 
 Task 1 - View the JSON representation of a user account
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Navigate to your list of user accounts:
 
@@ -23,6 +24,7 @@ representation.
 
 
 Task 2 - Edit a user account's JSON representation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. In the "JSON Input:" field, edit the value of 'displayName'.
 
@@ -34,5 +36,6 @@ Note that it automatically changes in the 'presentation' view above.
 
 
 Task 3 - delete the user
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Click the 'trash can' next to the user you created.

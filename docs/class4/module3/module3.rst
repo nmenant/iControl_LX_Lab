@@ -1,9 +1,6 @@
 Module 3 - Understanding the iControl LX extensions
 ===================================================
 
-Understanding the iControl LX extensions
-----------------------------------------
-
 In module 3 we are going to review the 'hello_world' extension, look at how to
 handle HTTP POSTs (and other methods), and interact with 3rd party systems.
 

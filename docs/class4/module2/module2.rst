@@ -1,14 +1,8 @@
 Module 2 - Interacting with an iControl LX extension
 ====================================================
 
-Interacting with an iControl LX extension
------------------------------------------
-
 In module 2, we are going to introduce the basic themes and then review an
 iControl LX extension.
-
-The Lab Environment
--------------------
 
 The following exercises will be performed on the iWorkflow platform.
 

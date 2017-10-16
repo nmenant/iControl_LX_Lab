@@ -14,6 +14,7 @@ Web interface, which looks like this:
 
 
 Task 1 - View the API via web browser
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. In your browser, navigate to (replacing `10.1.1.12` as appropriate if you don't use the F5 lab - iWorkflow IP address):
 https://10.1.1.12/mgmt/toc
@@ -29,6 +30,7 @@ on the iWorkflow platform.
 
 
 Task 2 - Interact with a REST resource
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. To filter the list of iControl REST resources, navigate to the textbox at the
 top of the page and enter 'echo':
@@ -46,6 +48,7 @@ top of the page and enter 'echo':
 
 
 Task 3 - The '/presentation#' extension
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Note that the URI has `/presentation#/` appended to the end of it. This is an
 iControlLX extension responsible for rendering the iControl REST resource in the
@@ -65,6 +68,7 @@ view. The URL should now be:
 
 
 Task 4 - Editing a REST resource
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Click the blue 'edit' button. You should now see this:
 

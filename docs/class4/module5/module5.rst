@@ -1,9 +1,6 @@
 Module 5 - My First iControlLX Extension
 ========================================
 
-My First iControlLX Extension
------------------------------
-
 In this module you are going to create your own iControlLX extension.
 
 

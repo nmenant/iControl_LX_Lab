@@ -1,9 +1,9 @@
-========================
+*********************
 Lab 1.1 - The daemons
-========================
+*********************
 
 Task 1 - Understand the two primary daemons
--------------------------------------------
+===========================================
 
 When developing iControl LX extensions, there are two daemons to be aware of:
 
@@ -27,7 +27,7 @@ to acting as the interface to *restjavad* and the iControl REST API.
 
 
 Task 2 - Start/Stop/Restart the daemons
----------------------------------------
+=======================================
 
 On an iWorkflow platform command prompt (ssh to iWorkfow), execute the
 following:
