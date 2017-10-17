@@ -14,9 +14,8 @@ Lab 4.1 - Creating the Hello-World iControl LX extension
 
 Lab 4.2 - Update our iControl LX extension
 
-  * Task 1 - Update our iControl LX extension
-  * Task 2 - Verify the iControl LX extension new behaviour
-  * Task 3 - Take a break!
+  * Task 1 - Update our iControl LX extension - handle Post requests
+  * Task 2 - Update our iControl LX extension - do a REST API call
 
 Lab 4.3 - Create a new iControl LX RPM
 
