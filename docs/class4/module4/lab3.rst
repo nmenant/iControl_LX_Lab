@@ -8,7 +8,7 @@ Lab 4.3 - Create a new iControl LX extension RPM
 
 
 Task 1 - create a new RPM for the updated iControl LX extension
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The minimum requirement to build an iControlLX package is the `appName`, which
 must match that of the package directory created in the previous step.

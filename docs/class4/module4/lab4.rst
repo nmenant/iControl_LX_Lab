@@ -3,6 +3,8 @@ Lab 4.4 - Install our iControl LX RPM on BIG-IP
 
 To install the iControl LX extension, first you need to copy the iControlLX package onto your iWorkflow platform, or BIG-IP device, in the following directory: `/var/config/rest/downloads`
 
+``scp /var/tmp/HelloWorld-0.1.0-0001.noarch.rpm admin@10.1.1.12/var/config/rest/downloads/``
+
 Task 1 - Review the installed iControl LX packages
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 First lets take a look at the packages installed on your iWorkflow platform, or

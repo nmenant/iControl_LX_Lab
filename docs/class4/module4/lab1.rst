@@ -8,16 +8,89 @@ Task 1 - Create our iControl LX extension onto iWorkflow
 
 iControl LX extension can be installed on either BIG-IP or iWorkflow platform. For this lab, we will use iWorkflow.
 
-To install the iControl LX extension, first you need to copy the iControlLX package onto your iWorkflow platform, or BIG-IP device, in the following directory: `/var/config/rest/downloads`
+Connect to your iWorkflow platform (10.1.1.12 if you use our topology).
 
+iControl LX extension resides in `/var/config/rest/iapps/`. This is where you need to create your iControl LX extension. Usually you will create:
 
-``scp /var/tmp/HelloWorld-0.1.0-0001.noarch.rpm admin@10.1.1.12/var/config/rest/downloads/``
+* a folder that is the name of your app: HelloWorld.
 
-On your iWorkflow platform, execute:
+.. note::
 
-`mkdir -p /var/config/rest/iapps/HelloWorld/nodejs/`
+  this folder name is important since this is what will be used as the RPM name when we will create our package later.
 
-Copy your javascript `hello_world.js` file into this directory.
+* inside the app folder name, another folder called nodejs that will contain your extension
+
+Let's create our directory tree. On your iWorkflow platform, execute:
+
+``mkdir -p /var/config/rest/iapps/HelloWorld/nodejs/``
+
+Now that we have our directoy, we need to create our extension. Use your preferred editor and create a file called `hello_world.js` in `/var/config/rest/iapps/HelloWorld/nodejs/`
+
+``vi /var/config/rest/iapps/HelloWorld/nodejs/hello_world.js``
+
+Copy / paste the following content into your file:
+
+.. code-block:: javascript
+
+    /**
+    * A simple iControl LX extension that handles only HTTP GET
+    */
+    function HelloWorld() {}
+
+    HelloWorld.prototype.WORKER_URI_PATH = "ilxe_lab/hello_world";
+    HelloWorld.prototype.isPublic = true;
+
+    /**
+    * handle onGet HTTP request
+    */
+    HelloWorld.prototype.onGet = function(restOperation) {
+      restOperation.setBody(JSON.stringify( { value: "Hello World!" } ));
+      this.completeRestOperation(restOperation);
+    };
+
+    /**
+    * handle /example HTTP request
+    */
+    HelloWorld.prototype.getExampleState = function () {
+      return {
+        "supports":"none"
+      };
+    };
+
+    module.exports = HelloWorld;
+
+Once our extension is created, we need to load it into restnoded. When an extension is loaded from a RPM, it is done automatically. However here, we will need to do it ourselves:
+
+use the following command to make restnoded aware of our extension:
+
+``restcurl shared/nodejs/loader-path-config -d '{"workerPath": "/var/config/rest/iapps/HelloWorld"}'``
+
+the output should look like this:
+
+.. code::
+
+  $ restcurl shared/nodejs/loader-path-config -d '{"workerPath": "/var/config/rest/iapps/HelloWorld"}'
+  {
+    "id": "ad130c79-59a0-49c7-a7e7-ff39efe956b5",
+    "workerPath": "/var/config/rest/iapps/HelloWorld",
+    "generation": 1,
+    "lastUpdateMicros": 1508242306312732,
+    "kind": "shared:nodejs:loader-path-config:loaderpathstate",
+    "selfLink": "https://localhost/mgmt/shared/nodejs/loader-path-config/ad130c79-59a0-49c7-a7e7-ff39efe956b5"
+  }
+
+The logfile restnoded.0.log will give you the ability to track whether your extension is loaded as expected. Run the following command to ensure everything went smoothly:
+
+``grep HelloWorld /var/log/restnoded/restnoded.log``
+
+the output should look like this:
+
+.. code::
+
+  Tue, 17 Oct 2017 12:11:46 GMT - finest: [LoaderWorker] triggered at path:  /var/config/rest/iapps/HelloWorld
+  Tue, 17 Oct 2017 12:11:46 GMT - finest: [LoaderWorker] triggered at path:  /var/config/rest/iapps/HelloWorld/nodejs
+  Tue, 17 Oct 2017 12:11:46 GMT - finest: [LoaderWorker] triggered at path:  /var/config/rest/iapps/HelloWorld/nodejs/hello_world.js
+  Tue, 17 Oct 2017 12:11:46 GMT - config: [RestWorker] /ilxe_lab/hello_world has started. Name:HelloWorld
 
 
 Task 2 - Check our iControl LX extension is working
@@ -27,6 +100,11 @@ In your web browser, navigate to:
 
 ``https://10.1.1.12/mgmt/ilxe_lab/hello_world``
 
+you should see something like this:
+
+.. image:: ../../_static/class4/module4/lab1-image001.png
+  :align: center
+  :scale: 50%
 
 You could also use `curl` in CLI:
 
