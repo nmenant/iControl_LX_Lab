@@ -108,6 +108,25 @@ you should see something like this:
 
 You could also use `curl` in CLI:
 
-``curl -u admin:admin https://10.1.1.12/mgmt/ilxe_lab/hello_world``
+``curl -k -u admin:admin https://10.1.1.12/mgmt/ilxe_lab/hello_world``
+
+.. code::
+
+  $ curl -k -u admin:admin https://192.168.143.30/mgmt/ilxe_lab/hello_world
+  {"value":"Hello World!"}
 
 Or a REST client like POSTMAN.
+
+Another test is to connect to our `/example` uri. Navigate with your browser to:
+
+``https://10.1.1.12/mgmt/ilxe_lab/hello_world/example``
+
+you should see something like this:
+
+.. image:: ../../_static/class4/module4/lab1-image002.png
+  :align: center
+  :scale: 50%
+
+You can also use curl in CLI:
+
+``curl -k -u admin:admin https://10.1.1.12/mgmt/ilxe_lab/hello_world/example``

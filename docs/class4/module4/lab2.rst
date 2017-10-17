@@ -1,7 +1,11 @@
 Lab 4.2 - Updating the Hello World iControl extension
 -----------------------------------------------------
 
-Its time to take a look at your new iControl LX extension in action.
+Now that we have a first version of our extension, let's update it so that it will be able to do a few more things:
+
+* Add logging information. Always useful to add logging information to track behaviour and help troubleshooting any issue
+* Handle POST requests
+* send a REST API call to a 3rd system
 
 
 Task 1 - Update our iControl LX extension
