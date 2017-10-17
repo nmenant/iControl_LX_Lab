@@ -29,15 +29,32 @@ Here is an EXAMPLE of a logger statement (DO NOT PUT THIS INTO YOUR CODE)
 .. code-block:: javascript
 
     if (DEBUG === true) {
-        logger.info("DEBUG: onGet request");
+        logger.info("DEBUG: HelloWorld - onGet request");
     }
+
+We may also want to create a VARIABLE for our default message Hello World!. This way if we need to change it at some point, we will need to change it only in a single location
+
+Under `var DEBUG = true;` add:
+
+.. code::
+
+    var DEFAULT_MSG = {"value": "Hello World!"};
+
+it should look like this:
+
+.. code::
+
+    var logger = require('f5-logger').getInstance();
+    var DEBUG = true;
+    var DEFAULT_MSG = {"value": "Hello World!"};
+
 
 let's update your onGET prototype. right now you should have this:
 
 .. code-block:: javascript
 
     HelloWorld.prototype.onGet = function(restOperation) {
-      restOperation.setBody(JSON.stringify( { value: "Hello World!" } ));
+      restOperation.setBody(JSON.stringify(DEFAULT_MSG));
       this.completeRestOperation(restOperation);
     };
 
@@ -47,9 +64,9 @@ replace this code with the following:
 
     HelloWorld.prototype.onGet = function(restOperation) {
       if (DEBUG === true) {
-        logger.info("DEBUG: onGet request");
+        logger.info("DEBUG: HelloWorld - onGet request");
       }
-      restOperation.setBody(JSON.stringify( { value: "Hello World!" } ));
+      restOperation.setBody(JSON.stringify( { value: DEFAULT_MSG } ));
       this.completeRestOperation(restOperation);
     };
 
@@ -69,6 +86,62 @@ Add the following code below the onGet prototype
       var newState = restOperation.getBody();
 
       if (DEBUG === true) {
+        logger.info("DEBUG: HelloWorld - onPost received Body is: " + JSON.stringify(newState,' ','\t'));
+      }
+      //we extract the variable name from the payload
+      var name = newState.name;
+
+      //if it's empty, we just print Hello World, otherwise Hello <name>
+      if (name) {
+        if (DEBUG === true) {
+          logger.info("DEBUG: HelloWorld - onPost request, the extracted name is : " + name);
+        }
+        restOperation.setBody(JSON.stringify({ "value": "Hello " + name + "!"}));
+      } else {
+        if (DEBUG === true) {
+          logger.info("DEBUG: HelloWorld - onPost request, no name parameter provided... using default value");
+        }
+        estOperation.setBody(JSON.stringify(DEFAULT_MSG));
+      }
+      this.completeRestOperation(restOperation);
+    };
+
+Let's review the code we have now, it should look like this:
+
+.. code-block:: javascript
+
+    /**
+    * A simple iControl LX extension that handles only HTTP GET
+    */
+
+    var logger = require('f5-logger').getInstance();
+    var DEBUG = true;
+    var DEFAULT_MSG = "Hello World!";
+
+    function HelloWorld() {}
+
+    HelloWorld.prototype.WORKER_URI_PATH = "ilxe_lab/hello_world";
+    HelloWorld.prototype.isPublic = true;
+
+    /**
+    * handle onGet HTTP request
+    */
+    HelloWorld.prototype.onGet = function(restOperation) {
+      if (DEBUG === true) {
+        logger.info("DEBUG: HelloWorld - onGet request");
+      }
+      restOperation.setBody(JSON.stringify(DEFAULT_MSG));
+      this.completeRestOperation(restOperation);
+    };
+
+    /**
+    *handle onPost HTTP request
+    */
+    HelloWorld.prototype.onPost = function(restOperation) {
+      //we retrieve the payload sent with the POST request
+      var newState = restOperation.getBody();
+
+      if (DEBUG === true) {
         logger.info("DEBUG: onPost received Body is: " + JSON.stringify(newState,' ','\t'));
       }
       //we extract the variable name from the payload
@@ -77,19 +150,30 @@ Add the following code below the onGet prototype
       //if it's empty, we just print Hello World, otherwise Hello <name>
       if (name) {
         if (DEBUG === true) {
-          logger.info("DEBUG: onPost request, the extracted name is : " + name);
+          logger.info("DEBUG: HelloWorld - onPost request, the extracted name is : " + name);
         }
         restOperation.setBody(JSON.stringify({ value: "Hello " + name + "!"}));
       } else {
         if (DEBUG === true) {
-          logger.info("DEBUG: onPost request, no name parameter provided... using default value");
+          logger.info("DEBUG: HelloWorld - onPost request, no name parameter provided... using default value");
         }
-        restOperation.setBody(JSON.stringify( { value: "Hello World!" } ));
+      restOperation.setBody(JSON.stringify( { value: DEFAULT_MSG } ));
       }
       this.completeRestOperation(restOperation);
     };
 
-Let's review the code we added:
+    /**
+    * handle /example HTTP request
+    */
+    HelloWorld.prototype.getExampleState = function () {
+      return {
+        "supports":"none"
+      };
+    };
+
+    module.exports = HelloWorld;
+
+
 
 * the lines starting with // are comments. It's always good to add comments to your code to help people read/understand your code... the bigger the code is, the more important it is to provide proper commented code
 * `var newState = restOperation.getBody();` - with this statement, we retrieve the PAYLOAD that was sent in the POST request and we show this payload in the following logger command
@@ -99,7 +183,7 @@ Let's review the code we added:
     - if the variable name is not empty: reply to the POST request with Hello and the name of the user
     - if the variable name is empty: reply to the POST request with Hello World!
 
-time to test our code!
+Time to test our code!
 
 Make sure you save your updated file. Once it's done, run the following command:
 
@@ -177,8 +261,75 @@ We now have an iControl LX extension that is able to handle GET and POST request
 Task 2 - Update our iControl LX extension - do a REST API call
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Right now, our iControl LX extension provide a default message that is set at the beginning of our code. If this "content" is owned by someone else, it may be inefficient to have it directly in the code. Let's see how we could leverage a HTTP request to retrieve our default message.
 
-Task 4 - Take a break!
+For this task, we will do 2 things:
+
+* add a new prototype onStart to our code
+* do a HTTP request on github to retrieve our default message
+
+The prototype onStart is something you can leverage to do some processing when your iControl LX extension is loaded in restnoded. It is triggered only once, when your extension is loaded. It's a good prototype to leverage to retrieve our default message.
+
+under the line: `HelloWorld.prototype.isPublic = true;`, add the following code:
+
+.. code-block:: javascript
+
+  /**
+  * Perform worker start functions
+  */
+
+  HelloWorld.prototype.onStart = function(success, error) {
+
+    if (DEBUG === true) {
+      logger.info("DEBUG: HelloWorld onStart request");
+    }
+
+    var options = {
+      "method": "GET",
+      "hostname": "s3-eu-west-1.amazonaws.com",
+      "port": 80,
+      "path": "/nicolas-labs/helloworld_resp.json",
+      "headers": {
+        "cache-control": "no-cache"
+      }
+    };
+
+    var req = http.request(options, function (res) {
+
+      var chunks = [];
+
+      res.on("data", function (chunk) {
+        chunks.push(chunk);
+      });
+
+      res.on("end", function () {
+        var body = Buffer.concat(chunks);
+        if (DEBUG === true) {
+          logger.info("DEBUG: HelloWorld - onStart - the default message body is: " + body);
+        }
+        DEFAULT_MSG = JSON.parse(body);
+      });
+    });
+
+    req.end();
+
+    if (DEBUG === true) {
+      logger.info("DEBUG: HelloWorld - onStart - the default message is: " + this.state);
+    }
+    success();
+  };
+
+update the onGet prototype line
+
+.. code::
+
+
+
+.. code::
+
+  restOperation.setBody(DEFAULT_MSG);
+
+Task 3 - Take a break!
 ^^^^^^^^^^^^^^^^^^^^^^
 
 Congratulations!!!! You've just modified the behavior of the F5 iControl REST API. Now, take a moment to think about what workflows you could implement to make life easier.
