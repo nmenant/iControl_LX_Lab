@@ -61,7 +61,7 @@ Copy / paste the following content into your file:
 
 Once our extension is created, we need to load it into restnoded. When an extension is loaded from a RPM, it is done automatically. However here, we will need to do it ourselves:
 
-use the following command to make restnoded aware of our extension:
+use the following command on iWorkflow to make restnoded aware of our extension:
 
 ``restcurl shared/nodejs/loader-path-config -d '{"workerPath": "/var/config/rest/iapps/HelloWorld"}'``
 

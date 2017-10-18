@@ -111,4 +111,81 @@ This is where you collect your RPM from. For example:
 
 Now you can delete the rpm from `/var/config/rest/iapps/RPMS/`
 
+Task 4 - Remove the iControl extension
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Since we started the iControl extension from scratch, we will need to remove it also manually.
+
+On iWorkflow, run the following command:
+
+``restcurl shared/nodejs/loader-path-config``
+
+you should have an output like this:
+
+.. code::
+
+  {
+    "items": [
+    {
+      "id": "ad130c79-59a0-49c7-a7e7-ff39efe956b5",
+      "workerPath": "/var/config/rest/iapps/HelloWorld",
+      "generation": 1,
+      "lastUpdateMicros": 1508242306312732,
+      "kind": "shared:nodejs:loader-path-config:loaderpathstate",
+      "selfLink": "https://localhost/mgmt/shared/nodejs/loader-path-config/ad130c79-59a0-49c7-a7e7-ff39efe956b5"
+    }
+    ],
+    "generation": 1,
+    "kind": "shared:nodejs:loader-path-config:loaderpathcollectionstate",
+    "lastUpdateMicros": 1508242306328021,
+    "selfLink": "https://localhost/mgmt/shared/nodejs/loader-path-config"
+  }
+
+Here we can see the ID of our extension: ad130c79-59a0-49c7-a7e7-ff39efe956b5. To delete this extension, you can run the following command:
+
+``restcurl -X DELETE shared/nodejs/loader-path-config/ad130c79-59a0-49c7-a7e7-ff39efe956b5``
+
+Replace the string `ad130c79-59a0-49c7-a7e7-ff39efe956b5` with your own extension id.
+
+Your output should be like this:
+
+.. code::
+
+  {
+    "id": "ad130c79-59a0-49c7-a7e7-ff39efe956b5",
+    "workerPath": "/var/config/rest/iapps/HelloWorld",
+    "generation": 1,
+    "lastUpdateMicros": 1508242306312732,
+    "kind": "shared:nodejs:loader-path-config:loaderpathstate",
+    "selfLink": "https://localhost/mgmt/shared/nodejs/loader-path-config/ad130c79-59a0-49c7-a7e7-ff39efe956b5"
+  }
+  Oct 18 14:33:06 iworkflow emerg logger: Re-starting restnoded
+
+As you can see restnoded got restarted automatically to remove the extension.
+
+
+You can validate that your extension has been removed from restnoded by trying to access it again:
+
+``curl -k -u admin:admin https://10.1.1.12/mgmt/ilxe_lab/hello_world | jq``
+
+Here your request should fail and the output should be similar to this:
+
+.. code::
+
+  {
+    "error": {
+      "code": 404,
+      "message": "",
+      "innererror": {
+        "referer": "192.168.143.1",
+        "originalRequestBody": "",
+        "errorStack": []
+      }
+    }
+  }
+
+You can now delete your working directory to complete erase this extension from your iWorkflow platform. from the iWF CLI, run this command:
+
+``rm -rf /var/config/rest/iapps/HelloWorld``
+
 
