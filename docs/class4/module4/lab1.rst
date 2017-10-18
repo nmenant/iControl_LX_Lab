@@ -1,5 +1,5 @@
 Lab 4.1 - Creating the Hello-World iControl LX extension
-----------------------------------------------------------
+--------------------------------------------------------
 
 iControl LX extensions are distributed as RPMs (RedHat Package Management system) when you want to leverage something existing. However when you start from scratch, you'll need to create your extension and then build a RPM that you can distribute accordingly
 
