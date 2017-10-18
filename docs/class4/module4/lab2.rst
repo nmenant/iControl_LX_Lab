@@ -13,7 +13,7 @@ Task 1 - Update our iControl LX extension - handle Post requests
 
 Here we will add some more code to our extension to handle POST request but also add some troubleshooting statements
 
-First thing to do is enable our f5-logger. This will make all `logger` statement to be sent to `/var/log/restnoded/restnoded.0.log`
+First thing to do is enable our f5-logger. This will make all `logger` statement to be sent to `/var/log/restnoded/restnoded.log`
 
 add the beginning of your extension, add the following:
 
@@ -22,7 +22,7 @@ add the beginning of your extension, add the following:
     var logger = require('f5-logger').getInstance();
     var DEBUG = true;
 
-now we will be able to use logger statement to print information in `/var/log/restnoded/restnoded.0.log`. we can also turn on/off all logging by changing the value of the DEBUG variable to false
+now we will be able to use logger statement to print information in `/var/log/restnoded/restnoded.log`. we can also turn on/off all logging by changing the value of the DEBUG variable to false
 
 Here is an EXAMPLE of a logger statement (DO NOT PUT THIS INTO YOUR CODE)
 
@@ -32,7 +32,7 @@ Here is an EXAMPLE of a logger statement (DO NOT PUT THIS INTO YOUR CODE)
         logger.info("DEBUG: HelloWorld - onGet request");
     }
 
-We may also want to create a VARIABLE for our default message Hello World!. This way if we need to change it at some point, we will need to change it only in a single location
+We may also want to create a VARIABLE for our default json response Hello World!. This way if we need to change it at some point, we will need to change it only in a single location
 
 Under `var DEBUG = true;` add:
 
@@ -54,7 +54,7 @@ let's update your onGET prototype. right now you should have this:
 .. code-block:: javascript
 
     HelloWorld.prototype.onGet = function(restOperation) {
-      restOperation.setBody(JSON.stringify(DEFAULT_MSG));
+      restOperation.setBody(JSON.stringify( { value: "Hello World!" } ));
       this.completeRestOperation(restOperation);
     };
 
@@ -66,11 +66,14 @@ replace this code with the following:
       if (DEBUG === true) {
         logger.info("DEBUG: HelloWorld - onGet request");
       }
-      restOperation.setBody(JSON.stringify( { value: DEFAULT_MSG } ));
+      restOperation.setBody(JSON.stringify(DEFAULT_MSG));
       this.completeRestOperation(restOperation);
     };
 
-Here the only thing we did was to add a logger statement so that we can track when our extension is called with a GET request
+Here the only thing we did was:
+
+* add a logger statement so that we can track when our extension is called with a GET request
+* replace our static response `{ value: "Hello World!" }` with our variable
 
 *Under* our onGet prototype, we will now add an OnPost prototype to handle POST request with our extension.
 
@@ -82,6 +85,7 @@ Add the following code below the onGet prototype
     *handle onPost HTTP request
     */
     HelloWorld.prototype.onPost = function(restOperation) {
+
       //we retrieve the payload sent with the POST request
       var newState = restOperation.getBody();
 
@@ -101,7 +105,7 @@ Add the following code below the onGet prototype
         if (DEBUG === true) {
           logger.info("DEBUG: HelloWorld - onPost request, no name parameter provided... using default value");
         }
-        estOperation.setBody(JSON.stringify(DEFAULT_MSG));
+        restOperation.setBody(JSON.stringify(DEFAULT_MSG));
       }
       this.completeRestOperation(restOperation);
     };
@@ -116,12 +120,55 @@ Let's review the code we have now, it should look like this:
 
     var logger = require('f5-logger').getInstance();
     var DEBUG = true;
-    var DEFAULT_MSG = "Hello World!";
+    var DEFAULT_MSG = {"value": "Hello World!"};
+    var http = require('http');
 
     function HelloWorld() {}
 
     HelloWorld.prototype.WORKER_URI_PATH = "ilxe_lab/hello_world";
     HelloWorld.prototype.isPublic = true;
+
+    /**
+    * Perform worker start functions
+    */
+
+    HelloWorld.prototype.onStart = function(success, error) {
+
+     if (DEBUG === true) {
+       logger.info("DEBUG: HelloWorld - onStart request");
+      }
+
+      var options = {
+        "method": "GET",
+        "hostname": "s3-eu-west-1.amazonaws.com",
+        "port": 80,
+        "path": "/nicolas-labs/helloworld_resp.json",
+        "headers": {
+          "cache-control": "no-cache"
+        }
+      };
+
+      var req = http.request(options, function (res) {
+
+        var chunks = [];
+
+        res.on("data", function (chunk) {
+          chunks.push(chunk);
+        });
+
+        res.on("end", function () {
+          var body = Buffer.concat(chunks);
+         if (DEBUG === true) {
+            logger.info("DEBUG: HelloWorld - onStart - the default message body is: " + body);
+          }
+          DEFAULT_MSG = JSON.parse(body);
+        });
+      });
+
+      req.end();
+
+      success();
+    };
 
     /**
     * handle onGet HTTP request
@@ -139,10 +186,10 @@ Let's review the code we have now, it should look like this:
     */
     HelloWorld.prototype.onPost = function(restOperation) {
       //we retrieve the payload sent with the POST request
-      var newState = restOperation.getBody();
+     var newState = restOperation.getBody();
 
-      if (DEBUG === true) {
-        logger.info("DEBUG: onPost received Body is: " + JSON.stringify(newState,' ','\t'));
+     if (DEBUG === true) {
+        logger.info("DEBUG: HelloWorld - onPost received Body is: " + JSON.stringify(newState,' ','\t'));
       }
       //we extract the variable name from the payload
       var name = newState.name;
@@ -152,12 +199,12 @@ Let's review the code we have now, it should look like this:
         if (DEBUG === true) {
           logger.info("DEBUG: HelloWorld - onPost request, the extracted name is : " + name);
         }
-        restOperation.setBody(JSON.stringify({ value: "Hello " + name + "!"}));
+        restOperation.setBody(JSON.stringify({ "value": "Hello " + name + "!"}));
       } else {
         if (DEBUG === true) {
           logger.info("DEBUG: HelloWorld - onPost request, no name parameter provided... using default value");
         }
-      restOperation.setBody(JSON.stringify( { value: DEFAULT_MSG } ));
+        restOperation.setBody(JSON.stringify(DEFAULT_MSG));
       }
       this.completeRestOperation(restOperation);
     };
@@ -173,8 +220,6 @@ Let's review the code we have now, it should look like this:
 
     module.exports = HelloWorld;
 
-
-
 * the lines starting with // are comments. It's always good to add comments to your code to help people read/understand your code... the bigger the code is, the more important it is to provide proper commented code
 * `var newState = restOperation.getBody();` - with this statement, we retrieve the PAYLOAD that was sent in the POST request and we show this payload in the following logger command
 * `var name = newState.name;` - with this , we assign the name parameter's value (send with the POST request) to the name variable.
@@ -187,7 +232,7 @@ Time to test our code!
 
 Make sure you save your updated file. Once it's done, run the following command:
 
-``bigstart restart restnoded ; tail -f /var/log/restnoded/restnoded.0.log``
+``bigstart restart restnoded ; tail -f /var/log/restnoded/restnoded.log``
 
 Review the logs and make sure that it doesn't mention any error/issue in your updated file.
 
@@ -197,9 +242,7 @@ you should have something like this:
 
     Tue, 17 Oct 2017 13:11:19 GMT - finest: [LoaderWorker] triggered at path:  /var/config/rest/iapps/HelloWorld
     Tue, 17 Oct 2017 13:11:19 GMT - finest: [LoaderWorker] triggered at path:  /var/config/rest/iapps/HelloWorld/nodejs
-    Tue, 17 Oct 2017 13:11:19 GMT - finest: [LoaderWorker] triggered at path:  /var/config/rest/iapps/HelloWorld/nodejs/.hello_world.js.swp
     Tue, 17 Oct 2017 13:11:19 GMT - finest: [LoaderWorker] triggered at path:  /var/config/rest/iapps/HelloWorld/nodejs/hello_world.js
-    Tue, 17 Oct 2017 13:11:19 GMT - finest: [LoaderWorker] unsupported module file extension '/var/config/rest/iapps/HelloWorld/nodejs/.hello_world.js.swp', skipping...
     Tue, 17 Oct 2017 13:11:19 GMT - config: [RestWorker] /ilxe_lab/hello_world has started. Name:HelloWorld
 
 you can now test your updated extension with the following commands:
@@ -212,11 +255,11 @@ the console output should look like this:
 
     {"value":"Hello World!"}
 
-the /var/log/restnoded/restnoded.0.log output should look like this:
+the /var/log/restnoded/restnoded.log output should look like this:
 
 .. code::
 
-    Tue, 17 Oct 2017 13:33:45 GMT - info: DEBUG: onGet request
+    Tue, 17 Oct 2017 13:33:45 GMT - info: DEBUG: HelloWorld - onGet request
 
 Run this command:
 
@@ -228,14 +271,14 @@ the console output should look like this:
 
     {"value":"Hello iControl LX Lab!"}
 
-the /var/log/restnoded/restnoded.0.log output should look like this:
+the /var/log/restnoded/restnoded.log output should look like this:
 
 .. code::
 
-    Tue, 17 Oct 2017 13:36:46 GMT - info: DEBUG: onPost received Body is: {
+    Tue, 17 Oct 2017 13:36:46 GMT - info: DEBUG: HelloWorld - onPost received Body is: {
     "name": "iControl LX Lab"
     }
-    Tue, 17 Oct 2017 13:36:46 GMT - info: DEBUG: onPost request, the extracted name is : iControl LX Lab
+    Tue, 17 Oct 2017 13:36:46 GMT - info: DEBUG: HelloWorld - onPost request, the extracted name is : iControl LX Lab
 
 Run this command:
 
@@ -247,14 +290,14 @@ the console output should look like this (the name parameter wasn't found in the
 
     {"value":"Hello World!"}
 
-the /var/log/restnoded/restnoded.0.log output should look like this:
+the /var/log/restnoded/restnoded.log output should look like this:
 
 .. code::
 
-    Tue, 17 Oct 2017 13:38:24 GMT - info: DEBUG: onPost received Body is: {
+    Tue, 17 Oct 2017 13:38:24 GMT - info: DEBUG: HelloWorld - onPost received Body is: {
     "other": "iControl LX Lab"
     }
-    Tue, 17 Oct 2017 13:38:24 GMT - info: DEBUG: onPost request, no name parameter provided... using default value
+    Tue, 17 Oct 2017 13:38:24 GMT - info: DEBUG: HelloWorld - onPost request, no name parameter provided... using default value
 
 We now have an iControl LX extension that is able to handle GET and POST requests but also provide debugging information
 
@@ -281,7 +324,7 @@ under the line: `HelloWorld.prototype.isPublic = true;`, add the following code:
   HelloWorld.prototype.onStart = function(success, error) {
 
     if (DEBUG === true) {
-      logger.info("DEBUG: HelloWorld onStart request");
+      logger.info("DEBUG: HelloWorld - onStart request");
     }
 
     var options = {
@@ -319,17 +362,85 @@ under the line: `HelloWorld.prototype.isPublic = true;`, add the following code:
     success();
   };
 
-update the onGet prototype line
+the purpose of this code is to retrieve the file:  `helloworld_resp`_
+
+
+.. _helloworld_resp: http://s3-eu-west-1.amazonaws.com/nicolas-labs/helloworld_resp.json
+
+This file will give us the default payload we should return when we receive a request
+
+Make sure you save your updated file. Once it's done, run the following command:
+
+``bigstart restart restnoded ; tail -f /var/log/restnoded/restnoded.log``
+
+Review the logs and make sure that it doesn't mention any error/issue in your updated file.
+
+you should have something like this:
 
 .. code::
 
+    Wed, 18 Oct 2017 09:30:08 GMT - finest: [LoaderWorker] triggered at path:  /var/config/rest/iapps/HelloWorld/nodejs
+    Wed, 18 Oct 2017 09:30:08 GMT - finest: [LoaderWorker] triggered at path:  /var/config/rest/iapps/HelloWorld/nodejs/hello_world.js
+    Wed, 18 Oct 2017 09:30:08 GMT - info: DEBUG: HelloWorld - onStart request
+    Wed, 18 Oct 2017 09:30:08 GMT - config: [RestWorker] /ilxe_lab/hello_world has started. Name:HelloWorld
+    Wed, 18 Oct 2017 09:30:08 GMT - info: DEBUG: HelloWorld - onStart - the default message body is: { "value": "Congratulations on your lab!" }
 
+you can now test your updated extension with the following commands:
+
+``curl -k -u admin:admin https://10.1.1.12/mgmt/ilxe_lab/hello_world``
+
+the console output should look like this:
 
 .. code::
 
-  restOperation.setBody(DEFAULT_MSG);
+    {"value":"Hello World!"}
+
+the /var/log/restnoded/restnoded.log output should look like this:
+
+.. code::
+
+    Tue, 17 Oct 2017 13:33:45 GMT - info: DEBUG: HelloWorld - onGet request
+
+Run this command:
+
+``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"name":"iControl LX Lab"}' https://10.1.1.12/mgmt/ilxe_lab/hello_world``
+
+the console output should look like this:
+
+.. code::
+
+    {"value":"Congratulations on your lab!"}
+
+the /var/log/restnoded/restnoded.log output should look like this:
+
+.. code::
+
+    Wed, 18 Oct 2017 09:32:40 GMT - info: DEBUG: HelloWorld - onPost received Body is: {
+    "name": "iControl LX Lab"
+    }
+    Wed, 18 Oct 2017 09:32:40 GMT - info: DEBUG: HelloWorld - onPost request, the extracted name is : iControl LX Lab
+
+Run this command:
+
+``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"other":"iControl LX Lab"}' https://10.1.1.12/mgmt/ilxe_lab/hello_world``
+
+the console output should look like this (the name parameter wasn't found in the POST payload):
+
+.. code::
+
+    {"value":"Congratulations on your lab!"}
+
+the /var/log/restnoded/restnoded.log output should look like this:
+
+.. code::
+
+    Wed, 18 Oct 2017 09:33:38 GMT - info: DEBUG: HelloWorld - onPost received Body is: {
+    "other": "iControl LX Lab"
+    }
+    Wed, 18 Oct 2017 09:33:38 GMT - info: DEBUG: HelloWorld - onPost request, no name parameter provided... using default value
+
 
 Task 3 - Take a break!
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Congratulations!!!! You've just modified the behavior of the F5 iControl REST API. Now, take a moment to think about what workflows you could implement to make life easier.
+Congratulations!!!! You've just modified the behavior of the F5 iControl LX extension. Now, take a moment to think about what workflows you could implement to make life easier.
