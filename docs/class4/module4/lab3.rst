@@ -13,7 +13,9 @@ Here is the REST command to create the package creation
 
   POST /mgmt/shared/iapp/build-package
   {
-   "appName": "HelloWorld"
+    "appName": "HelloWorld",
+    "packageVersion": "0.1",
+    "packageRelease": "001"
   }
 
 You can use the following command to do this :
@@ -105,9 +107,13 @@ Note also in the build-package completion response above, the
   "builtRpmPackageFilePath": "/var/config/rest/iapps/RPMS/HelloWorld-0.1-001.noarch.rpm"
 
 
-This is where you collect your RPM from. For example:
+This is where you collect your RPM from. For a terminal, run the following command:
 
 ``scp admin@10.1.1.12:/var/config/rest/iapps/RPMS/HelloWorld-0.1-001.noarch.rpm /var/tmp``
+
+.. note::
+
+  use your admin password. it should be `admin`
 
 Now you can delete the rpm from `/var/config/rest/iapps/RPMS/`
 

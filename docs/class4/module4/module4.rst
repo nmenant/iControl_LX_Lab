@@ -22,7 +22,7 @@ Lab 4.3 - Create a new iControl LX RPM
   * Task 1 - create a new RPM for the updated iControl LX extension
   * Task 2 - Retrieving your iControl LX package
 
-Lab 4.4 - Install our iControl LX RPM on BIG-IP
+Lab 4.4 - Install our iControl LX RPM
 
   * Task 1 - Review the installed iControl LX packages
   * Task 2 - Install our RPM
