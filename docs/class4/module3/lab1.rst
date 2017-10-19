@@ -4,6 +4,8 @@ Lab 3.1 - Review the Hello-World iControl LX extension
 iControl LX extensions are provided as RPM (RedHat Package Manager) files.
 Lets review the JavaScript contents of the Hello-World RPM.
 
+Here we just want to review how an extension looks like, you don't have to create anything on any platform yet
+
 Task 1 - Overview of the Hello-World extension
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

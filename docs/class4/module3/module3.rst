@@ -4,6 +4,8 @@ Module 3 - Understanding the iControl LX extensions
 In module 3 we are going to review the 'hello_world' extension, look at how to
 handle HTTP GETs (and other methods), and interact with 3rd party systems.
 
+This module is only about reviewing how it works. Module 4 will make us create our own HelloWorld extension
+
 **Exercises in this Module**
 
 Lab 3.1 - Review the Hello-World extension
