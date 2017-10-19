@@ -53,7 +53,7 @@ Copy / paste the following content into your file:
     */
     HelloWorld.prototype.getExampleState = function () {
       return {
-        "supports":"none"
+        "value": "your_string"
       };
     };
 
@@ -130,3 +130,9 @@ you should see something like this:
 You can also use curl in CLI:
 
 ``curl -k -u admin:admin https://10.1.1.12/mgmt/ilxe_lab/hello_world/example``
+
+.. note::
+
+  You may not want to use admin privilegies to leverage an extension. In many situation the extension may be needed only by a specific user and then you should be able to enforce some RBAC policies here. BIG-IP 13.1 will provide this capability : `BIG-IP RBAC API`_
+
+  .. _BIG-IP RBAC API: http://https://hive.f5.com/docs/DOC-45844

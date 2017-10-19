@@ -214,7 +214,7 @@ Let's review the code we have now, it should look like this:
     */
     HelloWorld.prototype.getExampleState = function () {
       return {
-        "supports":"none"
+        "value": "your_string"
       };
     };
 
