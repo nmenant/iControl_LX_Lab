@@ -38,7 +38,7 @@ The Hello-World Javascript is as follows:
     */
     HelloWorld.prototype.getExampleState = function () {
       return {
-        "supports":"none"
+        "value": "your_string"
       };
     };
 
@@ -98,7 +98,7 @@ then the client will need to know what data to send and in what format.
 
     HelloWorld.prototype.getExampleState = function () {
       return {
-      "supports":"none"
+      "value": "your_string"
       };
     };
 

@@ -91,7 +91,7 @@ operating state from a JSON file in GitHub:
     */
     HelloWorld.prototype.getExampleState = function () {
       return {
-        "supports":"none"
+        "value": "your_string"
       };
     };
 
