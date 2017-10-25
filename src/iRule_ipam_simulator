@@ -1,0 +1,44 @@
+when RULE_INIT {
+
+}
+
+#Identify whether it's a GET or DELETE request.
+#Get: We retrieve the next available I
+#DELETE: we free the relevant IP
+
+when HTTP_REQUEST {
+    switch [HTTP::method] {
+        GET {
+            #parse the datagroup ipam_dg to check for the next available IP
+            log local0. "received GET request"
+            set id [class startsearch ipam_dg_str]
+
+            while {[class anymore ipam_dg_str $id]}{
+                set element [class nextelement ipam_dg_str $id]
+                log local0. "\[class nextelement ipam_dg_str $id\]: [lindex $element 0]"
+                if { [table lookup -subtable "ipam" [lindex $element 0]] == "" } {
+                    log local0. "this IP [lindex $element 0] is available, we use it!!!"
+                    table set -subtable "ipam" [lindex $element 0] 1 indefinite
+                    HTTP::respond 200 content "{\"IP\":\"[lindex $element 0]\"}"
+                    return
+                }
+            }
+            #if we reach this, it means we didn't find an available IP
+            log local0. "no more IP available"
+            HTTP::respond 200 content "{\"IP\":\"No IP available remaining\"}"
+        }
+        DELETE {
+            log local0. "received DELETE request"
+            set element [findstr [HTTP::uri] "/" 1]
+            log local0. "element to delete is $element"
+            if  { [table lookup -subtable "ipam" $element] != "" } {
+                    log local0. "this IP $element is use, we free it!!!"
+                    table delete -subtable "ipam" $element
+                    HTTP::respond 200 content "IP $element has been freed"
+            }
+        }
+        - {
+            HTTP::respond 501
+        }
+    }
+}
