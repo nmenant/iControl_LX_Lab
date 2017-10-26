@@ -1,7 +1,8 @@
-Module 5 - My First iControl LX Extension
-========================================
+Module 5 - My First iControl LX extension
+=========================================
 
-In this module you are going to create your own iControlLX extension.
+In this module you are going to leverage an existing iControl LX extension
+
 
 
 **Exercises in this Module**

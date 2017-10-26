@@ -19,7 +19,7 @@ HelloWorld.prototype.onGet = function(restOperation) {
  */
 HelloWorld.prototype.getExampleState = function () {
   return {
-    "supports":"none"
+    "value": "your_string"
   };
 };
 

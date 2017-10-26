@@ -8,8 +8,6 @@ The following exercises will be performed on the iWorkflow platform.
 
 While the iControl LX framework does run on both BIG-IP and iWorkflow, there are many workflows that don't make sense to run directly on the BIG-IP. For example, if we developed an extension that presented the status of a Fleet of BIG-IP devices, it would make far more sense to do this from a central platform, than on each individual BIG-IP.
 
-This is the environment for the Training Lab: :doc:`/class3/labinfo`
-
 .. Note::
 
   This lab will NOT guide you through the iWorkflow or BIG-IP lab setup.
