@@ -121,7 +121,6 @@ Let's review the code we have now, it should look like this:
     var logger = require('f5-logger').getInstance();
     var DEBUG = true;
     var DEFAULT_MSG = {"value": "Hello World!"};
-    var http = require('http');
 
     function HelloWorld() {}
 
@@ -306,10 +305,25 @@ Task 2 - Update our iControl LX extension - do a REST API call
 
 Right now, our iControl LX extension provide a default message that is set at the beginning of our code. If this "content" is owned by someone else, it may be inefficient to have it directly in the code. Let's see how we could leverage a HTTP request to retrieve our default message.
 
-For this task, we will do 2 things:
+For this task, we will do 3 things:
 
+* add the http module to our extension
 * add a new prototype onStart to our code
 * do a HTTP request on github to retrieve our default message
+
+To add the http module to our extension, you only need to add the following at the top of your code:
+
+.. code-block:: javascript
+
+    var http = require('http');
+
+
+You can add this below this line:
+
+.. code-block:: javascript
+
+    var DEFAULT_MSG = {"value": "Hello World!"};
+
 
 The prototype onStart is something you can leverage to do some processing when your iControl LX extension is loaded in restnoded. It is triggered only once, when your extension is loaded. It's a good prototype to leverage to retrieve our default message.
 
