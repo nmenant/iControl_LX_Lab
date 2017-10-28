@@ -5,11 +5,13 @@
 var logger = require('f5-logger').getInstance();
 var DEBUG = true;
 var WorkerName = "my-app-interface";
-var IPAM_IP = "172.16.2.79";
+var IWF_IP = "10.1.10.20";
+var IPAM_IP = "10.1.10.21";
 var IPAM_Port = "79";
 var http = require('http');
 var tenantName = "student";
-var connectorReference = "901f35d2-208a-4ad2-b852-b8b89c950f39";
+var connectorReference = "58df07a5-f51c-45ac-a35b-406cfb35840c";
+//var connectorReference = "901f35d2-208a-4ad2-b852-b8b89c950f39";
 
 function ipam_extension() {
 }
@@ -102,7 +104,7 @@ ipam_extension.prototype.onPost = function (restOperation) {
 				var uri = aThis.restHelper.buildUri({
 					protocol: aThis.wellKnownPorts.DEFAULT_HTTPS_SCHEME,
 					port: "443",
-					hostname: "172.16.2.30",
+					hostname: IWF_IP,
 					path: "/mgmt/cm/cloud/tenants/" + tenantName + "/services/iapp/"
 				});
 
