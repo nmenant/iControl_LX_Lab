@@ -10,3 +10,8 @@ Create TCP Service:
 
 newman run My-App-Interface.postman_collection.json --folder Create-Service-TCP --global-var "iwf_username=student" --global-var "iwf_password=student" --global-var "iwf_mgmt=172.16.2.30" --global-var "my-app-name=my-tcp-nico" --global-var "service-port=22" --global-var "server1-addr=172.16.2.200" --global-var "server2-addr=172.16.2.201" --global-var "server1-port=22" --global-var "server2-port=22"  --insecure
 newman
+
+
+TODO in UDF:
+- create student API on iWF
+- push RPM on IWF
