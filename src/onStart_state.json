@@ -1,9 +1,0 @@
-{
-  "name":"HelloWorld",
-  "Description":"Example for iControl LX training lab",
-  "ipam":{
-    "name":"custom1",
-    "description":"IPAM system for getting VIP Address",
-    "address":"1.1.1.1"
-  }
-}

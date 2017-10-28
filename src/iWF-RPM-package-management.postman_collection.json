@@ -1,0 +1,763 @@
+{
+	"info": {
+		"name": "iWF-RPM-package-management",
+		"_postman_id": "5e16e484-d222-8313-ec95-718be987f887",
+		"description": "Collection to create/install/delete a RPM in iWF",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1A_Create_RPM",
+			"description": "Create a RPM from a REST Worker repo. \nThe folder containing the worker must be in /var/config/rest/iapps/\n\nthe folder name in /var/config/rest/iapps/ storing the worker must be used as the app_name\n\nthe RPM created will be here: /var/config/rest/iapps/RPMS/\n\nYou MUST MOVE IT MANUALLY HERE to install it: /var/config/rest/downloads/. If you don't move it, you'll get the following security exception\n\nFailed to install /var/config/rest/iapps/RPMS/********** - java.lang.SecurityException: Cannot install RPM from /var/config/rest/iapps/RPMS directory. Only install RPM from /var/config/rest/downloads directory\n\nInput Variables:\napp_name        name of the RPM to create\niwf_mgmt        iWorkflow management address\niwf_token        iwf Auth token\nretryCounter      Counter\nretryLimit        Max value of counter\nretryInterval      Interval between tests in ms\n\nOutput Variables\nrpm_creation_status_id  ID to track RPM creation status\nrpm_name        name of the RPM created",
+			"item": [
+				{
+					"name": "Request a Token from iWorkflow",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"",
+									"tests[\"response has token: \" +respData.token.token] = respData.token.token;",
+									"",
+									"postman.setEnvironmentVariable('iwf_token',respData.token.token);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": {{iwf_username}},\n  \"password\": {{iwf_password}},\n  \"loginProvidername\": \"tmos\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authn/login",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authn",
+								"login"
+							]
+						},
+						"description": "Using Basic Auth, request a token from the iWorkflow platform."
+					},
+					"response": []
+				},
+				{
+					"name": "Increase Auth Token Timeout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"tests[\"Auth Token timeout is: \" +respData.timeout] = respData.timeout;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"timeout\":\"36000\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authz/tokens/{{iwf_token}}",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authz",
+								"tokens",
+								"{{iwf_token}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create RPM on iWF",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var respData = JSON.parse(responseBody);",
+									"",
+									"tests[\"response has id: \" +respData.id] = respData.id;",
+									"",
+									"tests[\"appName is: \" + respData.appName] = respData.appName;",
+									"",
+									"tests[\"App package version is: \" + respData.packageVersion] = respData.packageVersion;",
+									"",
+									"tests[\"App package release is: \" + respData.packageRelease] = respData.packageRelease;",
+									"",
+									"postman.setEnvironmentVariable('rpm_creation_status_id',respData.id);",
+									"",
+									"var rpm_name = respData.appName + \"-\" +respData.packageVersion + \"-\" + respData.packageRelease +\".noarch\";",
+									"",
+									"postman.setEnvironmentVariable('rpm_name', rpm_name);",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"appName\": \"{{extension_name}}\",\n\t\"packageVersion\": \"0.1\",\n\t\"packageRelease\": \"001\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/iapp/build-package",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"iapp",
+								"build-package"
+							]
+						},
+						"description": "the app name used here is the name of the folder for your code in /var/config/rest/iapps"
+					},
+					"response": []
+				},
+				{
+					"name": "Check RPM creation process",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is: \" + responseCode.code] = responseCode.code === 200;",
+									"",
+									"var    retryCounter = environment.retryCounter;",
+									"var    retryInterval = environment.retryInterval;",
+									"var    retryLimit = environment.retryLimit;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"",
+									"function pausecomp(millis)",
+									"{",
+									"    var date = new Date();",
+									"    var curDate = null;",
+									"    do { curDate = new Date(); }",
+									"    while(curDate-date < millis);",
+									"}",
+									"",
+									"if ( respData.status != \"FINISHED\") {",
+									"    tests[\"retry-counter value is: \" + retryCounter] = retryCounter;",
+									"    if ( parseInt(retryCounter) < parseInt(retryLimit))",
+									"    {",
+									"        tests[\"retry-counter value is: \" + retryCounter] = retryCounter;",
+									"        postman.setEnvironmentVariable(\"retryCounter\", parseInt(retryCounter) + 1);",
+									"        pausecomp(retryInterval);",
+									"        postman.setNextRequest(\"Check RPM creation process\");",
+									"    } else",
+									"    {",
+									"        postman.setEnvironmentVariable(\"retryCounter\", 0);",
+									"        console.log(\"Resetting, retry counter to 0\");",
+									"        tests[\"Retries Expired\"] = true === false;",
+									"}",
+									"} else {",
+									"    tests[\"Process Status is: \" + respData.status] = respData.status == \"FINISHED\"",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/iapp/build-package/{{rpm_creation_status_id}}",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"iapp",
+								"build-package",
+								"{{rpm_creation_status_id}}"
+							]
+						},
+						"description": "Check the status of the RPM creation process"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2A_Install_RPM",
+			"description": "Install the RPM located in /var/config/rest/downloads/ and will install it. \n\nthe content of the RPM will be installed in /var/config/rest/iapps/ and will overwrite being already there if conflict\n\nInput Variables:\niwf_mgmt          iWorkflow management address\niwf_token          iwf Auth token\nrpm_name          name of the RPM to install\nretryCounter        Counter\nretryLimit          Max value of counter\nretryInterval        Interval between tests in ms\n\nOutput Variables\nrpm_installation_status_id  ID to track install progress",
+			"item": [
+				{
+					"name": "Request a Token from iWorkflow",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"",
+									"tests[\"response has token: \" +respData.token.token] = respData.token.token;",
+									"",
+									"postman.setEnvironmentVariable('iwf_token',respData.token.token);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": {{iwf_username}},\n  \"password\": {{iwf_password}},\n  \"loginProvidername\": \"tmos\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authn/login",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authn",
+								"login"
+							]
+						},
+						"description": "Using Basic Auth, request a token from the iWorkflow platform."
+					},
+					"response": []
+				},
+				{
+					"name": "Increase Auth Token Timeout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"tests[\"Auth Token timeout is: \" +respData.timeout] = respData.timeout;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"timeout\":\"36000\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authz/tokens/{{iwf_token}}",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authz",
+								"tokens",
+								"{{iwf_token}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "install RPM",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var respData = JSON.parse(responseBody);",
+									"",
+									"tests[\"response has id: \" +respData.id] = respData.id;",
+									"",
+									"postman.setEnvironmentVariable('rpm_installation_status_id',respData.id);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\"operation\": \"INSTALL\",\r\"packageFilePath\": \"/var/config/rest/downloads/{{rpm_name}}.rpm\"\r}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/iapp/package-management-tasks",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"iapp",
+								"package-management-tasks"
+							]
+						},
+						"description": "will install the RPM on iWF. \n\nthe file need to be in /var/config/rest/downloads/ or it will be rejected"
+					},
+					"response": []
+				},
+				{
+					"name": "Check RPM install process status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is: \" + responseCode.code] = responseCode.code === 200;",
+									"",
+									"var    retryCounter = environment.retryCounter;",
+									"var    retryInterval = environment.retryInterval;",
+									"var    retryLimit = environment.retryLimit;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"",
+									"function pausecomp(millis)",
+									"{",
+									"    var date = new Date();",
+									"    var curDate = null;",
+									"    do { curDate = new Date(); }",
+									"    while(curDate-date < millis);",
+									"}",
+									"",
+									"if ( respData.status != \"FINISHED\") {",
+									"    tests[\"retry-counter value is: \" + retryCounter] = retryCounter;",
+									"    if ( parseInt(retryCounter) < parseInt(retryLimit))",
+									"    {",
+									"        tests[\"retry-counter value is: \" + retryCounter] = retryCounter;",
+									"        postman.setEnvironmentVariable(\"retryCounter\", parseInt(retryCounter) + 1);",
+									"        pausecomp(retryInterval);",
+									"        postman.setNextRequest(\"Check RPM install process status\");",
+									"    } else",
+									"    {",
+									"        postman.setEnvironmentVariable(\"retryCounter\", 0);",
+									"        console.log(\"Resetting, retry counter to 0\");",
+									"        tests[\"Retries Expired\"] = true === false;",
+									"}",
+									"} else {",
+									"    tests[\"Process Status is: \" + respData.status] = respData.status == \"FINISHED\"",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/iapp/package-management-tasks/{{rpm_installation_status_id}}",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"iapp",
+								"package-management-tasks",
+								"{{rpm_installation_status_id}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Check installed RPM",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var respData = JSON.parse(responseBody);",
+									"var packageFound = 0;",
+									"",
+									"for (var i = 0; i < respData.items.length; i++){",
+									"    tests[\"Package index \" + i + \" installed: \" + respData.items[i].packageName] = respData.items[i].packageName;",
+									"  if (respData.items[i].packageName == environment.rpm_name) {",
+									"      packageFound = 1;",
+									"  }",
+									"  tests[\"package Found: \" + packageFound] = packageFound;",
+									"}",
+									"",
+									"tests[\"Found our package: \" + environment.rpm_name] = packageFound === 1;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"operation\": \"INSTALL\",\n \"packageName\": {{ rpm-path-filename }}\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/iapp/global-installed-packages",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"iapp",
+								"global-installed-packages"
+							]
+						},
+						"description": "Will list the RPM installed on iWF"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3A_Delete_RPM",
+			"description": "Delete REST worker that was installed in /var/config/rest/iapps.\n\nInput Variables:\niwf_mgmt          iWorkflow management address\niwf_token        iwf Auth token\nrpm_name          name of the RPM to install\n\nOutput Variables\nrpm_uninstallation_status_id  ID to track delete progress",
+			"item": [
+				{
+					"name": "Request a Token from iWorkflow",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"",
+									"tests[\"response has token: \" +respData.token.token] = respData.token.token;",
+									"",
+									"postman.setEnvironmentVariable('iwf_token',respData.token.token);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": {{iwf_username}},\n  \"password\": {{iwf_password}},\n  \"loginProvidername\": \"tmos\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authn/login",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authn",
+								"login"
+							]
+						},
+						"description": "Using Basic Auth, request a token from the iWorkflow platform."
+					},
+					"response": []
+				},
+				{
+					"name": "Increase Auth Token Timeout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"tests[\"Auth Token timeout is: \" +respData.timeout] = respData.timeout;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"timeout\":\"36000\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authz/tokens/{{iwf_token}}",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authz",
+								"tokens",
+								"{{iwf_token}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Uninstall RPM",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var respData = JSON.parse(responseBody);",
+									"",
+									"tests[\"response has id: \" +respData.id] = respData.id;",
+									"",
+									"postman.setEnvironmentVariable('rpm_uninstall_status_id',respData.id);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"operation\": \"UNINSTALL\",\n\"packageName\": {{rpm_name}}\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/iapp/package-management-tasks",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"iapp",
+								"package-management-tasks"
+							]
+						},
+						"description": "will delete the RPM from iWF"
+					},
+					"response": []
+				},
+				{
+					"name": "Check uninstall rpm process status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is: \" + responseCode.code] = responseCode.code === 200;",
+									"",
+									"var    retryCounter = environment.retryCounter;",
+									"var    retryInterval = environment.retryInterval;",
+									"var    retryLimit = environment.retryLimit;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"",
+									"function pausecomp(millis)",
+									"{",
+									"    var date = new Date();",
+									"    var curDate = null;",
+									"    do { curDate = new Date(); }",
+									"    while(curDate-date < millis);",
+									"}",
+									"",
+									"if ( respData.status != \"FINISHED\") {",
+									"    tests[\"retry-counter value is: \" + retryCounter] = retryCounter;",
+									"    if ( parseInt(retryCounter) < parseInt(retryLimit))",
+									"    {",
+									"        tests[\"retry-counter value is: \" + retryCounter] = retryCounter;",
+									"        postman.setEnvironmentVariable(\"retryCounter\", parseInt(retryCounter) + 1);",
+									"        pausecomp(retryInterval);",
+									"        postman.setNextRequest(\"Check uninstall rpm process status\");",
+									"    } else",
+									"    {",
+									"        postman.setEnvironmentVariable(\"retryCounter\", 0);",
+									"        console.log(\"Resetting, retry counter to 0\");",
+									"        tests[\"Retries Expired\"] = true === false;",
+									"}",
+									"} else {",
+									"    tests[\"Process Status is: \" + respData.status] = respData.status == \"FINISHED\"",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/iapp/package-management-tasks/{{rpm_uninstall_status_id}}",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"iapp",
+								"package-management-tasks",
+								"{{rpm_uninstall_status_id}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

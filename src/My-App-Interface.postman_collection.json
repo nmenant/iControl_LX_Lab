@@ -1,0 +1,457 @@
+{
+	"info": {
+		"name": "My-App-Interface",
+		"_postman_id": "daff55d1-3f20-4043-fbcc-829f56547522",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create-Service-HTTP",
+			"description": "this folder will create a HTTP service automatically via the custom application interface",
+			"item": [
+				{
+					"name": "Request a Token from iWorkflow",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"",
+									"tests[\"response has token: \" +respData.token.token] = respData.token.token;",
+									"",
+									"postman.setEnvironmentVariable('iwf_token',respData.token.token);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": {{iwf_username}},\n  \"password\": {{iwf_password}},\n  \"loginProvidername\": \"tmos\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authn/login",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authn",
+								"login"
+							]
+						},
+						"description": "Using Basic Auth, request a token from the iWorkflow platform."
+					},
+					"response": []
+				},
+				{
+					"name": "Increase Auth Token Timeout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"tests[\"Auth Token timeout is: \" +respData.timeout] = respData.timeout;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"timeout\":\"36000\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authz/tokens/{{iwf_token}}",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authz",
+								"tokens",
+								"{{iwf_token}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "https://172.16.2.30/mgmt/shared/my-app-interface",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"{{my-app-name}}\",\n\t\"template\" : \"f5-http-lb\",\n\t\"vars\": [\n                {\n                    \"name\": \"pool__port\",\n                    \"value\": \"{{service-port}}\"\n                }\n    ],\n    \"tables\": [{\n        \"name\": \"pool__Members\",\n        \"columns\": [\n            \"IPAddress\",\n            \"State\"\n        ],\n        \"rows\": [\n        \t[ \n        \t\t\"{{server1-addr}}\",\n        \t\t\"enabled\"\n        \t], [\n        \t\t\"{{server2-addr}}\",\n        \t\t\"enabled\"\n        \t]\n        ]\n    }]\n}"
+						},
+						"url": {
+							"raw": "https://172.16.2.30/mgmt/shared/my-app-interface",
+							"protocol": "https",
+							"host": [
+								"172",
+								"16",
+								"2",
+								"30"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"my-app-interface"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create-Service-TCP",
+			"description": "this folder will create a TCP service automatically via the custom application interface",
+			"item": [
+				{
+					"name": "Request a Token from iWorkflow",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"",
+									"tests[\"response has token: \" +respData.token.token] = respData.token.token;",
+									"",
+									"postman.setEnvironmentVariable('iwf_token',respData.token.token);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": {{iwf_username}},\n  \"password\": {{iwf_password}},\n  \"loginProvidername\": \"tmos\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authn/login",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authn",
+								"login"
+							]
+						},
+						"description": "Using Basic Auth, request a token from the iWorkflow platform."
+					},
+					"response": []
+				},
+				{
+					"name": "Increase Auth Token Timeout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"tests[\"Auth Token timeout is: \" +respData.timeout] = respData.timeout;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"timeout\":\"36000\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authz/tokens/{{iwf_token}}",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authz",
+								"tokens",
+								"{{iwf_token}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "https://172.16.2.30/mgmt/shared/my-app-interface",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"{{my-app-name}}\",\n\t\"template\" : \"f5-fastl4-tcp-lb\",\n\t\"vars\": [\n                {\n                    \"name\": \"pool__port\",\n                    \"value\": \"{{service-port}}\"\n                }\n    ],\n    \"tables\": [{\n        \"name\": \"pool__Members\",\n        \"columns\": [\n        \"IPAddress\",\n        \"Port\",\n        \"State\"\n      ],\n      \"rows\": [\n        [\n          \"{{server1-addr}}\",\n          \"{{server1-port}}\",\n          \"enabled\"\n        ],\n        [\n          \"{{server2-addr}}\",\n          \"{{server2-port}}\",\n          \"enabled\"\n        ]\n      ]\n    }]\n}"
+						},
+						"url": {
+							"raw": "https://172.16.2.30/mgmt/shared/my-app-interface",
+							"protocol": "https",
+							"host": [
+								"172",
+								"16",
+								"2",
+								"30"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"my-app-interface"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete-Service",
+			"description": "",
+			"item": [
+				{
+					"name": "Request a Token from iWorkflow",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"",
+									"tests[\"response has token: \" +respData.token.token] = respData.token.token;",
+									"",
+									"postman.setEnvironmentVariable('iwf_token',respData.token.token);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": {{iwf_username}},\n  \"password\": {{iwf_password}},\n  \"loginProvidername\": \"tmos\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authn/login",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authn",
+								"login"
+							]
+						},
+						"description": "Using Basic Auth, request a token from the iWorkflow platform."
+					},
+					"response": []
+				},
+				{
+					"name": "Increase Auth Token Timeout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"tests[\"Auth Token timeout is: \" +respData.timeout] = respData.timeout;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"timeout\":\"36000\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authz/tokens/{{iwf_token}}",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authz",
+								"tokens",
+								"{{iwf_token}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "https://172.16.2.30/mgmt/shared/my-app-interface",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\" : \"{{my-app-name}}\"\n}"
+						},
+						"url": {
+							"raw": "https://172.16.2.30/mgmt/shared/my-app-interface",
+							"protocol": "https",
+							"host": [
+								"172",
+								"16",
+								"2",
+								"30"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"my-app-interface"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

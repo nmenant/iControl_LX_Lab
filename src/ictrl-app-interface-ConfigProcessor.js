@@ -68,9 +68,6 @@ ipam_extension.prototype.onPost = function (restOperation) {
 
     			res.on("end", function () {
       				var VS_IP_Payload = Buffer.concat(chunks);
-      				if (DEBUG === true) {
-        				logger.info("DEBUG: " + WorkerName + "IPAM REST Call - onPost - the retrieved Payload is: " + VS_IP_Payload);
-      				}
 				var VS_IP_Obj = JSON.parse(VS_IP_Payload);
 				var VS_IP = VS_IP_Obj.IP;
 				if (DEBUG === true) {
@@ -120,7 +117,7 @@ ipam_extension.prototype.onPost = function (restOperation) {
                               		updateService,
                                         function(respPostRequest) {
 						if (DEBUG === true) {
-                        	              		logger.info ("DEBUG: " + WorkerName + " - function RestPostRequest");
+                        	              		logger.info ("DEBUG: " + WorkerName + " - function RestPostRequest, Service created successfully");
                                        		}
 					}, function(err) {
 						logger.info("DEBUG: " + WorkerName + " [Test Call Rest respPostServiceDeployment Error:] %j", err);
@@ -171,9 +168,6 @@ ipam_extension.prototype.onDelete = function (restOperation) {
          	aThis.eventChannel.e.sendRestOperation,
                 updateService,
                 function(respGetRequest) {
-                	if (DEBUG === true) {
-                        	logger.info ("DEBUG: " + WorkerName + " - onDelete : function RespGetRequest");
-                        }
 			//we retrieve the body of the response
 			var respBody = respGetRequest.getBody();
 			var appVarsList = respBody.vars;
@@ -208,6 +202,9 @@ ipam_extension.prototype.onDelete = function (restOperation) {
                 		bThis.eventChannel.e.sendRestOperation,
                 		deleteService,
                 		function(respDeleteRequest) {
+					if (DEBUG === true) {
+                                                logger.info ("DEBUG: " + WorkerName + " - onDelete : Service Deleted, release IP from IPAM: " + VS_IP);
+                                        }
 					var options = {
                         			"method": "DELETE",
                         			"hostname": IPAM_IP,

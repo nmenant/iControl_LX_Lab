@@ -1,0 +1,12 @@
+Create RPM:
+
+newman run iWF-RPM-package-management.postman_collection.json -e iWF-RPM-package-Management.postman_environment.json --folder 1A_Create_RPM --global-var "iwf_username=admin" --global-var "iwf_password=admin" --global-var "iwf_mgmt=172.16.2.30" --global-var "extension_name=my-app-interface" --insecure
+
+Create HTTP Service:
+
+newman run My-App-Interface.postman_collection.json --folder Create-Service-HTTP --global-var "iwf_username=student" --global-var "iwf_password=student" --global-var "iwf_mgmt=172.16.2.30" --global-var "my-app-name=my-web-nicolas" --global-var "service-port=80" --global-var "server1-addr=172.16.2.200" --global-var "server2-addr=172.16.2.201" --insecure
+
+Create TCP Service:
+
+newman run My-App-Interface.postman_collection.json --folder Create-Service-TCP --global-var "iwf_username=student" --global-var "iwf_password=student" --global-var "iwf_mgmt=172.16.2.30" --global-var "my-app-name=my-tcp-nico" --global-var "service-port=22" --global-var "server1-addr=172.16.2.200" --global-var "server2-addr=172.16.2.201" --global-var "server1-port=22" --global-var "server2-port=22"  --insecure
+newman
