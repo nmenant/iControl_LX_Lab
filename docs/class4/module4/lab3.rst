@@ -20,7 +20,7 @@ Here is the REST command to create the package creation
 
 You can use the following command to do this :
 
-``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"appName": "HelloWorld", "packageVersion": "0.1", "packageRelease": "001"}' https://10.1.1.12/mgmt/shared/iapp/build-package | jq``
+``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"appName": "HelloWorld", "packageVersion": "0.1", "packageRelease": "001"}' https://10.1.10.20/mgmt/shared/iapp/build-package | jq``
 
 .. note::
 
@@ -57,7 +57,7 @@ You'll get back a response that looks something like this:
 To view the status of the package creation, take the 'id' and append that to
 the end of the build-package URI like so (this is a GET request):
 
-``curl -k -u admin:admin https://10.1.1.12/mgmt/shared/iapp/build-package/3ae60863-9d92-40a0-a69a-1acc337100b9 | jq``
+``curl -k -u admin:admin https://10.1.10.20/mgmt/shared/iapp/build-package/3ae60863-9d92-40a0-a69a-1acc337100b9 | jq``
 
 You will receive the following when it is successfully created
 ("status": "FINISHED"):
@@ -109,7 +109,7 @@ Note also in the build-package completion response above, the
 
 This is where you collect your RPM from. For a terminal, run the following command:
 
-``scp admin@10.1.1.12:/var/config/rest/iapps/RPMS/HelloWorld-0.1-001.noarch.rpm /var/tmp``
+``scp admin@10.1.10.20:/var/config/rest/iapps/RPMS/HelloWorld-0.1-001.noarch.rpm /var/tmp``
 
 .. note::
 
@@ -172,7 +172,7 @@ As you can see restnoded got restarted automatically to remove the extension.
 
 You can validate that your extension has been removed from restnoded by trying to access it again:
 
-``curl -k -u admin:admin https://10.1.1.12/mgmt/ilxe_lab/hello_world | jq``
+``curl -k -u admin:admin https://10.1.10.20/mgmt/ilxe_lab/hello_world | jq``
 
 Here your request should fail and the output should be similar to this:
 

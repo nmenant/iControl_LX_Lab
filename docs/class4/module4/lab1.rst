@@ -8,7 +8,7 @@ Task 1 - Create our iControl LX extension onto iWorkflow
 
 iControl LX extension can be installed on either BIG-IP or iWorkflow platform. For this lab, we will use iWorkflow.
 
-Connect to your iWorkflow platform (10.1.1.12 if you use our topology).
+Connect to your iWorkflow platform (10.1.10.20 if you use our topology).
 
 iControl LX extension resides in `/var/config/rest/iapps/`. This is where you need to create your iControl LX extension. Usually you will create:
 
@@ -98,7 +98,7 @@ Task 2 - Check our iControl LX extension is working
 
 In your web browser, navigate to:
 
-``https://10.1.1.12/mgmt/ilxe_lab/hello_world``
+``https://10.1.10.20/mgmt/ilxe_lab/hello_world``
 
 you should see something like this:
 
@@ -108,7 +108,7 @@ you should see something like this:
 
 You could also use `curl` in CLI:
 
-``curl -k -u admin:admin https://10.1.1.12/mgmt/ilxe_lab/hello_world``
+``curl -k -u admin:admin https://10.1.10.20/mgmt/ilxe_lab/hello_world``
 
 .. code::
 
@@ -119,7 +119,7 @@ Or a REST client like POSTMAN.
 
 Another test is to connect to our `/example` uri. Navigate with your browser to:
 
-``https://10.1.1.12/mgmt/ilxe_lab/hello_world/example``
+``https://10.1.10.20/mgmt/ilxe_lab/hello_world/example``
 
 you should see something like this:
 
@@ -129,7 +129,7 @@ you should see something like this:
 
 You can also use curl in CLI:
 
-``curl -k -u admin:admin https://10.1.1.12/mgmt/ilxe_lab/hello_world/example``
+``curl -k -u admin:admin https://10.1.10.20/mgmt/ilxe_lab/hello_world/example``
 
 .. note::
 

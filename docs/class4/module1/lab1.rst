@@ -28,7 +28,7 @@ to acting as the interface to *restjavad* and the iControl REST API.
 Task 2 - Start/Stop/Restart the daemons
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-On an iWorkflow platform command prompt (ssh to iWorkfow), execute the
+Connect via ssh to your iWorkflow platform (a shortcut already exist in PuTTY - 10.1.10.20, Root/Default). Execute the
 following:
 
   ``bigstart status restnoded``

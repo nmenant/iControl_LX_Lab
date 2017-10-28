@@ -19,7 +19,7 @@ To delete the HelloWorld iControl LX extension, perform the following POST to
 the 'package-management-tasks' REST resource.
 
 
-``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"operation": "UNINSTALL","packageName": "HelloWorld-0.1-001.noarch"}' https://10.1.1.12/mgmt/shared/iapp/package-management-tasks | jq``
+``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"operation": "UNINSTALL","packageName": "HelloWorld-0.1-001.noarch"}' https://10.1.10.20/mgmt/shared/iapp/package-management-tasks | jq``
 
 A typical response looks like:
 
@@ -57,7 +57,7 @@ Task 3 - [OPTIONAL] Verify the iControl LX extension is gone
 Perform a GET request to `global-installed-packages` to confirm it is no
 longer there:
 
-``curl -k -u admin:admin https://10.1.1.12/mgmt/shared/iapp/global-installed-packages | jq``
+``curl -k -u admin:admin https://10.1.10.20/mgmt/shared/iapp/global-installed-packages | jq``
 
 .. code::
 
@@ -71,7 +71,7 @@ longer there:
 
 You can also try to access the iControl LX extension:
 
-``curl -k -u admin:admin https://10.1.1.12/mgmt/ilxe_lab/hello_world | jq``
+``curl -k -u admin:admin https://10.1.10.20/mgmt/ilxe_lab/hello_world | jq``
 
 Here your request should fail and the output should be similar to this:
 

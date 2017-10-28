@@ -59,7 +59,7 @@ Note the following line:
 This specifies where the iControl LX extension will appear within iControl REST.
 Adding the '/mgmt' prefix, this would result in:
 
-``https://10.1.1.12/mgmt/ilxe_lab/hello_world``
+``https://10.1.10.20/mgmt/ilxe_lab/hello_world``
 
 
 2. isPublic

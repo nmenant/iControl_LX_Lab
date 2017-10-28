@@ -16,8 +16,7 @@ Web interface, which looks like this:
 Task 1 - View the API via web browser
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. In your browser, navigate to (replacing `10.1.1.12` as appropriate if you don't use the F5 lab - iWorkflow IP address):
-https://10.1.1.12/mgmt/toc
+1. In your browser, navigate to: https://10.1.10.20/mgmt/toc
 
 
 2. Enter the 'admin' user credentials (it should be admin / admin).
@@ -64,7 +63,7 @@ web interface.
 2. Click the 'back' button in your browser to return to the /presentation#/
 view. The URL should now be:
 
-`https://10.1.1.12/mgmt/shared/echo/presentation#/`
+`https://10.1.10.20/mgmt/shared/echo/presentation#/`
 
 
 Task 4 - Editing a REST resource

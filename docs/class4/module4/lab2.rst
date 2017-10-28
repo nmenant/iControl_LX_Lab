@@ -246,7 +246,7 @@ you should have something like this:
 
 you can now test your updated extension with the following commands:
 
-``curl -k -u admin:admin https://10.1.1.12/mgmt/ilxe_lab/hello_world``
+``curl -k -u admin:admin https://10.1.10.20/mgmt/ilxe_lab/hello_world``
 
 the console output should look like this:
 
@@ -262,7 +262,7 @@ the /var/log/restnoded/restnoded.log output should look like this:
 
 Run this command:
 
-``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"name":"iControl LX Lab"}' https://10.1.1.12/mgmt/ilxe_lab/hello_world``
+``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"name":"iControl LX Lab"}' https://10.1.10.20/mgmt/ilxe_lab/hello_world``
 
 the console output should look like this:
 
@@ -281,7 +281,7 @@ the /var/log/restnoded/restnoded.log output should look like this:
 
 Run this command:
 
-``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"other":"iControl LX Lab"}' https://10.1.1.12/mgmt/ilxe_lab/hello_world``
+``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"other":"iControl LX Lab"}' https://10.1.10.20/mgmt/ilxe_lab/hello_world``
 
 the console output should look like this (the name parameter wasn't found in the POST payload):
 
@@ -401,7 +401,7 @@ you should have something like this:
 
 you can now test your updated extension with the following commands:
 
-``curl -k -u admin:admin https://10.1.1.12/mgmt/ilxe_lab/hello_world``
+``curl -k -u admin:admin https://10.1.10.20/mgmt/ilxe_lab/hello_world``
 
 the console output should look like this:
 
@@ -417,7 +417,7 @@ the /var/log/restnoded/restnoded.log output should look like this:
 
 Run this command:
 
-``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"name":"iControl LX Lab"}' https://10.1.1.12/mgmt/ilxe_lab/hello_world``
+``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"name":"iControl LX Lab"}' https://10.1.10.20/mgmt/ilxe_lab/hello_world``
 
 the console output should look like this:
 
@@ -436,7 +436,7 @@ the /var/log/restnoded/restnoded.log output should look like this:
 
 Run this command:
 
-``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"other":"iControl LX Lab"}' https://10.1.1.12/mgmt/ilxe_lab/hello_world``
+``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"other":"iControl LX Lab"}' https://10.1.10.20/mgmt/ilxe_lab/hello_world``
 
 the console output should look like this (the name parameter wasn't found in the POST payload):
 
