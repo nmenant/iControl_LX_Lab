@@ -106,7 +106,7 @@
 					"response": []
 				},
 				{
-					"name": "https://172.16.2.30/mgmt/shared/my-app-interface",
+					"name": "Create HTTP Service",
 					"event": [
 						{
 							"listen": "test",
@@ -135,13 +135,10 @@
 							"raw": "{\n\t\"name\": \"{{my-app-name}}\",\n\t\"template\" : \"f5-http-lb\",\n\t\"vars\": [\n                {\n                    \"name\": \"pool__port\",\n                    \"value\": \"{{service-port}}\"\n                }\n    ],\n    \"tables\": [{\n        \"name\": \"pool__Members\",\n        \"columns\": [\n            \"IPAddress\",\n            \"State\"\n        ],\n        \"rows\": [\n        \t[ \n        \t\t\"{{server1-addr}}\",\n        \t\t\"enabled\"\n        \t], [\n        \t\t\"{{server2-addr}}\",\n        \t\t\"enabled\"\n        \t]\n        ]\n    }]\n}"
 						},
 						"url": {
-							"raw": "https://172.16.2.30/mgmt/shared/my-app-interface",
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/my-app-interface",
 							"protocol": "https",
 							"host": [
-								"172",
-								"16",
-								"2",
-								"30"
+								"{{iwf_mgmt}}"
 							],
 							"path": [
 								"mgmt",
@@ -255,7 +252,7 @@
 					"response": []
 				},
 				{
-					"name": "https://172.16.2.30/mgmt/shared/my-app-interface",
+					"name": "Create TCP Service",
 					"event": [
 						{
 							"listen": "test",
@@ -284,13 +281,10 @@
 							"raw": "{\n\t\"name\": \"{{my-app-name}}\",\n\t\"template\" : \"f5-fastl4-tcp-lb\",\n\t\"vars\": [\n                {\n                    \"name\": \"pool__port\",\n                    \"value\": \"{{service-port}}\"\n                }\n    ],\n    \"tables\": [{\n        \"name\": \"pool__Members\",\n        \"columns\": [\n        \"IPAddress\",\n        \"Port\",\n        \"State\"\n      ],\n      \"rows\": [\n        [\n          \"{{server1-addr}}\",\n          \"{{server1-port}}\",\n          \"enabled\"\n        ],\n        [\n          \"{{server2-addr}}\",\n          \"{{server2-port}}\",\n          \"enabled\"\n        ]\n      ]\n    }]\n}"
 						},
 						"url": {
-							"raw": "https://172.16.2.30/mgmt/shared/my-app-interface",
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/my-app-interface",
 							"protocol": "https",
 							"host": [
-								"172",
-								"16",
-								"2",
-								"30"
+								"{{iwf_mgmt}}"
 							],
 							"path": [
 								"mgmt",
@@ -404,7 +398,7 @@
 					"response": []
 				},
 				{
-					"name": "https://172.16.2.30/mgmt/shared/my-app-interface",
+					"name": "Delete Service",
 					"event": [
 						{
 							"listen": "test",

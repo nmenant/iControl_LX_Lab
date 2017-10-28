@@ -470,64 +470,6 @@
 						"description": ""
 					},
 					"response": []
-				},
-				{
-					"name": "Check installed RPM",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"var respData = JSON.parse(responseBody);",
-									"var packageFound = 0;",
-									"",
-									"for (var i = 0; i < respData.items.length; i++){",
-									"    tests[\"Package index \" + i + \" installed: \" + respData.items[i].packageName] = respData.items[i].packageName;",
-									"  if (respData.items[i].packageName == environment.rpm_name) {",
-									"      packageFound = 1;",
-									"  }",
-									"  tests[\"package Found: \" + packageFound] = packageFound;",
-									"}",
-									"",
-									"tests[\"Found our package: \" + environment.rpm_name] = packageFound === 1;",
-									""
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "X-F5-Auth-Token",
-								"value": "{{iwf_token}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\"operation\": \"INSTALL\",\n \"packageName\": {{ rpm-path-filename }}\n}"
-						},
-						"url": {
-							"raw": "https://{{iwf_mgmt}}/mgmt/shared/iapp/global-installed-packages",
-							"protocol": "https",
-							"host": [
-								"{{iwf_mgmt}}"
-							],
-							"path": [
-								"mgmt",
-								"shared",
-								"iapp",
-								"global-installed-packages"
-							]
-						},
-						"description": "Will list the RPM installed on iWF"
-					},
-					"response": []
 				}
 			]
 		},
