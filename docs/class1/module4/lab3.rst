@@ -107,7 +107,7 @@ Note also in the build-package completion response above, the
   "builtRpmPackageFilePath": "/var/config/rest/iapps/RPMS/HelloWorld-0.1-001.noarch.rpm"
 
 
-This is where you collect your RPM from. For a terminal, run the following command:
+This is where you collect your RPM from. From a terminal, run the following command:
 
 ``scp admin@10.1.10.20:/var/config/rest/iapps/RPMS/HelloWorld-0.1-001.noarch.rpm /var/tmp``
 
