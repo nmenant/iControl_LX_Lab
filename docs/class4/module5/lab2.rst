@@ -1,81 +1,84 @@
-Lab 5.2 - Accept state updates via onPatch()
---------------------------------------------
+Lab 5.2 - Test and troubleshoot the extension
+---------------------------------------------
 
-Now we have an iControl LX extension that is acquiring its state during startup.
+Task 1 - Deploy services via the extension
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-How very Nuke & Pave (DevOps) of us!
+To deploy services , we need to push POST requests to /mgmt/share/my-app-interface.
 
-Next, we should make the extension accept changes to its operating setting after
-startup.
+Just like for the RPM installation process, we can either use a POSTMAN collection or use newman.
 
-Task 1 - Use onPatch to edit a parameter
+To see what the extension is doing:
 
-1. Open your local copy of myFirstWorker.js
+* you can monitor its logs in /var/log/restnoded/restnoded.log: Open a Putty session on iWorkflow and let the following command run: `tail -f /var/log/restnoded/restnoded.log` . This way you should see all action logged by the extension.
+* Connect to your BIG-IP UI and iWorkflow UI to see services being added/deleted. You have shortcuts in your Chrome browser
 
-2. Scroll down past the onGet() function.
+.. Note::
 
-3. Between onGet() and getExampleState(), add the following code:
+  Some limitation of the extension / IPAM solution to be aware of:
 
-```
-F5_ChatOps.prototype.onPut = function(restOperation) {
+  * only 8 IPs have been allocated to depoy services in the IPAM simulator (10.1.20.100-10.1.20.107) so don't try to deploy more services, it will fail
+  * only POST / DELETE have been setup for now, don't try to update a service
+  * Here we only handle the use case where we deploy 2 pool members for each app. Don't try to push only one server or more than 2.
 
-  var newState = restOperation.getBody();
+Use Postman
+"""""""""""
 
-  logger.info("onPut():" +newState);
+Open your Postman application in your JumpHost and select the collection called `My-App-Interface`
 
-  if (newState.ipam.address)  {
-    this.state.ipam.address = newState.ipam.address;
-  }
+.. image:: ../../_static/class4/module5/lab2-image001.png
+    :align: center
+    :scale: 50%
 
-  restOperation.setBody(this.state);
-  this.completeRestOperation(restOperation);
+Select also `My-App-Interface` environement variables
 
-};
+.. image:: ../../_static/class4/module5/lab2-image002.png
+    :align: center
+    :scale: 50%
 
-```
+In this collection you have different things you can do:
 
-.. Note: this will only accepted changes to `ipam.address`. The `if` statement
-  isn't checking for any other value changes within in the 'PUT'.
+* Deploy a HTTP and/or TCP Service
+* Delete a Service
 
-Task 2 - Upload this to your iWorkflow or BIG-IP
+For each workflow you want to trigger, make sure that you do the Calls in the order they are set in the folder.
 
-`scp /<location>/myFirstWorker.js root@<ip_address>:/usr/local/rest/src/workers/`
+For example to deploy a HTTP Service, in the folder Create-Service-HTTP:
 
-Task 3 - Load the new worker and test
+1. Click `Request a token from iWorkflow` and click SEND
+2. Click `Increase Auth token timeout` and click SEND
+3. Click `Create HTTP Service` and click SEND
 
-1. Execute:
+You can review that everything happened as expected through the iWorkflow and BIG-IP UI.
 
-`bigstart restart restnoded; tail -f /var/log/restnoded/restnoded.log`
+.. Note::
 
-Assuming there were no errors to troubleshoot/debug:
+  Your service definition is done in your `My-App-Interface` environment. So if you want to deploy multiple services, make sure you update it accordingly.
 
-2. Test the worker has acquired it startup state from GitHub:
+Use newman
+""""""""""
 
-`GET /mgmt/ilxe_lab/myFirstWorker`
+Launch the command prompt that is pinned in your taskbar
 
-3. Change the value of the 'ipam' server address:
+.. image:: ../../_static/class4/module5/lab1-image006.png
+    :align: center
+    :scale: 50%
 
-```
-PUT /mgmt/ilxe_lab/myFirstWorker
+You already have a few scripts setup to deploy/delete services:
 
-{
-  "ipam.address":"2.2.2.2"
-}
-```
+* 2_Create_HTTP_Service: will create a HTTP based service
+* 3_Create_TCP_Service:  will create a TCP based service
+* 4_Delete_HTTP_Service: will delete the created HTTP based service
+* 5_Delete_TCP_Service: will delete the created TCP based service
 
-You should receive the new state:
+.. Note::
 
-```
-{
-  "name":"HelloWorld",
-  "Description":"Example for iControl LX training lab",
-  "ipam":{
-    "name":"custom1",
-    "description":"IPAM system for getting VIP Address",
-    "address":"2.2.2.2"
-  }
-}
-```
+  If you want to change a little the service created, you can edit the relevant bat script. You'll find all the parameters related to the service in the script. You can open the folder containing all the scripts, right click on the script you want to update and edit it with Notepad++
 
-4. Congratulations again! You've created a dynamic, interactive iControl LX
-extension. You're future looks bright!
+  .. image:: ../../_static/class4/module5/lab2-image003.png
+    :align: center
+    :scale: 50%
+
+
+
+
