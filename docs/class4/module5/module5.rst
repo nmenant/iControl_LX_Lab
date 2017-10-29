@@ -49,6 +49,22 @@ An example of an attribute that a consumer shouldn't have to provide is our Virt
 
 In this lab, we will deploy an iControl LX extension that will communicate with an IPAM solution to populate automatically this information
 
+iWorflow is already setup with 2 service templates:
+
+* HTTP service
+* TCP service
+
+.. image:: ../../_static/class4/module5/image001.png
+    :align: center
+    :scale: 50%
+
+Our extension will do the following:
+
+* Receive POST/DELETE requests
+* Retrieve an IP from our IPAM solution (we use an iRule to simulate this. It's on the BIG-IP)
+* complete the received payload with the information needed by iWF to trigger those templates
+* send an updated POST/DELETE requests to iWF to deploy/delete the relevant service
+
 **Exercises in this Module**
 
 Lab 5.1 - Install the iControl LX package
