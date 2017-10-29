@@ -1,104 +1,168 @@
-Lab 5.1 - Retrieve state from GitHub repo
+Lab 5.1 - Install the iControl LX package
 -----------------------------------------
 
-In this lab we will extend the SkeletonWorker (best place to start) to retrieve
-its initial 'state' (operational settings) from a source code repository.
+Task 1 - Install the iControl LX RPM package
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Task 1 - Copy the hello_world.js file
+To save some time, we already have pushed the iControl LX RPM on your iworkflow platform.
 
-1. Download the hello_world.js source from: <Publish to GitHub so you can get the link>
+You can connect to your iWorkflow platform (10.1.10.20) and check the directory /var/config/rest/downloads:
 
-2. Copy it to your local machine.
+.. code::
 
-3. Rename it to `myFirstWorker.js`
-
-4. Open it with your favorite JavaScript editor.
-
-.. Note: Don't have one? Sublime and Atom are great. This lab was written using Atom and
-its awesome GitHub Desktop integration.
+  # ls /var/config/rest/downloads/
+  my-app-interface-0.1-001.noarch.rpm  tmp
 
 
-5. Replace all instances of 'HelloWorld' with 'MyFirstWorker'.
+To install your RPM, you have two different options:
 
-6. Use Search/Replace. You don't want to miss any!!!
+* use the POSTMAN application and the collection already setup in it and do the calls one by one
+* use the newman scripts that will automatically run all the required API calls
 
+Use the POSTMAN application
+"""""""""""""""""""""""""""
 
-Task 2 - Add code to retrieve state on startup
+Click on the POSTMAN icon in the task bar (or on the Desktop)
 
-1. Scroll down to `MyFirstWorker.prototype.isPublic = true;` and create some
-space for the onStart() function.
+.. image:: ../../_static/class4/module5/lab1-image001.png
+    :align: center
 
+you should see this:
 
-2. Add the following code after `isPublic`, and before `onGet()`:
+.. image:: ../../_static/class4/module5/lab1-image002.png
+    :align: center
+    :scale: 50%
 
-```
-MyFirstWorker.prototype.onStart = function(success, error) {
+Click on the collection `iWF-RPM-package-management` and then on `2A_Install_RPM`
 
-   logger.info("HelloWorld onStart()");
+.. image:: ../../_static/class4/module5/lab1-image003.png
+    :align: center
+    :scale: 50%
 
-   var options = {
-     "method": "GET",
-     "hostname": "raw.githubusercontent.com",
-     "port": null,
-     "path": "/<path-to-file>/master/onStart_state.json",
-     "headers": {
-       "cache-control": "no-cache"
-     }
-   };
+Here you can see that this folder has 4 different API calls:
 
-   var req = http.request(options, function (res) {
+* Get an Auth token from iWF
+* Extend the timeout of this token
+* Install our RPM
+* Check whether it installed successfully or not (you may need to do play this requets a few times before it's fully installed)
 
-     var chunks = [];
+Select the `iWF-RPM-package-Management` environment (top right of the windows)
 
-     res.on("data", function (chunk) {
-       chunks.push(chunk);
-     });
+.. image:: ../../_static/class4/module5/lab1-image004.png
+    :align: center
+    :scale: 50%
 
-     res.on("end", function () {
-       var body = Buffer.concat(chunks);
-       this.state = JSON.parse(body);
-     });
-   });
+Now, we are ready to execute our calls.
 
-   req.end();
+Here is the procedure:
 
-   success();
-};
-```
+* select the call: `Request a Token from iWorkflow` and click on SEND, you may review the response to ensure it was successful
+* select the call: `Increase Auth Token Timeout` and click on SEND, you may review the response
+* select the call: `install RPM` and click on SEND, you may review the response
+* select the call: `check RPM install process status` and click on SEND
 
-3. Save! Always Save!!!
+With the final call, you should see something like this (check the status value, it should be *FINISHED*):
 
+.. code::
 
-Task 3 - Put this worker on your BIG-IP or iWorkflow:
-
-1. Re-mount /usr to 'Read/Write'. The default is 'Read-only'
-
-On your iWorkflow, or BIG-IP, execute: `mount -o rw,remount /usr`
-
-2. copy myFirstWorker.js to your iWorkflow or BIG-IP:
-
-`scp /<location>/myFirstWorker.js root@<ip_address>:/usr/local/rest/src/workers/`
-
-3. Restart restnoded, and watch the log output:
-
-`bigstart restart restnoded; tail -f /var/log/restnoded/restnoded.log`
-
-
-Task 4 - Test your worker
-
-`GET /mgmt/ilxe_lab/myFirstWorker`
-
-You should see the contents of the `onStart_state.json` file retrieved from
-GitHub.
-
-```
-{
-  "name":"HelloWorld",
-  "Description":"Example for iControl LX training lab",
-  "ipam":{
-    "name":"custom1",
-    "description":"IPAM system for getting VIP Address",
-    "address":"1.1.1.1"
+  {
+    "packageFilePath": "/var/config/rest/downloads/my-app-interface-0.1-001.noarch.rpm",
+    "packageName": "my-app-interface-0.1-001.noarch",
+    "operation": "INSTALL",
+    "packageManifest": {
+        "tags": [
+            "IAPP"
+        ]
+    },
+    "id": "9bfc0b20-19e2-4565-9ffe-44221fba239e",
+    "status": "FINISHED",
+    "startTime": "2017-10-29T02:37:46.504-0700",
+    "endTime": "2017-10-29T02:37:46.957-0700",
+    "userReference": {
+        "link": "https://localhost/mgmt/shared/authz/users/admin"
+    },
+    "identityReferences": [
+        {
+            "link": "https://localhost/mgmt/shared/authz/users/admin"
+        }
+    ],
+    "ownerMachineId": "075786c3-27a2-45da-8b06-86dcbb73a1c5",
+    "generation": 3,
+    "lastUpdateMicros": 1509269866957258,
+    "kind": "shared:iapp:package-management-tasks:iapppackagemanagementtaskstate",
+    "selfLink": "https://localhost/mgmt/shared/iapp/package-management-tasks/9bfc0b20-19e2-4565-9ffe-44221fba239e"
   }
-}
-```
+
+
+Use the newman script
+"""""""""""""""""""""
+
+.. warning::
+
+  If you've already setup the extension by following the POSTMAN process, this will fail. You'll need to delete the extension first
+
+newman gives you the capability to run a POSTMAN collection or a specific folder. When you have multiple calls to do, it may be easier to use newman.
+
+If you want more information about newman, you can review this `newman_overview`_
+
+.. _newman_overview: https://www.getpostman.com/docs/postman/collection_runs/command_line_integration_with_newman
+
+newman is already installed and setup in your JumpHost. All the different scripts that will be used in this lab are stored in the `Lab` folder on your desktop.
+
+To execute newman, launch a MS Command Prompt. You have a shortcust in your taskbar that will be launched in the right folder automatically
+
+.. image:: ../../_static/class4/module5/lab1-image005.png
+    :align: center
+
+you should see this:
+
+.. image:: ../../_static/class4/module5/lab1-image006.png
+    :align: center
+    :scale: 50%
+
+to launch the newman script that install the RPM, run the following command `1_Install_RPM`
+
+.. code::
+
+  C:\Users\Administrator\Desktop\Lab\Postman>1_Install_RPM.bat
+
+This script will execute all the API calls in the 2A_Install_RPM collection, you should see this:
+
+.. image:: ../../_static/class4/module5/lab1-image007.png
+    :align: center
+    :scale: 50%
+
+
+Task 2 -  Check it has been installed successfully
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can check that the extension was successfully installed in different ways:
+
+* Check that the extension is installed in /var/config/rest/iapps/
+
+  .. code::
+
+     # ls /var/config/rest/iapps/
+     my-app-interface  RPMS  tmp.7399485599133304707
+
+* Check /var/log/restnoded/restnoded.log
+
+  .. code::
+
+     tail /var/log/restnoded/restnoded.log
+     Sun, 29 Oct 2017 09:53:14 GMT - finest: [LoaderWorker] triggered at path:  /var/config/rest/iapps/my-app-interface/nodejs
+     Sun, 29 Oct 2017 09:53:14 GMT - finest: [LoaderWorker] triggered at path:  /var/config/rest/iapps/my-app-interface/nodejs/ictrl-app-interface-ConfigProcessor.js
+     Sun, 29 Oct 2017 09:53:14 GMT - finest: socket 1 closed
+     Sun, 29 Oct 2017 09:53:14 GMT - info: my-app-interface - onStart()
+     Sun, 29 Oct 2017 09:53:14 GMT - config: [RestWorker] /shared/my-app-interface has started. Name:ipam_extension
+
+* Use Postman to test your extension. Try to access https://10.1.10.20/mgmt/shared/my-app-interface/exmaple. You'll need to authenticate yourself as student/student
+
+
+.. note::
+
+  To protect who can use this extension, we updated iWorkflow to only allow the student user to use this extension. This is done here in the iWorkflow interface:
+
+  .. image:: ../../_static/class4/module5/lab1-image008.png
+    :align: center
+    :scale: 50%
