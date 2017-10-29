@@ -59,7 +59,6 @@ Module 4 - Installing the Hello_World extension
     Task 2 - Create the 'delete' task
     Task 3 - [OPTIONAL] Verify the iControl LX extension is gone
 
-
 Module 5 - My First iControl LX extension
   Lab 5.1 - Install the iControl LX package
     Task 1 - Install the iControl LX RPM package
