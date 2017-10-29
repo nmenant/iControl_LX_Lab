@@ -156,7 +156,26 @@ You can check that the extension was successfully installed in different ways:
      Sun, 29 Oct 2017 09:53:14 GMT - info: my-app-interface - onStart()
      Sun, 29 Oct 2017 09:53:14 GMT - config: [RestWorker] /shared/my-app-interface has started. Name:ipam_extension
 
-* Use Postman to test your extension. Try to access https://10.1.10.20/mgmt/shared/my-app-interface/exmaple. You'll need to authenticate yourself as student/student
+* Use Postman to test your extension. Try to access https://10.1.10.20/mgmt/shared/my-app-interface/exmaple. You'll need to authenticate yourself as student/student. You have already a folder in your imported postman collection to do it. it's in the `My-App-Interface` collection and in the `Test-Interface` folder.
+
+  .. image:: ../../_static/class1/module5/lab1-image009.png
+    :align: center
+    :scale: 50%
+
+  .. note::
+
+    make sure to select the environment `My-App-Interface`
+
+    .. image:: ../../_static/class1/module5/lab2-image002.png
+      :align: center
+      :scale: 50%
+
+
+  You should see something like this:
+
+  .. image:: ../../_static/class1/module5/lab1-image010.png
+    :align: center
+    :scale: 50%
 
 
 .. note::

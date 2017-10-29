@@ -396,9 +396,110 @@
 						"description": ""
 					},
 					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test-Interface",
+			"description": "",
+			"item": [
+				{
+					"name": "Request a Token from iWorkflow",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"",
+									"tests[\"response has token: \" +respData.token.token] = respData.token.token;",
+									"",
+									"postman.setEnvironmentVariable('iwf_token',respData.token.token);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": {{iwf_username}},\n  \"password\": {{iwf_password}},\n  \"loginProvidername\": \"tmos\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authn/login",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authn",
+								"login"
+							]
+						},
+						"description": "Using Basic Auth, request a token from the iWorkflow platform."
+					},
+					"response": []
 				},
 				{
-					"name": "Delete Service",
+					"name": "Increase Auth Token Timeout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"tests[\"Auth Token timeout is: \" +respData.timeout] = respData.timeout;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"timeout\":\"36000\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authz/tokens/{{iwf_token}}",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authz",
+								"tokens",
+								"{{iwf_token}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Test interface /example",
 					"event": [
 						{
 							"listen": "test",
@@ -411,7 +512,7 @@
 						}
 					],
 					"request": {
-						"method": "DELETE",
+						"method": "GET",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -427,18 +528,16 @@
 							"raw": "{\n\t\"name\" : \"{{my-app-name}}\"\n}"
 						},
 						"url": {
-							"raw": "https://172.16.2.30/mgmt/shared/my-app-interface",
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/my-app-interface/example",
 							"protocol": "https",
 							"host": [
-								"172",
-								"16",
-								"2",
-								"30"
+								"{{iwf_mgmt}}"
 							],
 							"path": [
 								"mgmt",
 								"shared",
-								"my-app-interface"
+								"my-app-interface",
+								"example"
 							]
 						},
 						"description": ""
