@@ -8,14 +8,19 @@ This module is only about reviewing how it works. Module 4 will make us create o
 
 **Exercises in this Module**
 
-Lab 3.1 - Review the Hello-World extension
-  Task 1 - Overview of the Hello-World extension
-  Task 2 - Key parts of the HelloWorld extension
-Lab 3.2 - Beyond "GET"
-  Task 1 - The 'other' HTTP verbs
-Lab 3.3 - Interacting with 3rd party systems
-  Task 1 - Using restOperation
-  Task 2 - Creating a REST call using Native Node.js HTTP Reqests.
+- Lab 3.1 - Review the Hello-World extension
+
+  - Task 1 - Overview of the Hello-World extension
+  - Task 2 - Key parts of the HelloWorld extension
+
+- Lab 3.2 - Beyond "GET"
+
+  - Task 1 - The 'other' HTTP verbs
+
+- Lab 3.3 - Interacting with 3rd party systems
+
+  - Task 1 - Using restOperation
+  - Task 2 - Creating a REST call using Native Node.js HTTP Reqests
 
  .. toctree::
      :maxdepth: 1

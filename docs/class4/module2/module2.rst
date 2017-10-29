@@ -19,25 +19,25 @@ While the iControl LX framework does run on both BIG-IP and iWorkflow, there are
 
 **Exercises in this Module**
 
-Lab 2.1 - Interact with a REST extension
+- Lab 2.1 - Interact with a REST extension
 
-  * Task 1 - View the API via web browser
-  * Task 2 - Interact with a REST resource
-  * Task 3 - The '/presentation#' extension
-  * Task 4 - Editing a REST resource
+  - Task 1 - View the API via web browser
+  - Task 2 - Interact with a REST resource
+  - Task 3 - The '/presentation#' extension
+  - Task 4 - Editing a REST resource
 
-Lab 2.2 - Edit an iControl REST resource via /mgmt/toc
+- Lab 2.2 - Edit an iControl REST resource via /mgmt/toc
 
-  * Task 1 - Review the user accounts
-  * Task 2 - Create a new user
-  * Task 3 - Edit the new user
-  * Task 4 - Login as the new user
+  - Task 1 - Review the user accounts
+  - Task 2 - Create a new user
+  - Task 3 - Edit the new user
+  - Task 4 - Login as the new user
 
-Lab 2.3 - Advanced (raw JSON)
+- Lab 2.3 - Advanced (raw JSON)
 
-  * Task 1 - View the JSON representation of a user account
-  * Task 2 - Edit a user account's JSON representation
-  * Task 3 - delete the user
+  - Task 1 - View the JSON representation of a user account
+  - Task 2 - Edit a user account's JSON representation
+  - Task 3 - delete the user
 
 
 .. toctree::

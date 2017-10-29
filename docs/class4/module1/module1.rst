@@ -8,7 +8,6 @@ In this section we will review the relevant iControl LX daemons, the logs they
 use, and some basic troubleshooting tools/tips.
 
 
-
 **Exercises in this Module**
 
 - Lab 1.1 - The daemons (and flow)

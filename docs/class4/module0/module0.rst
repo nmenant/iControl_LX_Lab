@@ -6,7 +6,6 @@ Before we start playing with iControl LX extension, you need to have access to y
 In this section we will review how to access it.
 
 
-
 **Exercises in this Module**
 
 - Lab 1 - Access UDF and start your lab
