@@ -31,7 +31,7 @@ iControl LX (iControl Language eXtension) is the framework upon which F5's
 iControl REST API is developed, among other things, as show in the following
 diagram:
 
-.. image:: ../_static/class4/image001.png
+.. image:: ../_static/class1/image001.png
     :align: center
 
 
@@ -40,7 +40,7 @@ diagram:
 An iControlLX extension represents additional functionality built upon the
 iControlLX framework, and presented through the iControl REST API.
 
-.. image:: ../_static/class4/image002.png
+.. image:: ../_static/class1/image002.png
     :align: center
 
 F5 has already developed some iControl LX extensions to simplify operational
@@ -54,7 +54,7 @@ the following use cases:
 This training lab concerns itself with teaching you how to develop your own
 iControlLX extensions.
 
-.. image:: ../_static/class4/image003.png
+.. image:: ../_static/class1/image003.png
     :align: center
 
 
@@ -65,7 +65,7 @@ iAppsLX use specialist iControl LX workers, in addition to an optional
 presentation layer, to deliver F5's net generation application
 templating system.
 
-.. image:: ../_static/class4/image004.png
+.. image:: ../_static/class1/image004.png
     :align: center
 
 

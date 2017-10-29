@@ -17,7 +17,7 @@ Windows JumpHost     10.1.10.50        administrator/cXzTEv8E5
 
 Connect to UDF and go to "Courses".
 
-.. image:: ../../_static/class4/module0/lab1-image001.png
+.. image:: ../../_static/class1/module0/lab1-image001.png
   :align: center
   :scale: 50%
 

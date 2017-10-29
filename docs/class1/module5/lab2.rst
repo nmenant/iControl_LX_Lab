@@ -26,13 +26,13 @@ Use Postman
 
 Open your Postman application in your JumpHost and select the collection called `My-App-Interface`
 
-.. image:: ../../_static/class4/module5/lab2-image001.png
+.. image:: ../../_static/class1/module5/lab2-image001.png
     :align: center
     :scale: 50%
 
 Select also `My-App-Interface` environement variables
 
-.. image:: ../../_static/class4/module5/lab2-image002.png
+.. image:: ../../_static/class1/module5/lab2-image002.png
     :align: center
     :scale: 50%
 
@@ -60,7 +60,7 @@ Use newman
 
 Launch the command prompt that is pinned in your taskbar
 
-.. image:: ../../_static/class4/module5/lab1-image006.png
+.. image:: ../../_static/class1/module5/lab1-image006.png
     :align: center
     :scale: 50%
 
@@ -75,7 +75,7 @@ You already have a few scripts setup to deploy/delete services:
 
   If you want to change a little the service created, you can edit the relevant bat script. You'll find all the parameters related to the service in the script. You can open the folder containing all the scripts, right click on the script you want to update and edit it with Notepad++
 
-  .. image:: ../../_static/class4/module5/lab2-image003.png
+  .. image:: ../../_static/class1/module5/lab2-image003.png
     :align: center
     :scale: 50%
 

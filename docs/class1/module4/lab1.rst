@@ -102,7 +102,7 @@ In your web browser, navigate to:
 
 you should see something like this:
 
-.. image:: ../../_static/class4/module4/lab1-image001.png
+.. image:: ../../_static/class1/module4/lab1-image001.png
   :align: center
   :scale: 50%
 
@@ -123,7 +123,7 @@ Another test is to connect to our `/example` uri. Navigate with your browser to:
 
 you should see something like this:
 
-.. image:: ../../_static/class4/module4/lab1-image002.png
+.. image:: ../../_static/class1/module4/lab1-image002.png
   :align: center
   :scale: 50%
 

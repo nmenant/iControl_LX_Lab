@@ -54,7 +54,7 @@ iWorflow is already setup with 2 service templates:
 * HTTP service
 * TCP service
 
-.. image:: ../../_static/class4/module5/image001.png
+.. image:: ../../_static/class1/module5/image001.png
     :align: center
     :scale: 50%
 

@@ -15,7 +15,7 @@ iWorkflow platform.
 *restnoded* presents services for developing iControl LX extensions, in addition
 to acting as the interface to *restjavad* and the iControl REST API.
 
-.. image:: ../../_static/class4/module1/lab1-image001.png
+.. image:: ../../_static/class1/module1/lab1-image001.png
   :align: center
   :scale: 50%
 
