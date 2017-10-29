@@ -92,34 +92,8 @@ Check our BIG-IP configuration via the UI:
     :align: center
     :scale: 50%
 
-Use Postman - Delete HTTP Service example
-"""""""""""""""""""""""""""""""""""""""""
 
-Here is an example of removing the HTTP service (`Delete-Service` folder in POSTMAN):
-
-  .. image:: ../../_static/class1/module5/lab2-image008.png
-    :align: center
-    :scale: 50%
-
-Here is the response when we delete the service:
-
-  .. image:: ../../_static/class1/module5/lab2-image009.png
-    :align: center
-    :scale: 50%
-
-Output from /var/log/restnoded/restnoded.log on iWorkflow:
-
-.. code::
-
-  Sun, 29 Oct 2017 12:47:38 GMT - finest: socket 4 opened
-  Sun, 29 Oct 2017 12:47:38 GMT - info: my-app-interface - onDelete()
-  Sun, 29 Oct 2017 12:47:38 GMT - finest: socket 4 closed
-  Sun, 29 Oct 2017 12:47:38 GMT - info: DEBUG: my-app-interface - onDelete : VS_IP is: 10.1.20.104
-  Sun, 29 Oct 2017 12:47:39 GMT - info: DEBUG: my-app-interface - onDelete : Service Deleted, release IP from IPAM: 10.1.20.104
-
-Check that your service disappeared from iWorkflow and BIG-IP
-
-Use newman
+Use Newman
 """"""""""
 
 Launch the command prompt that is pinned in your taskbar
@@ -143,7 +117,7 @@ You already have a few scripts setup to deploy/delete services:
     :align: center
     :scale: 50%
 
-Use newman - Create HTTP Service example
+Use Newman - Create HTTP Service example
 """"""""""""""""""""""""""""""""""""""""
 
 We launch the command prompt that is pinned in your taskbar
@@ -177,6 +151,37 @@ You can check the service got deployed properly on iWorkflow (student tenant) an
   .. image:: ../../_static/class1/module5/lab2-image012.png
     :align: center
     :scale: 50%
+
+
+Task 2 - Delete services via the extension
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Use Postman - Delete HTTP Service example
+"""""""""""""""""""""""""""""""""""""""""
+
+Here is an example of removing the HTTP service (`Delete-Service` folder in POSTMAN):
+
+  .. image:: ../../_static/class1/module5/lab2-image008.png
+    :align: center
+    :scale: 50%
+
+Here is the response when we delete the service:
+
+  .. image:: ../../_static/class1/module5/lab2-image009.png
+    :align: center
+    :scale: 50%
+
+Output from /var/log/restnoded/restnoded.log on iWorkflow:
+
+.. code::
+
+  Sun, 29 Oct 2017 12:47:38 GMT - finest: socket 4 opened
+  Sun, 29 Oct 2017 12:47:38 GMT - info: my-app-interface - onDelete()
+  Sun, 29 Oct 2017 12:47:38 GMT - finest: socket 4 closed
+  Sun, 29 Oct 2017 12:47:38 GMT - info: DEBUG: my-app-interface - onDelete : VS_IP is: 10.1.20.104
+  Sun, 29 Oct 2017 12:47:39 GMT - info: DEBUG: my-app-interface - onDelete : Service Deleted, release IP from IPAM: 10.1.20.104
+
+Check that your service disappeared from iWorkflow and BIG-IP
 
 
 Use newman - Delete HTTP Service example
