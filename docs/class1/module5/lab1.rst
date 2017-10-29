@@ -24,18 +24,18 @@ Use the POSTMAN application
 
 Click on the POSTMAN icon in the task bar (or on the Desktop)
 
-.. image:: ../../_static/class4/module5/lab1-image001.png
+.. image:: ../../_static/class1/module5/lab1-image001.png
     :align: center
 
 you should see this:
 
-.. image:: ../../_static/class4/module5/lab1-image002.png
+.. image:: ../../_static/class1/module5/lab1-image002.png
     :align: center
     :scale: 50%
 
 Click on the collection `iWF-RPM-package-management` and then on `2A_Install_RPM`
 
-.. image:: ../../_static/class4/module5/lab1-image003.png
+.. image:: ../../_static/class1/module5/lab1-image003.png
     :align: center
     :scale: 50%
 
@@ -48,7 +48,7 @@ Here you can see that this folder has 4 different API calls:
 
 Select the `iWF-RPM-package-Management` environment (top right of the windows)
 
-.. image:: ../../_static/class4/module5/lab1-image004.png
+.. image:: ../../_static/class1/module5/lab1-image004.png
     :align: center
     :scale: 50%
 
@@ -111,12 +111,12 @@ newman is already installed and setup in your JumpHost. All the different script
 
 To execute newman, launch a MS Command Prompt. You have a shortcust in your taskbar that will be launched in the right folder automatically
 
-.. image:: ../../_static/class4/module5/lab1-image005.png
+.. image:: ../../_static/class1/module5/lab1-image005.png
     :align: center
 
 you should see this:
 
-.. image:: ../../_static/class4/module5/lab1-image006.png
+.. image:: ../../_static/class1/module5/lab1-image006.png
     :align: center
     :scale: 50%
 
@@ -128,7 +128,7 @@ to launch the newman script that install the RPM, run the following command `1_I
 
 This script will execute all the API calls in the 2A_Install_RPM collection, you should see this:
 
-.. image:: ../../_static/class4/module5/lab1-image007.png
+.. image:: ../../_static/class1/module5/lab1-image007.png
     :align: center
     :scale: 50%
 
@@ -163,6 +163,6 @@ You can check that the extension was successfully installed in different ways:
 
   To protect who can use this extension, we updated iWorkflow to only allow the student user to use this extension. This is done here in the iWorkflow interface:
 
-  .. image:: ../../_static/class4/module5/lab1-image008.png
+  .. image:: ../../_static/class1/module5/lab1-image008.png
     :align: center
     :scale: 50%

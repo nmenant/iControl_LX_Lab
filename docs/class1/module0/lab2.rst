@@ -10,7 +10,7 @@ In the UDF interface, go to Deployment and select the Deployment `iControl LX ex
 
 Click on the `Components` tab and find the component called `JumpHost` (in the Systems column)
 
-.. image:: ../../_static/class4/module0/lab1-image002.png
+.. image:: ../../_static/class1/module0/lab1-image002.png
   :align: center
   :scale: 50%
 

@@ -15,7 +15,7 @@ https://10.1.1.2/mgmt/shared/authz/users/presentation#/
 
 4. Click the 'Advanced' button. A JSON input window appear
 
-.. image:: ../../_static/class4/module2/lab3-image001.png
+.. image:: ../../_static/class1/module2/lab3-image001.png
     :align: center
     :scale: 50%
 
