@@ -99,7 +99,7 @@ Use the newman script
 
 .. warning::
 
-  If you've already setup the extension by following the POSTMAN process, this will fail. You'll need to delete the extension first
+  If you've already setup the extension by following the POSTMAN process, this will fail. You'll need to delete the extension first. You can use the relevant postman collection/folder to do this
 
 newman gives you the capability to run a POSTMAN collection or a specific folder. When you have multiple calls to do, it may be easier to use newman.
 
@@ -156,7 +156,7 @@ You can check that the extension was successfully installed in different ways:
      Sun, 29 Oct 2017 09:53:14 GMT - info: my-app-interface - onStart()
      Sun, 29 Oct 2017 09:53:14 GMT - config: [RestWorker] /shared/my-app-interface has started. Name:ipam_extension
 
-* Use Postman to test your extension. Try to access https://10.1.10.20/mgmt/shared/my-app-interface/exmaple. You'll need to authenticate yourself as student/student. You have already a folder in your imported postman collection to do it. it's in the `My-App-Interface` collection and in the `Test-Interface` folder.
+* Use Postman to test your extension. Try to access https://10.1.10.20/mgmt/shared/my-app-interface/example. You'll need to authenticate yourself as student/student. You have already a folder in your imported postman collection to do it. it's in the `My-App-Interface` collection and in the `Test-Interface` folder.
 
   .. image:: ../../_static/class1/module5/lab1-image009.png
     :align: center

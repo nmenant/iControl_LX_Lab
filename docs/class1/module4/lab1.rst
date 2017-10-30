@@ -63,7 +63,9 @@ Once our extension is created, we need to load it into restnoded. When an extens
 
 use the following command on iWorkflow to make restnoded aware of our extension:
 
-``restcurl shared/nodejs/loader-path-config -d '{"workerPath": "/var/config/rest/iapps/HelloWorld"}'``
+.. code::
+
+  restcurl shared/nodejs/loader-path-config -d '{"workerPath": "/var/config/rest/iapps/HelloWorld"}'
 
 the output should look like this:
 
@@ -108,7 +110,9 @@ you should see something like this:
 
 You could also use `curl` in CLI:
 
-``curl -k -u admin:admin https://10.1.10.20/mgmt/ilxe_lab/hello_world``
+.. code::
+
+  curl -k -u admin:admin https://10.1.10.20/mgmt/ilxe_lab/hello_world
 
 .. code::
 
@@ -129,7 +133,9 @@ you should see something like this:
 
 You can also use curl in CLI:
 
-``curl -k -u admin:admin https://10.1.10.20/mgmt/ilxe_lab/hello_world/example``
+.. code::
+
+  curl -k -u admin:admin https://10.1.10.20/mgmt/ilxe_lab/hello_world/example
 
 .. note::
 

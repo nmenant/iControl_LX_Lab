@@ -1,11 +1,13 @@
 Lab 4.3 - Create a new iControl LX extension RPM
 ------------------------------------------------
 
+Here, our curl commands will return a fair amount of output. To make it more readable, we will need jq. jq is not available on BIG-IP or iWorkflow so to run the next curl commands, do it from the Linux server. It's already defined in PUTTY. Login: ubuntu, password: ubuntu
+
 Task 1 - create a new RPM for the updated iControl LX extension
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The minimum requirement to build an iControlLX package is the `appName`, which
-must match the directory name you use in `/var/config/rest/iapps` to store your extension.
+must match the directory name you use in `/var/config/rest/iapps` to store your extension. In our lab, the folder's name is `HelloWorld`
 
 Here is the REST command to create the package creation
 
@@ -22,7 +24,7 @@ You can use the following command to do this :
 
 .. code::
 
-  curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"appName": "HelloWorld", "packageVersion": "0.1", "packageRelease": "001"}' https://10.1.10.20/mgmt/shared/iapp/build-package | jq``
+  curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"appName": "HelloWorld", "packageVersion": "0.1", "packageRelease": "001"}' https://10.1.10.20/mgmt/shared/iapp/build-package | jq
 
 .. note::
 
@@ -104,29 +106,21 @@ Task 3 - Retrieving your iControl LX package
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Note also in the build-package completion response above, the
-*builtRpmPackageFilePath*, as below:
+*builtRpmPackageFilePath* field, it should look like this:
 
 .. code::
 
   "builtRpmPackageFilePath": "/var/config/rest/iapps/RPMS/HelloWorld-0.1-001.noarch.rpm"
 
 
-This is where you collect your RPM from. From a terminal, run the following command:
+This is where you collect your RPM from. You can retrieve your RPM either with something like WinSCP, SCP or your favorite tool
 
-.. code::
-
-  scp admin@10.1.10.20:/var/config/rest/iapps/RPMS/HelloWorld-0.1-001.noarch.rpm /var/tmp
-
-.. note::
-
-  use your admin password. it should be `admin`
-
-Now you can delete the rpm from `/var/config/rest/iapps/RPMS/`
+No need to retrieve it for this lab.
 
 Task 4 - Remove the iControl extension
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Since we started the iControl extension from scratch, we will need to remove it also manually.
+Now that we have our RPM, we may want to remove what we create ourselves (the HelloWorld folder in `/var/config/rest/iapps` and also that it is loaded in restnoded). Since we started the iControl extension from scratch, we will need to remove it also manually.
 
 On iWorkflow, run the following command:
 
@@ -180,7 +174,7 @@ Your output should be like this:
 As you can see restnoded got restarted automatically to remove the extension.
 
 
-You can validate that your extension has been removed from restnoded by trying to access it again:
+You can validate that your extension has been removed from restnoded by trying to access it again (run this command from the Linux Server):
 
 .. code::
 

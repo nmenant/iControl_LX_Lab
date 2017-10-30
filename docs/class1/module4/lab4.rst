@@ -3,26 +3,23 @@ Lab 4.4 - Install our iControl LX RPM
 
 Let's try to install our iControl LX RPM on iWorkflow.
 
-To install the iControl LX extension, first you need to copy the iControlLX package onto your iWF device, in the following directory: `/var/config/rest/downloads`
+To install the iControl LX extension, first you need to copy the iControlLX package onto your iWF device in the right folder. It should be in the following directory: `/var/config/rest/downloads`
 
-from a terminal, run the following command:
+use your iWorkflow ssh session and run the following command:
 
 .. code::
 
-  scp /var/tmp/HelloWorld-0.1-001.noarch.rpm admin@10.1.10.20:/var/config/rest/downloads/
+   mv /var/config/rest/iapps/RPMS/HelloWorld-0.1-001.noarch.rpm /var/config/rest/downloads/
 
-you can ensure the transfer was successful by checking the folder /var/config/rest/downloads.
+Here, we just had to move the RPM from a folder to another since already on the iWorkflow platform. You can ensure the transfer was successful by checking the folder /var/config/rest/downloads.
 
-.. note::
-
-  use your admin password. it should be `admin`
 
 Task 1 - Review the installed iControl LX packages
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 First lets take a look at the packages installed on your iWorkflow platform
 
-From a terminal, run the following command:
+From your Linux Server , run the following command:
 
 .. code::
 
@@ -87,14 +84,18 @@ the output should look like this:
     "selfLink": "https://localhost/mgmt/shared/iapp/package-management-tasks/4d62ae98-5302-41ee-8057-479b28372b9f"
   }
 
-Note the "id". If you now query the 'package-managment-tasks' resouce, and
-append the "id" you can get the status of the install.
+Note the "id". If you now query the 'package-managment-tasks' ressource and
+append the "id", you can get the status of the install.
 
 From your terminal:
 
 .. code::
 
   curl -k -u admin:admin  https://10.1.10.20/mgmt/shared/iapp/package-management-tasks/4d62ae98-5302-41ee-8057-479b28372b9f | jq
+
+.. warning::
+
+  replace the ID in the curl command (`4d62ae98-5302-41ee-8057-479b28372b9f`) with your own id
 
 Output:
 
@@ -128,7 +129,7 @@ Output:
     "selfLink": "https://localhost/mgmt/shared/iapp/package-management-tasks/4d62ae98-5302-41ee-8057-479b28372b9f"
   }
 
-If the package is already installed, you will see FAILED. For example:
+Check the status field in the output to know if everything happened as expected. If the package is already installed, you will see FAILED. For example:
 
 .. code::
 
@@ -158,17 +159,18 @@ If the package is already installed, you will see FAILED. For example:
   }
 
 You can check the installation by:
+
 * reviewing the folder `/var/config/rest/iapps/`
-* check the output of
+* check the output of the command (from your Linux Server)
 
   .. code::
 
     curl -k -u admin:admin https://10.1.10.20/mgmt/shared/iapp/global-installed-packages | jq
 
-.. code::
+  .. code::
 
-  $ls /var/config/rest/iapps/
-  HelloWorld  RPMS
+    $ls /var/config/rest/iapps/
+    HelloWorld  RPMS
 
 We can see that the HelloWorld folder is back here.
 
@@ -223,7 +225,7 @@ We can see here that our iControl LX extension has been added to restnoded
 Task 3 - Test our iControl extension
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can simply redo some of our previous test to see the outcome:
+You can simply redo some of our previous tests to see the outcome:
 
 .. code::
 
@@ -233,9 +235,7 @@ the console output should look like this:
 
 .. code::
 
-    {"value":"Hello World!"}
-
-
+    {"value":"Congratulations on your lab!"}
 
 
 .. code::
@@ -246,7 +246,7 @@ the console output should look like this:
 
 .. code::
 
-    {"value":"Congratulations on your lab!"}
+    {"value":"Hello iControl LX Lab!"}
 
 
 
