@@ -15,7 +15,15 @@ Here we will add some more code to our extension to handle POST request but also
 
 First thing to do is enable our f5-logger. This will make all `logger` statement to be sent to `/var/log/restnoded/restnoded.log`
 
-add the beginning of your extension, add the following:
+Below the first comment,
+
+.. code::
+
+  /**
+  * A simple iControl LX extension that handles only HTTP GET
+  */
+
+add the following:
 
 .. code-block:: javascript
 
@@ -32,7 +40,7 @@ Here is an EXAMPLE of a logger statement (DO NOT PUT THIS INTO YOUR CODE)
         logger.info("DEBUG: HelloWorld - onGet request");
     }
 
-We may also want to create a VARIABLE for our default json response Hello World!. This way if we need to change it at some point, we will need to change it only in a single location
+We may also want to create a VARIABLE for our default json response Hello World!. This way, if we need to change it at some point, we will need to change it only in a single location
 
 Under `var DEBUG = true;` add:
 
@@ -70,7 +78,7 @@ replace this code with the following:
       this.completeRestOperation(restOperation);
     };
 
-Here the only thing we did was:
+Here the only thing we did was to:
 
 * add a logger statement so that we can track when our extension is called with a GET request
 * replace our static response `{ value: "Hello World!" }` with our variable
@@ -126,48 +134,6 @@ Let's review the code we have now, it should look like this:
 
     HelloWorld.prototype.WORKER_URI_PATH = "ilxe_lab/hello_world";
     HelloWorld.prototype.isPublic = true;
-
-    /**
-    * Perform worker start functions
-    */
-
-    HelloWorld.prototype.onStart = function(success, error) {
-
-     if (DEBUG === true) {
-       logger.info("DEBUG: HelloWorld - onStart request");
-      }
-
-      var options = {
-        "method": "GET",
-        "hostname": "s3-eu-west-1.amazonaws.com",
-        "port": 80,
-        "path": "/nicolas-labs/helloworld_resp.json",
-        "headers": {
-          "cache-control": "no-cache"
-        }
-      };
-
-      var req = http.request(options, function (res) {
-
-        var chunks = [];
-
-        res.on("data", function (chunk) {
-          chunks.push(chunk);
-        });
-
-        res.on("end", function () {
-          var body = Buffer.concat(chunks);
-         if (DEBUG === true) {
-            logger.info("DEBUG: HelloWorld - onStart - the default message body is: " + body);
-          }
-          DEFAULT_MSG = JSON.parse(body);
-        });
-      });
-
-      req.end();
-
-      success();
-    };
 
     /**
     * handle onGet HTTP request
@@ -227,13 +193,15 @@ Let's review the code we have now, it should look like this:
     - if the variable name is not empty: reply to the POST request with Hello and the name of the user
     - if the variable name is empty: reply to the POST request with Hello World!
 
+Make sure you save your updated file.
+
 Time to test our code!
 
-Make sure you save your updated file. Once it's done, run the following command:
+Once it's done, open another ssh session to your iWorkflow platform and run the following command:
 
 ``bigstart restart restnoded ; tail -f /var/log/restnoded/restnoded.log``
 
-Review the logs and make sure that it doesn't mention any error/issue in your updated file.
+Review the logs and make sure that it doesn't mention any error/issue in your updated file. Keep this session open just to monitor your logs. Easier to have one window to track/monitor your logging information and use another one to update your code/send curl command
 
 you should have something like this:
 
@@ -246,7 +214,9 @@ you should have something like this:
 
 you can now test your updated extension with the following commands:
 
-``curl -k -u admin:admin https://10.1.10.20/mgmt/ilxe_lab/hello_world``
+.. code::
+
+  curl -k -u admin:admin https://10.1.10.20/mgmt/ilxe_lab/hello_world
 
 the console output should look like this:
 
@@ -262,7 +232,9 @@ the /var/log/restnoded/restnoded.log output should look like this:
 
 Run this command:
 
-``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"name":"iControl LX Lab"}' https://10.1.10.20/mgmt/ilxe_lab/hello_world``
+.. code::
+
+  curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"name":"iControl LX Lab"}' https://10.1.10.20/mgmt/ilxe_lab/hello_world
 
 the console output should look like this:
 
@@ -281,7 +253,9 @@ the /var/log/restnoded/restnoded.log output should look like this:
 
 Run this command:
 
-``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"other":"iControl LX Lab"}' https://10.1.10.20/mgmt/ilxe_lab/hello_world``
+.. code::
+
+  curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"other":"iControl LX Lab"}' https://10.1.10.20/mgmt/ilxe_lab/hello_world
 
 the console output should look like this (the name parameter wasn't found in the POST payload):
 
@@ -385,7 +359,9 @@ This file will give us the default payload we should return when we receive a re
 
 Make sure you save your updated file. Once it's done, run the following command:
 
-``bigstart restart restnoded ; tail -f /var/log/restnoded/restnoded.log``
+.. code::
+
+  bigstart restart restnoded ; tail -f /var/log/restnoded/restnoded.log
 
 Review the logs and make sure that it doesn't mention any error/issue in your updated file.
 
@@ -401,13 +377,15 @@ you should have something like this:
 
 you can now test your updated extension with the following commands:
 
-``curl -k -u admin:admin https://10.1.10.20/mgmt/ilxe_lab/hello_world``
+.. code::
+
+  curl -k -u admin:admin https://10.1.10.20/mgmt/ilxe_lab/hello_world
 
 the console output should look like this:
 
 .. code::
 
-    {"value":"Hello World!"}
+    {"value":"Congratulations on your lab!"}
 
 the /var/log/restnoded/restnoded.log output should look like this:
 
@@ -417,13 +395,15 @@ the /var/log/restnoded/restnoded.log output should look like this:
 
 Run this command:
 
-``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"name":"iControl LX Lab"}' https://10.1.10.20/mgmt/ilxe_lab/hello_world``
+.. code::
+
+  curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"name":"iControl LX Lab"}' https://10.1.10.20/mgmt/ilxe_lab/hello_world
 
 the console output should look like this:
 
 .. code::
 
-    {"value":"Congratulations on your lab!"}
+    {"value":"Hello iControl LX Lab!"}
 
 the /var/log/restnoded/restnoded.log output should look like this:
 
@@ -436,7 +416,9 @@ the /var/log/restnoded/restnoded.log output should look like this:
 
 Run this command:
 
-``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"other":"iControl LX Lab"}' https://10.1.10.20/mgmt/ilxe_lab/hello_world``
+.. code::
+
+  curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"other":"iControl LX Lab"}' https://10.1.10.20/mgmt/ilxe_lab/hello_world
 
 the console output should look like this (the name parameter wasn't found in the POST payload):
 
@@ -454,7 +436,7 @@ the /var/log/restnoded/restnoded.log output should look like this:
     Wed, 18 Oct 2017 09:33:38 GMT - info: DEBUG: HelloWorld - onPost request, no name parameter provided... using default value
 
 
-Task 3 - Take a break!
-^^^^^^^^^^^^^^^^^^^^^^
+Task 3 - Take a (5min) break!
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Congratulations!!!! You've just modified the behavior of the F5 iControl LX extension. Now, take a moment to think about what workflows you could implement to make life easier.

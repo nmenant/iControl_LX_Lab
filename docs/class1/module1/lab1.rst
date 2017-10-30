@@ -28,7 +28,7 @@ to acting as the interface to *restjavad* and the iControl REST API.
 Task 2 - Start/Stop/Restart the daemons
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Connect via ssh to your iWorkflow platform (a shortcut already exist in PuTTY - 10.1.10.20, Root/Default). Execute the
+Connect via ssh to your iWorkflow platform (a shortcut already exists in PuTTY - 10.1.10.20, root/default). Execute the
 following:
 
   ``bigstart status restnoded``
@@ -57,11 +57,11 @@ The following bigstart commands are supported:
 - ``bigstart restart <daemon>``
 - ``bigstart stop <daemon>``
 
-1. Restart the restnoded & restjavad daemons by executing:
+Restart the restnoded & restjavad daemons by executing:
 
 ``bigstart restart restjavad restnoded``
 
-you won't see any logs in CLI when using this command. You'll need to check the log files
+you won't see any logs in CLI when using this command. You'll need to check the log files `/var/log/restjavad.0.log and `/var/log/restnoded/restnoded.log`. This is covered in the next lab
 
 .. toctree::
    :maxdepth: 1

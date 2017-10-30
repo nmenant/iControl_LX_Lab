@@ -31,11 +31,13 @@ Task 3 - Combining commands, for extra efficiency
 
 To ensure you don't miss any output while your iControl LX extension
 is loading, you can execute the 'restnoded' restart command, and the 'tail'
-commands together using the separator `;`. For example:
+commands together using the separator **;**
+
+For example:
 
   ``bigstart restart restnoded; tail -f /var/log/restnoded/restnoded.log``
 
-.. Note:: The `;` means to execute the first command 'bigstart restart restnoded'
+.. Note:: The **;** means to execute the first command 'bigstart restart restnoded'
    and then the second command ``tail -f /var/log/restnoded/restnoded.log``
    immediately after.
 

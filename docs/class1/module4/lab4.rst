@@ -7,7 +7,9 @@ To install the iControl LX extension, first you need to copy the iControlLX pack
 
 from a terminal, run the following command:
 
-``scp /var/tmp/HelloWorld-0.1-001.noarch.rpm admin@10.1.10.20:/var/config/rest/downloads/``
+.. code::
+
+  scp /var/tmp/HelloWorld-0.1-001.noarch.rpm admin@10.1.10.20:/var/config/rest/downloads/
 
 you can ensure the transfer was successful by checking the folder /var/config/rest/downloads.
 
@@ -22,7 +24,9 @@ First lets take a look at the packages installed on your iWorkflow platform
 
 From a terminal, run the following command:
 
-``curl -k -u admin:admin https://10.1.10.20/mgmt/shared/iapp/global-installed-packages | jq``
+.. code::
+
+  curl -k -u admin:admin https://10.1.10.20/mgmt/shared/iapp/global-installed-packages | jq
 
 Response:
 
@@ -55,7 +59,9 @@ Here is the syntax:
 
 Let's use your terminal to run the following command:
 
-``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"operation": "INSTALL","packageFilePath": "/var/config/rest/downloads/HelloWorld-0.1-001.noarch.rpm"}' https://10.1.10.20/mgmt/shared/iapp/package-management-tasks | jq``
+.. code::
+
+  curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"operation": "INSTALL","packageFilePath": "/var/config/rest/downloads/HelloWorld-0.1-001.noarch.rpm"}' https://10.1.10.20/mgmt/shared/iapp/package-management-tasks | jq
 
 the output should look like this:
 
@@ -86,7 +92,9 @@ append the "id" you can get the status of the install.
 
 From your terminal:
 
-``curl -k -u admin:admin  https://10.1.10.20/mgmt/shared/iapp/package-management-tasks/4d62ae98-5302-41ee-8057-479b28372b9f | jq``
+.. code::
+
+  curl -k -u admin:admin  https://10.1.10.20/mgmt/shared/iapp/package-management-tasks/4d62ae98-5302-41ee-8057-479b28372b9f | jq
 
 Output:
 
@@ -151,7 +159,11 @@ If the package is already installed, you will see FAILED. For example:
 
 You can check the installation by:
 * reviewing the folder `/var/config/rest/iapps/`
-* check the output of ``curl -k -u admin:admin https://10.1.10.20/mgmt/shared/iapp/global-installed-packages | jq``
+* check the output of
+
+  .. code::
+
+    curl -k -u admin:admin https://10.1.10.20/mgmt/shared/iapp/global-installed-packages | jq
 
 .. code::
 
@@ -160,7 +172,9 @@ You can check the installation by:
 
 We can see that the HelloWorld folder is back here.
 
-``curl -k -u admin:admin https://10.1.10.20/mgmt/shared/iapp/global-installed-packages | jq``
+.. code::
+
+  curl -k -u admin:admin https://10.1.10.20/mgmt/shared/iapp/global-installed-packages | jq
 
 .. code::
 
@@ -211,7 +225,9 @@ Task 3 - Test our iControl extension
 
 You can simply redo some of our previous test to see the outcome:
 
-``curl -k -u admin:admin https://10.1.10.20/mgmt/ilxe_lab/hello_world``
+.. code::
+
+  curl -k -u admin:admin https://10.1.10.20/mgmt/ilxe_lab/hello_world
 
 the console output should look like this:
 
@@ -222,7 +238,9 @@ the console output should look like this:
 
 
 
-``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"name":"iControl LX Lab"}' https://10.1.10.20/mgmt/ilxe_lab/hello_world``
+.. code::
+
+  curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"name":"iControl LX Lab"}' https://10.1.10.20/mgmt/ilxe_lab/hello_world
 
 the console output should look like this:
 
@@ -232,7 +250,9 @@ the console output should look like this:
 
 
 
-``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"other":"iControl LX Lab"}' https://10.1.10.20/mgmt/ilxe_lab/hello_world``
+.. code::
+
+  curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"other":"iControl LX Lab"}' https://10.1.10.20/mgmt/ilxe_lab/hello_world
 
 the console output should look like this (the name parameter wasn't found in the POST payload):
 

@@ -85,7 +85,7 @@ representation of the REST resource.
     :align: center
     :scale: 50%
 
-3. Try editing the REST resource. In the content field, type: Authentication works..
+3. Try editing the REST resource. In the "content" field,  type: "Authentication works" (check the picture below)
    Note that it synchronizes between the textboxes and the raw 'JSON input' textfield. They are both representations of the same resource.
 
 .. image:: ../../_static/class1/module2/lab1-image008.png

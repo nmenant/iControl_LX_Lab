@@ -2,8 +2,7 @@ Module 4 - Installing the Hello_World extension
 ===============================================
 
 In module 4, we are going to create our first iControl LX extension, the
-'hello_world' extension. It doesn't do much, other than reply hello_world,
-but its simple and perfect for illustrating the package management system.
+'hello_world' extension. It doesn't do much but its simple and perfect for illustrating the package management system.
 
 **Exercises in this Module**
 
