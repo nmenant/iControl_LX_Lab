@@ -22,3 +22,7 @@ Click on Access and `RDP`. You should download automatically a shortcut to launc
 login: administrator
 password: cXzTEv8E5
 
+.. note::
+
+    The lab guide is setup as the homepage of your chrome browser
+

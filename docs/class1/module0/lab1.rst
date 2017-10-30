@@ -11,7 +11,7 @@ Here is the lab topology
 ================ =================== ============================
 BIG-IP               10.1.10.21        admin/admin root/default
 iWorkflow            10.1.10.20        admin/admin root/default
-Linux server         10.1.10.10-13         ubuntu/ubuntu
+Linux server         10.1.10.10-13    ubuntu/ubuntu root/default
 Windows JumpHost     10.1.10.50        administrator/cXzTEv8E5
 ================ =================== ============================
 
