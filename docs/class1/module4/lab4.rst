@@ -246,7 +246,7 @@ the console output should look like this:
 
 .. code::
 
-    {"value":"Congratulations on your lab!"}
+    {"value":"Hello iControl LX Lab!"}
 
 
 
