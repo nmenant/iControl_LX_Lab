@@ -199,7 +199,9 @@ Time to test our code!
 
 Once it's done, open another ssh session to your iWorkflow platform and run the following command:
 
-``bigstart restart restnoded ; tail -f /var/log/restnoded/restnoded.log``
+.. code::
+
+  bigstart restart restnoded ; tail -f /var/log/restnoded/restnoded.log
 
 Review the logs and make sure that it doesn't mention any error/issue in your updated file. Keep this session open just to monitor your logs. Easier to have one window to track/monitor your logging information and use another one to update your code/send curl command
 
@@ -437,6 +439,6 @@ the /var/log/restnoded/restnoded.log output should look like this:
 
 
 Task 3 - Take a (5min) break!
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Congratulations!!!! You've just modified the behavior of the F5 iControl LX extension. Now, take a moment to think about what workflows you could implement to make life easier.
