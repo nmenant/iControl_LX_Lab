@@ -59,7 +59,7 @@ Copy / paste the following content into your file:
 
     module.exports = HelloWorld;
 
-Once our extension is created, we need to load it into restnoded. When an extension is loaded from a RPM, it is done automatically. However here, we will need to do it ourselves:
+Once our extension is created, we need to load it into restnoded. When an extension is loaded from a RPM, it is done automatically. However here, we will need to do it ourselves.
 
 use the following command on iWorkflow to make restnoded aware of our extension:
 
@@ -134,5 +134,6 @@ You can also use curl in CLI:
 .. note::
 
   You may not want to use admin privilegies to leverage an extension. In many situation the extension may be needed only by a specific user and then you should be able to enforce some RBAC policies here. BIG-IP 13.1 will provide this capability : `BIG-IP RBAC API`_
+  With iWF, you can already setup RBAC for the API. For a specific user, you can specify which URIs he has access to and also which HTTP Methods he can use against those URIs
 
   .. _BIG-IP RBAC API: http://https://hive.f5.com/docs/DOC-45844
