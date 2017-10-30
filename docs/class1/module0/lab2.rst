@@ -6,7 +6,7 @@ Task 1 - Launch your RDP session
 
 Once your deployment is up and running, you should try to access the JumpHost via RDP.
 
-In the UDF interface, go to Deployment and select the Deployment `iControl LX extensions`
+In the UDF interface, go to Deployment and select the Deployment `Intro to iControl LX extension`
 
 Click on the `Components` tab and find the component called `JumpHost` (in the Systems column)
 
