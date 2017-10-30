@@ -7,7 +7,7 @@ Task 1 - View the JSON representation of a user account
 
 1. Navigate to your list of user accounts:
 
-https://10.1.1.2/mgmt/shared/authz/users/presentation#/
+https://10.1.10.20/mgmt/shared/authz/users/presentation#/
 
 2. Click on the user you created earlier (user42 ?).
 

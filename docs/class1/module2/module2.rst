@@ -4,7 +4,7 @@ Module 2 - Interacting with an iControl LX extension
 In module 2, we are going to introduce the basic themes and then review an
 iControl LX extension.
 
-The following exercises will be performed on the iWorkflow platform.
+The following exercises will be performed on the iWorkflow platform (https://10.1.10.20).
 
 While the iControl LX framework does run on both BIG-IP and iWorkflow, there are many workflows that don't make sense to run directly on the BIG-IP. For example, if we developed an extension that presented the status of a Fleet of BIG-IP devices, it would make far more sense to do this from a central platform, than on each individual BIG-IP.
 
