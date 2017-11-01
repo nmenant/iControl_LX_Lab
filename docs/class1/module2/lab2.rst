@@ -21,11 +21,13 @@ Perform the following steps to complete this task:
 Task 2 - Create a New User
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+In this task we will create a new user account named ``user42``.
+
 #. Click the ``+`` at the top of the user list
 
-#. Enter a previously unused username, for example ``user42``
+#. Enter ``user42`` in the ``name`` field.
 
-#. Enter a password in the ``password`` field
+#. Enter a ``user42`` in the ``password`` field
 
 #. Click :guilabel:`Save`
 
@@ -38,9 +40,9 @@ Task 2 - Create a New User
 Task 3 - Modify the New User
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Click on the new user
+#. Click on the new user ``user42``
 
-#  Note the ``displayName`` has been auto-populated with the ``username`` value.
+#  Note the ``displayName`` has been auto-populated with the ``name`` value.
 
 #. Click the :guilabel:`Edit` button.
 
@@ -55,9 +57,9 @@ Task 3 - Modify the New User
 Task 4 - Login as the New User
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Open a new browser window and navigate to ``https://10.1.10.20/``
+#. Open a new browser window/tab and navigate to ``https://10.1.10.20/``
 
-#. Login as the new user
+#. Login as the new user (``user42/user42``)
 
 #. Note the different ``displayName`` and ``username``.
 
@@ -68,5 +70,5 @@ Task 4 - Login as the New User
 #. Also note that you can't do very much with this user. It has not been added
    to any roles or given any permissions
 
-#. Close this browser and go back to the previous one
+#. Close this browser window/tab and go back to the previous one
 
