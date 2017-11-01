@@ -11,7 +11,7 @@ Perform the following steps to complete this task:
 
 #. In the UDF interface, go to :guilabel:`Deployments`
 
-#. Find the deployment named ``Intro to iControl LX extension`` and click the
+#. Find the deployment named ``Intro to iControl LX extension`` and click
    :guilabel:`Details`
 
 #. Click on the :guilabel:`Components` tab and find the component named

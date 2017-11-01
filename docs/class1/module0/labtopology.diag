@@ -6,7 +6,6 @@ nwdiag {
       group bigip {
             color = "#E66675";
             "BIG-IP A" [address = "10.1.10.21"];
-            "BIG-IP B" [address = "10.1.1.11"];
       }
       group compute {
             color = "#5FA5CC";
