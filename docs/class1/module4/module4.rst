@@ -2,7 +2,7 @@ Module 4 - Installing the HelloWorld extension
 ===============================================
 
 In module 4, we are going to create our first iControl LX extension, the
-``HelloWorld`` extension. It doesn't do much but its simple and perfect for
+``HelloWorld`` extension. It doesn't do much but it's simple and perfect for
 illustrating the package management system.
 
 **Exercises in this Module**
