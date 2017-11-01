@@ -50,6 +50,8 @@ Perform the following steps to complete this task:
       To get the status of ALL F5 controlled daemons execute
 
       ``bigstart status``
+  
+      Please see `K13444 <https://support.f5.com/csp/article/K13444>`_ if you wish to learn more about ``bigstart``.
 
 #. The following bigstart commands are supported:
 
