@@ -57,7 +57,7 @@ Note that the URI has ``/presentation#/`` appended to the end of it. This is an
 iControlLX extension responsible for rendering the iControl REST resource in the
 web interface.
 
-#. Remove the appended ``presentation#/`` and note the raw JSON representation:
+#. Remove the appended ``presentation#/`` and note the raw JSON representation (you will be re-prompted to enter your user credentials ``admin/admin``):
 
    .. image:: ../../_static/class1/module2/lab1-image005.png
       :align: center
