@@ -5,19 +5,19 @@ Task 1 - Understand the 'other' HTTP Verbs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The iControl LX Framework also provides access to the following HTTP verbs:
-``POST``, ``PUT``, ``PATCH`` and ``DELETE``. In this lab, we will cover when you
-should use which HTTP verb.
+``POST``, ``PUT``, ``PATCH`` and ``DELETE``. 
+
+In this lab; you will learn which HTTP verb to use.
 
 POST is for Creating Resources
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For example, in the previous exercise we created a new user in the
-``/mgmt/shared/authz/users/`` collection. This is done by sending a ``POST`` to
-``https://<ip_address>/mgmt/shared/authz/users/`` and results in a new REST
+In the previous exercise we created a new user in the
+``/mgmt/shared/authz/users/`` collection. This was done by sending a ``POST`` to
+``https://<ip_address>/mgmt/shared/authz/users/`` and resulted in a new REST
 resource under the ``users`` collection.
 
-For your iControl LX Extension to handle an HTTP ``POST``, you must implement
-the ``onPost()`` HTTP Method processor.
+The ``onPost()`` HTTP Method processor must be implemented to handle an HTTP ``POST`` in your iControl LX Extension.
 
 PUT is for Replacing a Resources Properties
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

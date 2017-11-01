@@ -1,7 +1,8 @@
 Lab 3.1 - Review the HelloWorld iControl LX Extension
 -----------------------------------------------------
 
-iControl LX extensions are provided as RPM (RedHat Package Manager) files.
+iControl LX extensions are provided as RPM (RedHat Package Manager) files.  An RPM is similar to a ``.tar`` or ``.zip`` file for installing application files.
+
 Lets review the JavaScript contents of the HelloWorld RPM.
 
 Here we just want to review how an extension looks like, you don't have to
@@ -10,12 +11,13 @@ create anything on any platform yet
 Overview of the HelloWorld Extension
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+
+
 To help us get started we've keep this extension very simple:
 
-#. It only supports HTTP ``GET``. No ``POST``, ``PUT``, ``PATCH`` or anything
-   fancy.
-#. It only responds with ``Hello World!``
-#. Half of it is comments. There are actually *only* 13 lines of Javascript.
+#. It only supports HTTP ``GET`` requests. 
+#. It only responds to ``GET`` requests with ``Hello World!``
+#. There are *only* 13 lines of Javascript (the rest is comments/documentation).
 
 The Javascript code for the HelloWorld extension is as follows:
 
