@@ -1,0 +1,21 @@
+nwdiag {
+  default_fontsize = 12;
+  span_width=65;
+  network Management {
+      address = "10.1.10.0/24";
+      group bigip {
+            color = "#E66675";
+            "BIG-IP A" [address = "10.1.10.21"];
+      }
+      group compute {
+            color = "#5FA5CC";
+            "Linux\nServer" [address = "10.1.10.10-13"];
+      }
+      group mgmt {
+            color = "#6CDB7A";
+            "iWorkflow" [address = "10.1.10.20"];
+            "Windows\nJumphost" [address = "10.1.10.50"];
+      }
+
+  }
+}

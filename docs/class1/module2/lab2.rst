@@ -1,68 +1,74 @@
-Lab 2.2 - Edit an iControl REST resource via ToC
+Lab 2.2 - Edit an iControl REST Resource via ToC
 ------------------------------------------------
 
-
-Task 1 - Review the user accounts
+Task 1 - Review the User Accounts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Navigate to /mgmt/toc
+Perform the following steps to complete this task:
 
-2. In the search textbox, type 'authz'
+#. Navigate to ``/mgmt/toc``
 
-3. From the results, select 'authz/users'
+#. In the search textbox, type ``authz``
 
-You are now looking at all of the user accounts on your iWorkflow platform.
+#. From the results, select ``authz/users``
 
-.. image:: ../../_static/class1/module2/lab2-image001.png
-    :align: center
-    :scale: 50%
+#. You are now viewing all of the user accounts on your iWorkflow platform.
 
-Task 2 - Create a new user
+   .. image:: ../../_static/class1/module2/lab2-image001.png
+      :align: center
+      :scale: 50%
+
+Task 2 - Create a New User
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Click the '+' at the top of the user list
+In this task we will create a new user account named ``user42``.
 
-2. Enter a previously unused username, for example 'user42'
+#. Click the ``+`` at the top of the user list
 
-3. Enter a password in the 'password:' field.
+#. Enter ``user42`` in the ``name`` field.
 
-4. Click 'save'
+#. Enter a ``user42`` in the ``password`` field
 
-Note the new user in the list.
+#. Click :guilabel:`Save`
 
-.. image:: ../../_static/class1/module2/lab2-image002.png
-    :align: center
-    :scale: 50%
+#. Note the new user in the list
 
-Task 3 - Edit the new user
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+   .. image:: ../../_static/class1/module2/lab2-image002.png
+      :align: center
+      :scale: 50%
 
-1. Click on the new user.
+Task 3 - Modify the New User
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Note the displayName has been auto-populated  with the username value.
+#. Click on the new user ``user42``
 
-2. Click the 'Edit' button.
+#  Note the ``displayName`` has been auto-populated with the ``name`` value.
 
-3. Change the value of 'displayName'. We used: User 42
+#. Click the :guilabel:`Edit` button.
 
-4. Click 'Save'
+#. Change the value of ``displayName`` to ``User 42``
 
-.. image:: ../../_static/class1/module2/lab2-image003.png
-    :align: center
-    :scale: 50%
+#. Click the :guilabel:`Save` button
 
-Task 4 - Login as the new user
+   .. image:: ../../_static/class1/module2/lab2-image003.png
+      :align: center
+      :scale: 50%
+
+Task 4 - Login as the New User
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Open a new browser window and navigate to: https://<ip_address>/
+#. Open a new browser window/tab and navigate to ``https://10.1.10.20/``
 
-2. Login as the new user.
+#. Login as the new user (``user42/user42``)
 
-Note the different display name and username.
+#. Note the different ``displayName`` and ``username``.
 
-.. image:: ../../_static/class1/module2/lab2-image004.png
-    :align: center
-    :scale: 50%
+   .. image:: ../../_static/class1/module2/lab2-image004.png
+      :align: center
+      :scale: 50%
 
-Also note that you can't do very much with this user. It has not been added to
-any roles or given any permissions. Close this browser and go back to the previous one.
+#. Also note that you can't do very much with this user. It has not been added
+   to any roles or given any permissions
+
+#. Close this browser window/tab and go back to the previous one
+

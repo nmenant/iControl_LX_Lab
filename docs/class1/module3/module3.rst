@@ -1,29 +1,31 @@
-Module 3 - Understanding the iControl LX extensions
-===================================================
+Module 3 - Understanding iControl LX Extensions
+===============================================
 
-In module 3, we are going to review the 'hello_world' extension, look at how to
-handle HTTP GETs (and other methods), and interact with 3rd party systems.
+In this module, we are going to review the ``HelloWorld`` extension, look at
+how to handle HTTP GETs (and other methods), and interact with 3rd party
+systems.
 
-This module is only about reviewing how it works. Module 4 will make us create our own HelloWorld extension
+This module will only reviewing and existing extension. In Module 4 we will
+create our own ``HelloWorld`` extension
 
 **Exercises in this Module**
 
-- Lab 3.1 - Review the HelloWorld extension
+- Lab 3.1 - Review the HelloWorld iControl LX Extension
 
-  - Task 1 - Overview of the HelloWorld extension
-  - Task 2 - Key parts of the HelloWorld extension
+  - Overview of the HelloWorld Extension
+  - Key Parts of the HelloWorld Extension
 
 - Lab 3.2 - Beyond "GET"
 
-  - Task 1 - The 'other' HTTP verbs
+  - Task 1 - The 'other' HTTP Verbs
 
-- Lab 3.3 - Interacting with 3rd party systems
+- Lab 3.3 - Interacting with 3rd Party Systems
 
   - Task 1 - Using restOperation
-  - Task 2 - Creating a REST call using Native Node.js HTTP Reqests
+  - Task 2 - Creating a REST call using Native Node.js HTTP Requests
 
- .. toctree::
-     :maxdepth: 1
-     :glob:
+.. toctree::
+   :maxdepth: 1
+   :glob:
 
-     lab*
+   lab*

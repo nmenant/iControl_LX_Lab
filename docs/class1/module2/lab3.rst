@@ -1,41 +1,44 @@
 Lab 2.3 - Advanced (raw JSON)
 -----------------------------
 
-
-Task 1 - View the JSON representation of a user account
+Task 1 - View the JSON Representation of a User Account
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Navigate to your list of user accounts:
+Perform the following steps to complete this task:
 
-https://10.1.10.20/mgmt/shared/authz/users/presentation#/
+#. Navigate to your list of user accounts:
 
-2. Click on the user you created earlier (user42 ?).
+   ``https://10.1.10.20/mgmt/shared/authz/users/presentation#/``
 
-3. Click the 'Edit' button.
+#. Click on the user you created earlier (``user42``)
 
-4. Click the 'Advanced' button. A JSON input window appear
+#. Click the :guilabel:`Edit` button
 
-.. image:: ../../_static/class1/module2/lab3-image001.png
-    :align: center
-    :scale: 50%
+#. Click the :guilabel:`Advanced` button. A JSON input window will appear:
 
-Note that the value in JSON match those presented above in the /presentation#/
-representation.
+   .. image:: ../../_static/class1/module2/lab3-image001.png
+      :align: center
+      :scale: 50%
 
+#. Note that the value in JSON match those presented above in the
+   ``/presentation#/`` representation.
 
-Task 2 - Edit a user account's JSON representation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Task 2 - Modify a User Account's JSON Representation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. In the "JSON Input:" field, edit the value of 'displayName'.
+Perform the following steps to complete this task:
 
-Note that it automatically changes in the 'presentation' view above.
+#. In the ``JSON Input:`` field, edit the value of ``displayName`` change ``User 42`` to ``Modified User 42``
 
-2. Click 'Save' or 'Cancel'.
+#. Note that it automatically changes in the 'presentation' view above
 
-3. Click 'Parent' to return to the list of users.
+#. Click :guilabel:`Save` or :guilabel:`Cancel`
 
+#. Click ``Parent`` to return to the list of users
 
-Task 3 - delete the user
+Task 3 - Delete the User
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Click the 'trash can' next to the user you created.
+Perform the following steps to complete this task:
+
+#. Click the trash can icon next to the user you created to delete the user
