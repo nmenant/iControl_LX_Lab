@@ -37,8 +37,8 @@ Perform the following steps to complete this task:
       :align: center
       :scale: 50%
 
-#. Click on the collection ``iWF-RPM-package-management`` and then on
-   ``2A_Install_RPM`` item
+#. Click on the collection ``iWF-RPM-package-management`` and then on the
+   ``2A_Install_RPM`` folder
 
    .. image:: ../../_static/class1/module5/lab1-image003.png
       :align: center
@@ -52,7 +52,7 @@ Perform the following steps to complete this task:
    * Check whether it installed successfully or not (you may need to do play
      this requests a few times before it's fully installed)
 
-#. Select the `iWF-RPM-package-Management` environment (top right of the window)
+#. Select the ``iWF-RPM-package-Management`` environment (top right of the window)
 
    .. image:: ../../_static/class1/module5/lab1-image004.png
       :align: center
