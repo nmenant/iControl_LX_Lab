@@ -5,8 +5,9 @@ Class 1 - F5 iControl LX extensions
 
 This class will teach you how to create F5 iControl REST API extensions. If you
 are NOT familiar with the iControl REST API, here are the labs you are looking
-for `Automation & Orchestration Introduction Course
-<http://f5-automation-labs.readthedocs.io/en/latest/>`_.
+for the `Introduction to Automation & Orchestration
+<http://clouddocs.f5.com/training/community/programmability/class1/class1.html/>`_
+Course.
 
 While this guide assumes no prior experience with the iControl LX framework, it
 does assume that the reader has obtained a basic understanding of REST APIs,
