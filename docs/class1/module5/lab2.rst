@@ -17,7 +17,8 @@ To see what the extension is doing:
   ``tail -f /var/log/restnoded/restnoded.log``. This way you should see all
   action logged by the extension.
 
-* Connect to your BIG-IP UI and iWorkflow UI to see services being
+* Connect to your BIG-IP UI (login ``admin``, password ``admin``) and
+  iWorkflow UI (login ``student``, password ``student``) to see services being
   added/deleted. You have shortcuts in your Chrome browser
 
 .. NOTE:: Some limitations of the extension / IPAM solution to be aware of:

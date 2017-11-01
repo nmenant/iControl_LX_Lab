@@ -160,7 +160,7 @@ Task 2 - Check the Package was Successfully Installed
 
 You can check that the extension was successfully installed in different ways:
 
-* Check that the extension is installed in ``/var/config/rest/iapps/``
+* Check that the extension is installed in ``/var/config/rest/iapps/`` on iWorflow
 
   .. code::
 
