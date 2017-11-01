@@ -51,9 +51,9 @@ Perform the following steps to complete this task:
       :align: center
       :scale: 50%
 
-#. Search for a Course named ``iControl LX extensions``. There will be 2
+#. Search for a Course named ``intro to iControl LX extension``. There will be 2
    classes at ISC around iControl LX extensions so make sure you select the
-   right session.
+   right session (based on the room name).
 
 #. Click the :guilabel:`Join` button and your deployment should start.
 
