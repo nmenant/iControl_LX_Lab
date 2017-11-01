@@ -14,7 +14,8 @@ platform. For this lab, we will use iWorkflow.
 
 Perform the following steps to complete this task:
 
-#. Connect to your iWorkflow platform (``10.1.10.20``) using Putty (ssh)
+#. Connect to your iWorkflow platform  via ssh/Putty(``10.1.10.20``)
+
 
 #. iControl LX extensions reside in ``/var/config/rest/iapps/``. This is where
    you need to create your iControl LX extension. Usually you will create:
@@ -70,6 +71,8 @@ Perform the following steps to complete this task:
 
       module.exports = HelloWorld;
 
+#. Save the changes (``ESC ESC :wq`` if you use ``vi`)
+
 #. Once our extension is created, we need to load it into ``restnoded``. When
    an extension is loaded from a RPM, it is done automatically. However here,
    we will need to do it ourselves
@@ -123,7 +126,7 @@ Perform the following steps to complete this task:
       :align: center
       :scale: 50%
 
-#. You could also use ``curl`` in CLI:
+#. You could also use ``curl`` in CLI (from iWorkflow CLI for example):
 
    ``curl -k -u admin:admin https://10.1.10.20/mgmt/ilxe_lab/hello_world``
 
@@ -145,8 +148,9 @@ Perform the following steps to complete this task:
 .. NOTE:: You may NOT want to use admin priviledges to leverage an extension.
    In many situation the extension may be needed only by a specific user and
    then you should be able to enforce some RBAC policies here. BIG-IP 13.1 will
-   provide this capability (`BIG-IP RBAC API`_).  With iWorkflow, you can
-   already setup RBAC for the API. For a specific user, you can specify which
+   provide this capability (`BIG-IP RBAC API`_).
+   With iWorkflow, you can already setup RBAC for the API. For a specific user,
+   you can specify which
    URIs they have access to and also which HTTP Methods he can use against those
    URIs.
 

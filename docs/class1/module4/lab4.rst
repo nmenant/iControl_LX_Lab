@@ -23,7 +23,7 @@ First lets take a look at the packages installed on your iWorkflow platform.
 
 Perform the following steps to complete this task:
 
-#. From your Linux Server, run the following command:
+#. From your ``Linux Server`, run the following command:
 
    ``curl -k -u admin:admin https://10.1.10.20/mgmt/shared/iapp/global-installed-packages | jq``
 
@@ -46,7 +46,7 @@ Task 2 - Install our RPM
 
 The installation is performed via the iControl REST API
 ``package-management-tasks`` service. Performing an HTTP ``POST`` to this
-service with the ``INSTALL`` operation, and the location and name of the
+service with the ``INSTALL`` operation, the location and name of the
 iControlLX package is all it takes:
 
 Here is the syntax:
@@ -228,19 +228,19 @@ Task 3 - Test our iControl Extension
 
 #. You can simply redo some of our previous tests to see the outcome:
 
-   ``curl -k -u admin:admin https://10.1.10.20/mgmt/ilxe_lab/HelloWorld``
+   ``curl -k -u admin:admin https://10.1.10.20/mgmt/ilxe_lab/hello_world``
 
 #. The console output should look like this:
 
    ``{"value":"Congratulations on your lab!"}``
 
-#. Execute ``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"name":"iControl LX Lab"}' https://10.1.10.20/mgmt/ilxe_lab/HelloWorld``
+#. Execute ``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"name":"iControl LX Lab"}' https://10.1.10.20/mgmt/ilxe_lab/hello_world``
 
    The console output should look like this:
 
    ``{"value":"Hello iControl LX Lab!"}``
 
-#. Execute ``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"other":"iControl LX Lab"}' https://10.1.10.20/mgmt/ilxe_lab/HelloWorld``
+#. Execute ``curl -H "Content-Type: application/json" -k -u admin:admin -X POST -d '{"other":"iControl LX Lab"}' https://10.1.10.20/mgmt/ilxe_lab/hello_world``
 
 #. The console output should look like this (the name parameter wasn't found in
    the POST payload):

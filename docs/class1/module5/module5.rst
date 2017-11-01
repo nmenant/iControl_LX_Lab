@@ -68,6 +68,8 @@ iWorkflow is already setup with 2 service templates:
    :align: center
    :scale: 50%
 
+
+
 Our extension will do the following:
 
 * Receive POST/DELETE requests

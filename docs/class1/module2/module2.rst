@@ -11,7 +11,7 @@ While the iControl LX framework runs on both BIG-IP and iWorkflow, there are
 many workflows that don't make sense to run directly on the BIG-IP. For
 example, if we developed an extension that presented the status of a Fleet
 of BIG-IP devices, it would make far more sense to do this from a central
-platform, than on each individual BIG-IP.
+platform, rather than on each individual BIG-IP.
 
 .. NOTE:: This lab will NOT guide you through the iWorkflow or BIG-IP lab setup.
    For information on installing and configuring BIG-IP and iWorkflow, please

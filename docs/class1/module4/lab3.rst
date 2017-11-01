@@ -2,9 +2,10 @@ Lab 4.3 - Create a New iControl LX Extension RPM
 ------------------------------------------------
 
 Here, our curl commands will return a fair amount of output. To make it more
-readable, we will need ``jq``.  ``jq`` is not available on BIG-IP or iWorkflow
-so to run the next curl commands, do it from the Linux server. It's already
-defined in PUTTY. Login: ``ubuntu``, Password: ``ubuntu``
+readable, we will need ``jq``.  ``jq`` is not available on BIG-IP or iWorkflow.
+
+To run the next curl commands, do it from the Linux server(``10.1.10.10``). It's already
+defined in PUTTY. Login: ``student``, Password: ``student``
 
 Task 1 - Create a new RPM for the Updated iControl LX Extension
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -111,7 +112,7 @@ Note also in the build-package completion response above, the
 ``"builtRpmPackageFilePath": "/var/config/rest/iapps/RPMS/HelloWorld-0.1-001.noarch.rpm"``
 
 This is where you collect your RPM from. You can retrieve your RPM either with
-something like WinSCP, SCP or your favorite tool.
+something like ``WinSCP``, ``SCP`` or your favorite tool.
 
 No need to retrieve it for this lab.
 

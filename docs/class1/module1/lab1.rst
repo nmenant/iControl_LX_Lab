@@ -47,7 +47,7 @@ Perform the following steps to complete this task:
 
       ``bigstart status restjavad restnoded``
 
-      To get the status of ALL F5 controlled daemons execute
+      To get the status of ALL F5 controlled daemons execute:
 
       ``bigstart status``
   
@@ -65,7 +65,7 @@ Perform the following steps to complete this task:
    ``bigstart restart restjavad restnoded``
 
    .. NOTE:: You won't see any logs in CLI when using this command. You'll
-      need to check the log files `/var/log/restjavad.0.log and
+      need to check the log files `/var/log/restjavad.0.log` and
       `/var/log/restnoded/restnoded.log`. This is covered in the next lab.
 
 .. toctree::
