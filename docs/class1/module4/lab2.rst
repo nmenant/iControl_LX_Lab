@@ -1,5 +1,5 @@
-Lab 4.2 - Updating the Hello World iControl Extension
------------------------------------------------------
+Lab 4.2 - Updating the HelloWorld iControl LX Extension
+-------------------------------------------------------
 
 Now that we have a first version of our extension, let's update it so that it
 will be able to do a few more things:
@@ -23,7 +23,7 @@ Perform the following steps to complete this task:
 #. Execute ``vi /var/config/rest/iapps/HelloWorld/nodejs/hello_world.js`` to
    edit the file
 
-#. Below the first comment,
+#. Below the first comment
 
    .. code::
 
@@ -38,7 +38,7 @@ Perform the following steps to complete this task:
       var logger = require('f5-logger').getInstance();
       var DEBUG = true;
 
-#. Save the changes (``ESC ESC :wq``)
+#. Save the changes (``ESC ESC :wq`` if you use ``vi`)
 
 #. Now we will be able to use ``logger`` statement to print information to the
    `/var/log/restnoded/restnoded.log` log file.  We can also turn on/off all
@@ -229,9 +229,13 @@ Perform the following steps to complete this task:
    ``bigstart restart restnoded ; tail -f /var/log/restnoded/restnoded.log``
 
 #. Review the logs and make sure that it doesn't mention any error/issue in
-   your updated file.  Keep this session open just to monitor your logs. Easier
-   to have one window to track/monitor your logging information and use another
-   one to update your code/send curl command
+   your updated file.
+
+   .. NOTE::
+
+    Keep this ssh session open just to monitor your logs and open a new one.
+    Easier to have one window to track/monitor your logging information and
+    use another one to update your code/send curl command
 
 #. You should have something like this:
 
@@ -308,7 +312,7 @@ For this task, we will do 3 things:
 
 Perform the following tasks to complete this task:
 
-#. To add the http module to our extension we need to add the following to the
+#. To add the http module to our extension we need to add the following at the
    top of your code
 
    .. code-block:: javascript
@@ -400,7 +404,7 @@ Perform the following tasks to complete this task:
       Wed, 18 Oct 2017 09:30:08 GMT - config: [RestWorker] /ilxe_lab/hello_world has started. Name:HelloWorld
       Wed, 18 Oct 2017 09:30:08 GMT - info: DEBUG: HelloWorld - onStart - the default message body is: { "value": "Congratulations on your lab!" }
 
-#. You can now test your updated extension with the following commands:
+#. You can now test your updated extension with the following command:
 
    ``curl -k -u admin:admin https://10.1.10.20/mgmt/ilxe_lab/hello_world``
 

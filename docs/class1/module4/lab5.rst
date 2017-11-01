@@ -9,7 +9,7 @@ Task 1 - Verify the 'packageName'
 
 Perform the following steps to complete this task:
 
-#. To verify the package name, from your Linux Server, run the following
+#. To verify the package name, from your ``Linux Server``, run the following
    command:
 
    ``curl -k -u admin:admin https://10.1.10.20/mgmt/shared/iapp/global-installed-packages | jq``
