@@ -1,28 +1,43 @@
-Lab 0.2 - Access your lab
+Lab 0.2 - Access Your lab
 -------------------------
 
 Task 1 - Launch your RDP session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once your deployment is up and running, you should try to access the JumpHost via RDP.
+Once your deployment is up and running, you should try to access the JumpHost
+via RDP.
 
-In the UDF interface, go to Deployment and select the Deployment `Intro to iControl LX extension`
+Perform the following steps to complete this task:
 
-Click on the `Components` tab and find the component called `JumpHost` (in the Systems column)
+#. In the UDF interface, go to :guilabel:`Deployments`
 
-.. image:: ../../_static/class1/module0/lab1-image002.png
-  :align: center
-  :scale: 50%
+#. Find the deployment named ``Intro to iControl LX extension`` and click the
+   :guilabel:`Details`
 
-Click on Access and `RDP`. You should download automatically a shortcut to launch the RDP session
+#. Click on the :guilabel:`Components` tab and find the component named
+   ``JumpHost`` in the :guilabel:`Systems` column
 
-.. warning:: For MAC user, it is recommended to use Microsoft Remote Desktop. You may not be able to access your jumpbox otherwise. It is available in the App store (FREE).
+   .. image:: ../../_static/class1/module0/lab1-image002.png
+      :align: center
+      :scale: 50%
 
+#. Click on the :guilabel:`Access` button, then select :guilabel:`RDP`. An
+   RDP file will be downloaded automatically that allows you to launch the RDP
+   session
 
-login: administrator
-password: cXzTEv8E5
+   .. WARNING:: For MAC users, it is recommended to use Microsoft Remote
+      Desktop. You may not be able to access your jumpbox otherwise. It is
+      available in the Mac App Store as a free download.
 
-.. note::
+#. Open the RDP connection to the jumphost
 
-    The lab guide is setup as the homepage of your chrome browser
+#. Login with the following credentials:
+
+   - Username: ``administrator``
+   - Password: ``cXzTEv8E5``
+
+.. NOTE::
+
+   To prevent having to switch between windows or screens this lab guide is
+   setup as the homepage of the Chrome browser on the jumphost.
 

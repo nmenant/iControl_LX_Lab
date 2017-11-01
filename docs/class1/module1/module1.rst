@@ -1,25 +1,24 @@
-Module 1 - Understanding the iControl LX architecture
+Module 1 - Understanding the iControl LX Architecture
 =====================================================
 
-Before we start installing iControl LX extensions, it is important to understand the
-iControl LX architecture.
+Before we start installing iControl LX extensions, it is important to
+understand the iControl LX architecture.
 
 In this section we will review the relevant iControl LX daemons, the logs they
 use, and some basic troubleshooting tools/tips.
 
-
 **Exercises in this Module**
 
-- Lab 1.1 - The daemons (and flow)
+- Lab 1.1 - The Daemons (and flow)
 
-  - Task 1 - Understand the two primary daemons
-  - Task 2 - Start/Stop/Restart the daemons
+  - Understand the Two Primary Daemons
+  - Task 1 - Start/Stop/Restart the Daemons
 
 - Lab 1.2 - Troubleshooting, Logs, etc
 
-  - Task 1 - Understand the iControl & iControl LX logs
-  - Task 2 - Streaming the log output
-  - Task 3 - Combining commands, for extra efficiency
+  - Understand the iControl & iControl LX Logs
+  - Task 1 - Streaming the Log Output
+  - Task 2 - Combining Commands, for Extra Efficiency
 
 
 .. toctree::

@@ -1,5 +1,5 @@
-Module 0 - Accessing your lab
-=============================
+Module 0 - Accessing the Lab Environment
+========================================
 
 Before we start playing with iControl LX extension, you need to have access to your lab.
 
