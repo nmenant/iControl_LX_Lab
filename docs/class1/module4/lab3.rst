@@ -5,7 +5,7 @@ Here, our curl commands will return a fair amount of output. To make it more
 readable, we will need ``jq``.  ``jq`` is not available on BIG-IP or iWorkflow.
 
 To run the next curl commands, do it from the Linux server(``10.1.10.10``). It's already
-defined in PUTTY. Login: ``ubuntu``, Password: ``ubuntu``
+defined in PUTTY. Login: ``student``, Password: ``student``
 
 Task 1 - Create a new RPM for the Updated iControl LX Extension
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

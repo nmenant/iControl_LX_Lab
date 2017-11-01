@@ -27,7 +27,7 @@ Here is the lab topology:
        ``root/default``
    * - Linux Server
      - 10.1.10.10-13
-     - ``ubuntu/ubuntu``
+     - ``student/student``
 
        ``root/default``
    * - Windows Jumphost
