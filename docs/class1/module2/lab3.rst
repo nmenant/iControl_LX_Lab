@@ -28,7 +28,7 @@ Task 2 - Modify a User Account's JSON Representation
 
 Perform the following steps to complete this task:
 
-#. In the ``JSON Input:`` field, edit the value of ``displayName``
+#. In the ``JSON Input:`` field, edit the value of ``displayName`` change ``User 42`` to ``Modified User 42``
 
 #. Note that it automatically changes in the 'presentation' view above
 
