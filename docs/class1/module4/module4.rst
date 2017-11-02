@@ -34,8 +34,8 @@ illustrating the package management system.
   - Task 2 - Create the 'delete' task
   - Task 3 - [OPTIONAL] Verify the iControl LX Extension was Deleted
 
- .. toctree::
-     :maxdepth: 1
-     :glob:
+.. toctree::
+   :maxdepth: 1
+   :glob:
 
-     lab*
+   lab*
