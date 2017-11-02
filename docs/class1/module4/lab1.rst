@@ -14,7 +14,8 @@ platform. For this lab, we will use iWorkflow.
 
 Perform the following steps to complete this task:
 
-#. Connect to your iWorkflow platform  via ssh(``10.1.10.20``)
+#. Connect to your iWorkflow platform  via ssh/Putty(``10.1.10.20``)
+
 
 #. iControl LX extensions reside in ``/var/config/rest/iapps/``. This is where
    you need to create your iControl LX extension. Usually you will create:
@@ -35,7 +36,9 @@ Perform the following steps to complete this task:
    preferred editor and create a file named ``hello_world.js`` in
    ``/var/config/rest/iapps/HelloWorld/nodejs/``:
 
-   ``vi /var/config/rest/iapps/HelloWorld/nodejs/hello_world.js``
+   ``nano /var/config/rest/iapps/HelloWorld/nodejs/hello_world.js``
+   
+   .. NOTE:: If you have not used nano before:  After you paste in the contents below, you will type ``CTRL-X`` to exit the editor.  You will then be prompted to save the file, type ``Y`` to confirm.
 
 #. Copy/Paste the following content into your file:
 
@@ -78,6 +81,8 @@ Perform the following steps to complete this task:
    extension:
 
    ``restcurl shared/nodejs/loader-path-config -d '{"workerPath": "/var/config/rest/iapps/HelloWorld"}'``
+   
+   .. NOTE:: ``restcurl`` is a utility that allows you to communicate with iControl REST via the CLI.   
 
    The output should look like this:
 

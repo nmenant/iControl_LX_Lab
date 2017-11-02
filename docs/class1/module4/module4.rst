@@ -2,8 +2,17 @@ Module 4 - Installing the HelloWorld extension
 ===============================================
 
 In module 4, we are going to create our first iControl LX extension, the
-``HelloWorld`` extension. It doesn't do much but its simple and perfect for
+``HelloWorld`` extension. It doesn't do much but it's simple and perfect for
 illustrating the package management system.
+
+.. NOTE::
+
+  In this lab, we will make you do edits on the platform itself.
+  You'll connect on iWorkflow and do everything on it. It's not necessarily
+  a best practice. You could also have a local version on your JumpHost and use
+  ``Notepad++`` (already installed on your JumpHost, feel free to install
+  something else) to do the work. Once your file is updated accordingly,
+  you may use WinSCP to push the new version.
 
 **Exercises in this Module**
 
@@ -34,8 +43,8 @@ illustrating the package management system.
   - Task 2 - Create the 'delete' task
   - Task 3 - [OPTIONAL] Verify the iControl LX Extension was Deleted
 
- .. toctree::
-     :maxdepth: 1
-     :glob:
+.. toctree::
+   :maxdepth: 1
+   :glob:
 
-     lab*
+   lab*

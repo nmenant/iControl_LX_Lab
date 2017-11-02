@@ -11,11 +11,9 @@ create anything on any platform yet
 Overview of the HelloWorld Extension
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-
-
 To help us get started we've keep this extension very simple:
 
-#. It only supports HTTP ``GET`` requests. 
+#. It only supports HTTP ``GET`` requests.
 #. It only responds to ``GET`` requests with ``Hello World!``
 #. There are *only* 13 lines of Javascript (the rest is comments/documentation).
 
