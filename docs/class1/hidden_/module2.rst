@@ -29,6 +29,18 @@ platform, rather than on each individual BIG-IP.
   - Task 3 - The '/presentation#' Extension
   - Task 4 - Editing a REST Resource
 
+- Lab 2.2 - Edit an iControl REST Resource via /mgmt/toc
+
+  - Task 1 - Review the User Accounts
+  - Task 2 - Create a New User
+  - Task 3 - Modify the New User
+  - Task 4 - Login as the New User
+
+- Lab 2.3 - Advanced (raw JSON)
+
+  - Task 1 - View the JSON Representation of a User Account
+  - Task 2 - Modify a User Account's JSON Representation
+  - Task 3 - Delete the User
 
 .. toctree::
   :maxdepth: 1
