@@ -1,5 +1,8 @@
-build001: onPost, onDelete implemented
-build002: onPost, onDelete, onPut implemented
-build003: onPost, onDelete, onPut, onGet implemented
+Build history:
 
-to be implemented: specify the cluster on which to deploy the service. (today it's a variable)
+ #. 0.1-001: onPost, onDelete implemented
+ #. 0.1-002: onPost, onDelete, onPut implemented
+ #. 0.1-003: onPost, onDelete, onPut, onGet implemented
+
+
+To be implemented: specify the cluster on which to deploy the service. (today it's a variable)
