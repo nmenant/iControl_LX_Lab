@@ -21,6 +21,10 @@ ipam_extension.prototype.WORKER_URI_PATH = "/shared/my-app-interface";
 
 ipam_extension.prototype.isPublic = true;
 
+
+// Enable worker URL routing as passthrough.
+ipam_extension.prototype.isPassThrough = true;
+
 //triggered when our worker is loaded
 ipam_extension.prototype.onStart = function (success) {
   logger.info(WorkerName + " - onStart()");
@@ -29,8 +33,68 @@ ipam_extension.prototype.onStart = function (success) {
 
 ipam_extension.prototype.onGet = function (restOperation) {
   logger.info(WorkerName + " - onGet()");
-  var newState = restOperation.getBody();
-  this.completeRestOperation(restOperation);
+  var uriValue = restOperation.getUri();
+  var serviceName = uriValue.path.toString().split("/")[3];
+  aThis = this;
+
+  if (DEBUG === true) {
+    logger.info("DEBUG: " + WorkerName + "IPAM REST Call - onGet - uri is " + serviceName);
+  }
+
+  //we retrieve the service definition
+  var uri = aThis.restHelper.buildUri({
+    protocol: aThis.wellKnownPorts.DEFAULT_HTTPS_SCHEME,
+    port: "443",
+    hostname: IWF_IP,
+    path: "/mgmt/cm/cloud/tenants/" + tenantName + "/services/iapp/" + serviceName
+  });
+
+  var getService = aThis.restOperationFactory.createRestOperationInstance()
+    .setMethod("Get")
+    .setUri(uri)
+    .setIdentifiedDeviceRequest(true);
+
+  aThis.eventChannel.emit(
+    aThis.eventChannel.e.sendRestOperation,
+    getService,
+    function(respGetRequest) {
+      var respBody = respGetRequest.getBody();
+      var varsList = respBody.vars;
+      var tablesList = respBody.tables;
+      var templateName = respBody.tenantTemplateReference.link.toString().split("/");
+
+      templateName = templateName[templateName.length - 1];
+      var restBody = "{ \"name\": \"" + serviceName + "\", \"template\": \"" + templateName + "\",\"vars\": [";
+
+      // reminder: var varsList = newState.vars -> it contains all the vars that were defined in our app definition
+      for (var j=0; j < varsList.length; j++) {
+        if (varsList[j].name != "pool__addr") {
+          if (j > 0){
+            restBody += ",";
+          }
+          composeBody(varsList[j]);
+        }
+      }
+      function composeBody(message){
+        restBody += " { \"name\" : \"" + message.name + "\", \"value\" : \"" + message.value + "\"}";
+      }
+
+      restBody += "], \"tables\": ";
+      restBody += JSON.stringify(tablesList,' ','\t');
+
+      //close our payload
+      restBody += "}";
+      if (DEBUG === true) {
+        logger.info ("DEBUG: " + WorkerName + " onGet - response service BODY is: " + JSON.stringify(restBody,' ','\t'));
+      }
+      restOperation.setBody(restBody);
+      aThis.completeRestOperation(restOperation);
+    }, function(err) {
+      logger.info("DEBUG: " + WorkerName + " [Test Call Rest respGetRequest Error:] %j", err);
+    }
+  );
+
+ // this.completeRestOperation(restOperation);
 };
 
 
