@@ -10,8 +10,6 @@ var IPAM_IP = "10.1.10.21";
 var IPAM_Port = "79";
 var http = require('http');
 var tenantName = "student";
-var connectorReference = "58df07a5-f51c-45ac-a35b-406cfb35840c";
-//var connectorReference = "901f35d2-208a-4ad2-b852-b8b89c950f39";
 
 function ipam_extension() {
 }
@@ -38,7 +36,7 @@ ipam_extension.prototype.onGet = function (restOperation) {
   aThis = this;
 
   if (DEBUG === true) {
-    logger.info("DEBUG: " + WorkerName + "IPAM REST Call - onGet - uri is " + serviceName);
+    logger.info("DEBUG: " + WorkerName + " - onGet - uri is " + serviceName);
   }
 
   //we retrieve the service definition
@@ -61,34 +59,68 @@ ipam_extension.prototype.onGet = function (restOperation) {
       var respBody = respGetRequest.getBody();
       var varsList = respBody.vars;
       var tablesList = respBody.tables;
+      var bThis = aThis;
+
       var templateName = respBody.tenantTemplateReference.link.toString().split("/");
-
       templateName = templateName[templateName.length - 1];
-      var restBody = "{ \"name\": \"" + serviceName + "\", \"template\": \"" + templateName + "\",\"vars\": [";
 
-      // reminder: var varsList = newState.vars -> it contains all the vars that were defined in our app definition
-      for (var j=0; j < varsList.length; j++) {
-        if (varsList[j].name != "pool__addr") {
-          if (j > 0){
-            restBody += ",";
-          }
-          composeBody(varsList[j]);
-        }
-      }
-      function composeBody(message){
-        restBody += " { \"name\" : \"" + message.name + "\", \"value\" : \"" + message.value + "\"}";
-      }
+      //We need to retrieve the name of the connector.
+      var connectorId = respBody.properties[0].value.toString().split("/");
+      connectorId = connectorId[connectorId.length - 1];
 
-      restBody += "], \"tables\": ";
-      restBody += JSON.stringify(tablesList,' ','\t');
-
-      //close our payload
-      restBody += "}";
       if (DEBUG === true) {
-        logger.info ("DEBUG: " + WorkerName + " onGet - response service BODY is: " + JSON.stringify(restBody,' ','\t'));
+        logger.info ("DEBUG: " + WorkerName + " onGet - connectorId is: " + connectorId);
       }
-      restOperation.setBody(restBody);
-      aThis.completeRestOperation(restOperation);
+      var getConnectorNameuri = bThis.restHelper.buildUri({
+        protocol: aThis.wellKnownPorts.DEFAULT_HTTPS_SCHEME,
+        port: "443",
+        hostname: IWF_IP,
+        path: "/mgmt/cm/cloud/connectors/local/" + connectorId
+      });
+
+      var getConnectorName = bThis.restOperationFactory.createRestOperationInstance()
+        .setMethod("Get")
+        .setUri(getConnectorNameuri)
+        .setIdentifiedDeviceRequest(true);
+
+      bThis.eventChannel.emit(
+        bThis.eventChannel.e.sendRestOperation,
+        getConnectorName,
+        function(respGetConnectorName) {
+          var respGetConnectorNameBody = respGetConnectorName.getBody();
+
+          var clusterName = respGetConnectorNameBody.name;
+
+          //We have all the date to build the response to the get request
+          var restBody = "{ \"name\": \"" + serviceName + "\", \"template\": \"" + templateName + "\",\"clustername\": \"" + clusterName + "\",\"vars\": [";
+
+          // reminder: var varsList = newState.vars -> it contains all the vars that were defined in our app definition
+          for (var j=0; j < varsList.length; j++) {
+            if (varsList[j].name != "pool__addr") {
+              if (j > 0){
+                restBody += ",";
+              }
+              composeBody(varsList[j]);
+            }
+          }
+          function composeBody(message){
+            restBody += " { \"name\" : \"" + message.name + "\", \"value\" : \"" + message.value + "\"}";
+          }
+
+          restBody += "], \"tables\": ";
+          restBody += JSON.stringify(tablesList,' ','\t');
+
+          //close our payload
+          restBody += "}";
+          if (DEBUG === true) {
+            logger.info ("DEBUG: " + WorkerName + " onGet - response service BODY is: " + JSON.stringify(restBody,' ','\t'));
+          }
+          restOperation.setBody(restBody);
+          aThis.completeRestOperation(restOperation);
+        }, function(err) {
+          logger.info("DEBUG: " + WorkerName + " [Test Call Rest respGetRequest Error:] %j", err);
+        }
+      );
     }, function(err) {
       logger.info("DEBUG: " + WorkerName + " [Test Call Rest respGetRequest Error:] %j", err);
     }
@@ -102,9 +134,10 @@ ipam_extension.prototype.onPost = function (restOperation) {
   logger.info(WorkerName + " - onPost()");
   var newState = restOperation.getBody();
   var templateName = newState.template;
+  var connectorName = newState.clustername;
 
   if (DEBUG === true) {
-    logger.info("DEBUG: " + WorkerName + "IPAM REST Call - onPost - ");
+    logger.info("DEBUG: " + WorkerName + " - onPost - ");
   }
 
   if ( templateName ) {
@@ -136,57 +169,98 @@ ipam_extension.prototype.onPost = function (restOperation) {
         var VS_IP_Payload = Buffer.concat(chunks);
         var VS_IP_Obj = JSON.parse(VS_IP_Payload);
 				var VS_IP = VS_IP_Obj.IP;
-				if (DEBUG === true) {
-       	  logger.info("DEBUG: " + WorkerName + "IPAM REST Call - onPost - the retrieved IP is: " + VS_IP);
+
+        if (DEBUG === true) {
+          logger.info("DEBUG: " + WorkerName + "- onPost - the retrieved IP is: " + VS_IP);
         }
-				// Now that we have the IP we need to work on deploying the service template.
-				// we create the app definition but we add the IPAM IP for Pool__Addr
-				var updateRestBody = "{ \"name\": \"" + serviceName + "\", \"tenantTemplateReference\": { \"link\": \"https://localhost/mgmt/cm/cloud/tenant/templates/iapp/" + templateName + "\"}, \"tenantReference\": { \"link\": \"https://localhost/mgmt/cm/cloud/tenants/" + tenantName + "\"},\"vars\": [";
 
-				// reminder: var varsList = newState.vars -> it contains all the vars that were defined in our app definition
-				for(var i=0; i < varsList.length; i++) {
-					composeBody(varsList[i]);
-				}
-				function composeBody(message){
-					updateRestBody += " { \"name\" : \"" + message.name + "\", \"value\" : \"" + message.value + "\"},";
-  			}
+        if (DEBUG === true) {
+          logger.info("DEBUG: " + WorkerName + "retrieve connector ID - onPost - the connector name is : " + connectorName);
+        }
+        //retrieve the local connector ID
+        var getConnectorsuri = aThis.restHelper.buildUri({
+          protocol: aThis.wellKnownPorts.DEFAULT_HTTPS_SCHEME,
+          port: "443",
+          hostname: IWF_IP,
+          path: "/mgmt/cm/cloud/connectors/local"
+        });
 
-				//we add the VS IP to the variable to create the service properly
-				updateRestBody += "{\"name\": \"pool__addr\",\"value\": \"" + VS_IP + "\"}], \"tables\": ";
-				updateRestBody += JSON.stringify(tablesList,' ','\t');
-
-				//add the connector reference
-				updateRestBody += ",\"properties\": [{\"id\": \"cloudConnectorReference\",\"isRequired\": false, \"value\": \"https://localhost/mgmt/cm/cloud/connectors/local/" + connectorReference + "\"}]";
-				updateRestBody += ",\"selfLink\": \"https://localhost/mgmt/cm/cloud/tenants/" + tenantName + "/services/iapp/" + serviceName + "\"}";
-				if (DEBUG === true) {
-					logger.info ("DEBUG: " + WorkerName + " update service BODY is: " + JSON.stringify(updateRestBody,' ','\t'));
-				}
-				//We generate the PUT API call
-
-				var uri = aThis.restHelper.buildUri({
-					protocol: aThis.wellKnownPorts.DEFAULT_HTTPS_SCHEME,
-					port: "443",
-					hostname: IWF_IP,
-					path: "/mgmt/cm/cloud/tenants/" + tenantName + "/services/iapp/"
-				});
-
-				var updateService = aThis.restOperationFactory.createRestOperationInstance()
-          .setMethod("Post")
-          .setUri(uri)
-          .setBody(updateRestBody)
+        var getConnectors = aThis.restOperationFactory.createRestOperationInstance()
+          .setMethod("Get")
+          .setUri(getConnectorsuri)
           .setIdentifiedDeviceRequest(true);
 
-				aThis.eventChannel.emit(
+        aThis.eventChannel.emit(
           aThis.eventChannel.e.sendRestOperation,
-          updateService,
-          function(respPostRequest) {
-						if (DEBUG === true) {
-              logger.info ("DEBUG: " + WorkerName + " - function RestPostRequest, Service created successfully");
+          getConnectors,
+          function(respGetConnectorsRequest) {
+
+            bThis = aThis;
+            var connectorId;
+
+            var respBodyConnectors = respGetConnectorsRequest.getBody();
+            var connectorsList = respBodyConnectors.items;
+            //Parse the connectors to find the one matching the one specified in the request
+            for(var k=0; k < connectorsList.length; k++) {
+              if (connectorsList[k].name == connectorName) {
+                if (DEBUG === true) {
+                  logger.info ("DEBUG: " + WorkerName + " onPost - connector ID is : " + connectorsList[k].connectorId);
+                }
+                connectorId = connectorsList[k].connectorId;
+              }
             }
-					}, function(err) {
-						logger.info("DEBUG: " + WorkerName + " [Test Call Rest respPostServiceDeployment Error:] %j", err);
-					}
-				);
+				    // Now that we have the IP we need to work on deploying the service template.
+				    // we create the app definition but we add the IPAM IP for Pool__Addr
+				    var updateRestBody = "{ \"name\": \"" + serviceName + "\", \"tenantTemplateReference\": { \"link\": \"https://localhost/mgmt/cm/cloud/tenant/templates/iapp/" + templateName + "\"}, \"tenantReference\": { \"link\": \"https://localhost/mgmt/cm/cloud/tenants/" + tenantName + "\"},\"vars\": [";
+
+				    // reminder: var varsList = newState.vars -> it contains all the vars that were defined in our app definition
+				    for(var i=0; i < varsList.length; i++) {
+              composeBody(varsList[i]);
+            }
+				    function composeBody(message){
+              updateRestBody += " { \"name\" : \"" + message.name + "\", \"value\" : \"" + message.value + "\"},";
+            }
+
+				    //we add the VS IP to the variable to create the service properly
+				    updateRestBody += "{\"name\": \"pool__addr\",\"value\": \"" + VS_IP + "\"}], \"tables\": ";
+				    updateRestBody += JSON.stringify(tablesList,' ','\t');
+
+				    //add the connector reference
+				    updateRestBody += ",\"properties\": [{\"id\": \"cloudConnectorReference\",\"isRequired\": false, \"value\": \"https://localhost/mgmt/cm/cloud/connectors/local/" + connectorId + "\"}]";
+				    updateRestBody += ",\"selfLink\": \"https://localhost/mgmt/cm/cloud/tenants/" + tenantName + "/services/iapp/" + serviceName + "\"}";
+				    if (DEBUG === true) {
+              logger.info ("DEBUG: " + WorkerName + " update service BODY is: " + JSON.stringify(updateRestBody,' ','\t'));
+				    }
+
+            //We generate the PUT API call
+				    var uri = bThis.restHelper.buildUri({
+              protocol: bThis.wellKnownPorts.DEFAULT_HTTPS_SCHEME,
+              port: "443",
+              hostname: IWF_IP,
+              path: "/mgmt/cm/cloud/tenants/" + tenantName + "/services/iapp/"
+            });
+
+            var updateService = bThis.restOperationFactory.createRestOperationInstance()
+              .setMethod("Post")
+              .setUri(uri)
+              .setBody(updateRestBody)
+              .setIdentifiedDeviceRequest(true);
+
+            bThis.eventChannel.emit(
+              bThis.eventChannel.e.sendRestOperation,
+              updateService,
+              function(respPostRequest) {
+                if (DEBUG === true) {
+                  logger.info ("DEBUG: " + WorkerName + " - function RestPostRequest, Service created successfully");
+                }
+              }, function(err) {
+                logger.info("DEBUG: " + WorkerName + " [Test Call Rest respPostServiceDeployment Error:] %j", err);
+              }
+				    );
+          }, function(err) {
+            logger.info("DEBUG: " + WorkerName + " [Test Call Rest respPostServiceDeployment Error:] %j", err);
+          }
+        );
 			});
 		});
 		req.end();
@@ -224,6 +298,7 @@ ipam_extension.prototype.onPut = function (restOperation) {
       //we retrieve the body of the response
       var respBody = respGetRequest.getBody();
       var appVarsList = respBody.vars;
+      var connectorId = respBody.properties[0].value;
       var VS_IP;
       var bThis = aThis;
 
@@ -254,7 +329,7 @@ ipam_extension.prototype.onPut = function (restOperation) {
       updateRestBody += JSON.stringify(tablesList,' ','\t');
 
       //add the connector reference
-      updateRestBody += ",\"properties\": [{\"id\": \"cloudConnectorReference\",\"isRequired\": false, \"value\": \"https://localhost/mgmt/cm/cloud/connectors/local/" + connectorReference + "\"}]";
+      updateRestBody += ",\"properties\": [{\"id\": \"cloudConnectorReference\",\"isRequired\": false, \"value\": \"" + connectorId + "\"}]";
       updateRestBody += ",\"selfLink\": \"https://localhost/mgmt/cm/cloud/tenants/" + tenantName + "/services/iapp/" + serviceName + "\"}";
       if (DEBUG === true) {
         logger.info ("DEBUG: " + WorkerName + " update service BODY is: " + JSON.stringify(updateRestBody,' ','\t'));
