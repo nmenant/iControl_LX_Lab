@@ -7,7 +7,7 @@ Understand the iControl & iControl LX Logs
 In Lab 1.1 we explored the two key daemons responsible for iControl
 REST, and iControl LX extensions. The two logs for these daemons are:
 
-``/var/log/restjavad/restjavad.0.log``
+``/var/log/restjavad.0.log``
 
 ``/var/log/restnoded/restnoded.log``
 
