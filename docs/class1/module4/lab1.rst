@@ -98,7 +98,7 @@ Perform the following steps to complete this task:
        "selfLink": "https://localhost/mgmt/shared/nodejs/loader-path-config/ad130c79-59a0-49c7-a7e7-ff39efe956b5"
      }
 
-#. The logfile ``/var/log/restnoded.0.log`` will give you the ability to track
+#. The logfile ``/var/log/restnoded/restnoded.0.log`` will give you the ability to track
    whether your extension is loaded as expected. Run the following command to
    ensure everything went smoothly:
 
