@@ -26,8 +26,6 @@ To see what the extension is doing:
   * Only 8 IPs have been allocated to deploy services in the IPAM simulator
     (10.1.20.100-10.1.20.107) so don't try to deploy more services, it will fail
 
-  * Only POST / DELETE have been setup for now, don't try to update a service
-
   * Here we only handle the use case where we deploy 2 pool members for each
     app. Don't try to push only one server or more than 2
 
@@ -55,13 +53,14 @@ Perform the following steps to complete this task:
    * Delete a Service
 
 #. For each workflow you want to trigger, make sure that you do the Calls in
-   the order they are set in the folder.
+   the order they are set in the folder. Make sure to review the response payload
 
    For example to deploy a HTTP Service, in the folder ``Create-Service-HTTP``:
 
    1. Click ``Request a token from iWorkflow`` and click :guilabel:`Send`
    2. Click ``Increase Auth token timeout`` and click :guilabel:`Send`
    3. Click ``Create HTTP Service`` and click :guilabel:`Send`
+   4. Click ``Get HTTP Service`` and click :guilabel:`Send`
 
 You can review that everything happened as expected through the iWorkflow and
 BIG-IP UI.
