@@ -63,7 +63,7 @@ Perform the following steps to complete this task:
    4. Click ``Get HTTP Service`` and click :guilabel:`Send`
 
 You can review that everything happened as expected through the iWorkflow and
-BIG-IP UI.
+BIG-IP UI also.
 
 .. NOTE:: Your service definition is done in your ``My-App-Interface``
    environment. So if you want to deploy multiple services, make sure you
@@ -106,6 +106,13 @@ Use Postman - Create HTTP Service Example
    .. image:: ../../_static/class1/module5/lab2-image007.png
       :align: center
       :scale: 50%
+
+#. You can review the configuration view Postman (``Get HTTP Service`` in the same folder):
+
+   .. image:: ../../_static/class1/module5/lab2-image014.png
+      :align: center
+      :scale: 50%
+
 
 Use Newman
 ~~~~~~~~~~
@@ -220,3 +227,8 @@ Here is the ``/var/log/restnoded/restnoded.log`` output on iWorkflow:
 
 You can check the service got deleted properly on iWorkflow (student tenant)
 and on your BIG-IP
+
+.. NOTE:: In the postman collection we have also example on how to update the
+   deployed HTTP/TCP service. The folders are called ``Update-HTTP-Service`` and
+   ``Update-TCP-Service``. It shows how you can update an existing service to
+   disable the first server for example.
