@@ -20,6 +20,10 @@ platform, rather than on each individual BIG-IP.
    * `F5 iWorkflow <https://devcentral.f5.com/wiki/iWorkflow.HomePage.ashx>`_
    * `F5 BIG-IP <https://support.f5.com/csp/knowledge-center/software/BIG-IP?module=BIG-IP%20LTM>`_
 
+.. NOTE:: This lab is ``optional``. It gives you an example on what you can build/
+   implement with an iControl LX extension. It won't give you any knowledge on
+   how to build your own extension or install one.
+
 **Exercises in this Module**
 
 - Lab 2.1 - Interact with a REST extension
@@ -29,6 +33,18 @@ platform, rather than on each individual BIG-IP.
   - Task 3 - The '/presentation#' Extension
   - Task 4 - Editing a REST Resource
 
+- Lab 2.2 - Edit an iControl REST Resource via /mgmt/toc
+
+  - Task 1 - Review the User Accounts
+  - Task 2 - Create a New User
+  - Task 3 - Modify the New User
+  - Task 4 - Login as the New User
+
+- Lab 2.3 - Advanced (raw JSON)
+
+  - Task 1 - View the JSON Representation of a User Account
+  - Task 2 - Modify a User Account's JSON Representation
+  - Task 3 - Delete the User
 
 .. toctree::
   :maxdepth: 1
