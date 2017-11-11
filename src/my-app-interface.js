@@ -92,9 +92,9 @@ ipam_extension.prototype.onGet = function (restOperation) {
           var clusterName = respGetConnectorNameBody.name;
 
           //We have all the date to build the response to the get request
-          var restBody = "{ \"name\": \"" + serviceName + "\", \"template\": \"" + templateName + "\",\"clustername\": \"" + clusterName + "\",\"vars\": [";
+          var restBody = "{ \"name\": \"" + serviceName + "\", \"template\": \"" + templateName + "\",\"clustername\": \"" + clusterName + "\",\"app-data\": [";
 
-          // reminder: var varsList = newState.vars -> it contains all the vars that were defined in our app definition
+          // reminder: var varsList  -> contains all the vars that were defined in our app definition
           for (var j=0; j < varsList.length; j++) {
             if (varsList[j].name != "pool__addr") {
               if (j > 0){
@@ -107,7 +107,7 @@ ipam_extension.prototype.onGet = function (restOperation) {
             restBody += " { \"name\" : \"" + message.name + "\", \"value\" : \"" + message.value + "\"}";
           }
 
-          restBody += "], \"tables\": ";
+          restBody += "], \"servers-data\": ";
           restBody += JSON.stringify(tablesList,' ','\t');
 
           //close our payload
@@ -144,8 +144,8 @@ ipam_extension.prototype.onPost = function (restOperation) {
     aThis = this;
     //variables we will needed to do the app deployment on iWF, extracted from the payload sent by user
 		var serviceName = newState.name;
-		var varsList = newState.vars;
-    var tablesList = newState.tables;
+		var varsList = newState["app-data"];
+    var tablesList = newState["servers-data"];
 
 		//uri to pull our ipam solution. I use an iRule on a bigip to simulate the transaction
 		var options = {
@@ -213,7 +213,7 @@ ipam_extension.prototype.onPost = function (restOperation) {
 				    // we create the app definition but we add the IPAM IP for Pool__Addr
 				    var updateRestBody = "{ \"name\": \"" + serviceName + "\", \"tenantTemplateReference\": { \"link\": \"https://localhost/mgmt/cm/cloud/tenant/templates/iapp/" + templateName + "\"}, \"tenantReference\": { \"link\": \"https://localhost/mgmt/cm/cloud/tenants/" + tenantName + "\"},\"vars\": [";
 
-				    // reminder: var varsList = newState.vars -> it contains all the vars that were defined in our app definition
+				    // reminder: var varsList contains all the vars that were defined in our app definition
 				    for(var i=0; i < varsList.length; i++) {
               composeBody(varsList[i]);
             }
@@ -273,8 +273,8 @@ ipam_extension.prototype.onPut = function (restOperation) {
   this.logger.info(WorkerName + " - onPut()");
 
   var serviceName = newState.name;
-  var varsList = newState.vars;
-  var tablesList = newState.tables;
+  var varsList = newState["app-data"];
+  var tablesList = newState["servers-data"];
   var templateName = newState.template;
   var aThis = this;
 
@@ -316,7 +316,7 @@ ipam_extension.prototype.onPut = function (restOperation) {
       // we create the app definition but we add the IPAM IP for Pool__Addr
       var updateRestBody = "{ \"name\": \"" + serviceName + "\", \"tenantTemplateReference\": { \"link\": \"https://localhost/mgmt/cm/cloud/tenant/templates/iapp/" + templateName + "\"}, \"tenantReference\": { \"link\": \"https://localhost/mgmt/cm/cloud/tenants/" + tenantName + "\"},\"vars\": [";
 
-      // reminder: var varsList = newState.vars -> it contains all the vars that were defined in our app definition
+      // reminder: var varsList  contains all the vars that were defined in our app definition
       for(var j=0; j < varsList.length; j++) {
         composeBody(varsList[j]);
       }
@@ -412,8 +412,8 @@ ipam_extension.prototype.onDelete = function (restOperation) {
 				if (appVarsList[i].name == "pool__addr") {
 					VS_IP = appVarsList[i].value;
 					if (DEBUG === true) {
-                                		logger.info ("DEBUG: " + WorkerName + " - onDelete : VS_IP is: " + VS_IP);
-                        		}
+            logger.info ("DEBUG: " + WorkerName + " - onDelete : VS_IP is: " + VS_IP);
+          }
 				}
 			}
 

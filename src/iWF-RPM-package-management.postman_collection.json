@@ -1,7 +1,7 @@
 {
 	"info": {
 		"name": "iWF-RPM-package-management",
-		"_postman_id": "5e16e484-d222-8313-ec95-718be987f887",
+		"_postman_id": "a7f199b6-30a5-0f6b-f414-e046d911fdfd",
 		"description": "Collection to create/install/delete a RPM in iWF",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -101,7 +101,7 @@
 								"{{iwf_token}}"
 							]
 						},
-						"description": ""
+						"description": null
 					},
 					"response": []
 				},
@@ -148,7 +148,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"appName\": \"{{extension_name}}\",\n\t\"packageVersion\": \"0.1\",\n\t\"packageRelease\": \"001\"\n}"
+							"raw": "{\n  \"appName\": \"{{extension_name}}\",\n  \"packageVersion\": \"0.1\",\n  \"packageRelease\": \"001\"\n}"
 						},
 						"url": {
 							"raw": "https://{{iwf_mgmt}}/mgmt/shared/iapp/build-package",
@@ -224,7 +224,10 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "https://{{iwf_mgmt}}/mgmt/shared/iapp/build-package/{{rpm_creation_status_id}}",
 							"protocol": "https",
@@ -340,7 +343,7 @@
 								"{{iwf_token}}"
 							]
 						},
-						"description": ""
+						"description": null
 					},
 					"response": []
 				},
@@ -452,7 +455,10 @@
 								"value": "{{iwf_token}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "https://{{iwf_mgmt}}/mgmt/shared/iapp/package-management-tasks/{{rpm_installation_status_id}}",
 							"protocol": "https",
@@ -467,7 +473,7 @@
 								"{{rpm_installation_status_id}}"
 							]
 						},
-						"description": ""
+						"description": null
 					},
 					"response": []
 				}
@@ -568,7 +574,7 @@
 								"{{iwf_token}}"
 							]
 						},
-						"description": ""
+						"description": null
 					},
 					"response": []
 				},
@@ -680,7 +686,10 @@
 								"value": "application/json"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "https://{{iwf_mgmt}}/mgmt/shared/iapp/package-management-tasks/{{rpm_uninstall_status_id}}",
 							"protocol": "https",
@@ -695,7 +704,7 @@
 								"{{rpm_uninstall_status_id}}"
 							]
 						},
-						"description": ""
+						"description": null
 					},
 					"response": []
 				}
