@@ -26,8 +26,6 @@ To see what the extension is doing:
   * Only 8 IPs have been allocated to deploy services in the IPAM simulator
     (10.1.20.100-10.1.20.107) so don't try to deploy more services, it will fail
 
-  * Only POST / DELETE have been setup for now, don't try to update a service
-
   * Here we only handle the use case where we deploy 2 pool members for each
     app. Don't try to push only one server or more than 2
 
@@ -43,28 +41,32 @@ Perform the following steps to complete this task:
       :align: center
       :scale: 50%
 
+
 #. Select also ``My-App-Interface`` environment variables
 
    .. image:: ../../_static/class1/module5/lab2-image002.png
       :align: center
       :scale: 50%
 
+
 #. In this collection you have different things you can do:
 
    * Deploy a HTTP and/or TCP Service
    * Delete a Service
 
+
 #. For each workflow you want to trigger, make sure that you do the Calls in
-   the order they are set in the folder.
+   the order they are set in the folder. Make sure to review the response payload
 
    For example to deploy a HTTP Service, in the folder ``Create-Service-HTTP``:
 
    1. Click ``Request a token from iWorkflow`` and click :guilabel:`Send`
    2. Click ``Increase Auth token timeout`` and click :guilabel:`Send`
    3. Click ``Create HTTP Service`` and click :guilabel:`Send`
+   4. Click ``Get HTTP Service`` and click :guilabel:`Send`
 
 You can review that everything happened as expected through the iWorkflow and
-BIG-IP UI.
+BIG-IP UI also.
 
 .. NOTE:: Your service definition is done in your ``My-App-Interface``
    environment. So if you want to deploy multiple services, make sure you
@@ -80,21 +82,24 @@ Use Postman - Create HTTP Service Example
       :align: center
       :scale: 50%
 
-#. Here is the response from the service creation:
+
+#. Here is the response from the POST Request:
 
    .. image:: ../../_static/class1/module5/lab2-image005.png
       :align: center
       :scale: 50%
 
+
 #. Output from ``/var/log/restnoded/restnoded.log`` on iWorkflow:
 
    .. code::
 
-      Sun, 29 Oct 2017 12:30:07 GMT - info: DEBUG: my-app-interfaceIPAM REST Call - onPost -
-      Sun, 29 Oct 2017 12:30:07 GMT - finest: socket 3 closed
-      Sun, 29 Oct 2017 12:30:07 GMT - info: DEBUG: my-app-interfaceIPAM REST Call - onPost - the retrieved IP is: 10.1.20.103
-      Sun, 29 Oct 2017 12:30:07 GMT - info: DEBUG: my-app-interface update service BODY is: "{ \"name\": \"my-application\", \"tenantTemplateReference               \": { \"link\": \"https://localhost/mgmt/cm/cloud/tenant/templates/iapp/f5-http-lb\"}, \"tenantReference\": { \"link\": \"https://localhost/mgmt               /cm/cloud/tenants/student\"},\"vars\": [ { \"name\" : \"pool__port\", \"value\" : \"80\"},{\"name\": \"pool__addr\",\"value\": \"10.1.20.103\"}]               , \"tables\": [\n\t{\n\t\t\"name\": \"pool__Members\",\n\t\t\"columns\": [\n\t\t\t\"IPAddress\",\n\t\t\t\"State\"\n\t\t],\n\t\t\"rows\": [\n\t\t               \t[\n\t\t\t\t\"10.1.10.10\",\n\t\t\t\t\"enabled\"\n\t\t\t],\n\t\t\t[\n\t\t\t\t\"10.1.10.10\",\n\t\t\t\t\"enabled\"\n\t\t\t]\n\t\t]\n\t}\n],\"pro               perties\": [{\"id\": \"cloudConnectorReference\",\"isRequired\": false, \"value\": \"https://localhost/mgmt/cm/cloud/connectors/local/58df07a5-f               51c-45ac-a35b-406cfb35840c\"}],\"selfLink\": \"https://localhost/mgmt/cm/cloud/tenants/student/services/iapp/my-application\"}"
-      Sun, 29 Oct 2017 12:30:07 GMT - info: DEBUG: my-app-interface - function RestPostRequest, Service created successfully
+      Mon, 13 Nov 2017 14:51:40 GMT - info: DEBUG: my-app-interface- onPost - the retrieved IP is: 10.1.20.100
+      Mon, 13 Nov 2017 14:51:40 GMT - info: DEBUG: my-app-interfaceretrieve connector ID - onPost - the connector name is : BIG-IP-student
+      Mon, 13 Nov 2017 14:51:40 GMT - info: DEBUG: my-app-interface onPost - connector ID is : 58df07a5-f51c-45ac-a35b-406cfb35840c
+      Mon, 13 Nov 2017 14:51:40 GMT - info: DEBUG: my-app-interface update service BODY is: "{ \"name\": \"my-application\", \"tenantTemplateReference\": { \"link\": \"https://localhost/mgmt/cm/cloud/tenant/templates/iapp/f5-http-lb\"}, \"tenantReference\": { \"link\": \"https://localhost/mgmt/cm/cloud/tenants/student\"},\"vars\": [ { \"name\" : \"pool__port\", \"value\" : \"80\"},{\"name\": \"pool__addr\",\"value\": \"10.1.20.100\"}], \"tables\": [\n\t{\n\t\t\"name\": \"pool__Members\",\n\t\t\"columns\": [\n\t\t\t\"IPAddress\",\n\t\t\t\"State\"\n\t\t],\n\t\t\"rows\": [\n\t\t\t[\n\t\t\t\t\"10.1.10.10\",\n\t\t\t\t\"enabled\"\n\t\t\t],\n\t\t\t[\n\t\t\t\t\"10.1.10.11\",\n\t\t\t\t\"enabled\"\n\t\t\t]\n\t\t]\n\t}\n],\"properties\": [{\"id\": \"cloudConnectorReference\",\"isRequired\": false, \"value\": \"https://localhost/mgmt/cm/cloud/connectors/local/58df07a5-f51c-45ac-a35b-406cfb35840c\"}],\"selfLink\": \"https://localhost/mgmt/cm/cloud/tenants/student/services/iapp/my-application\"}"
+      Mon, 13 Nov 2017 14:51:40 GMT - info: DEBUG: my-app-interface - function RestPostRequest, Service created successfully
+
 
 #. Logging as ``student`` on the iWorkflow UI:
 
@@ -102,11 +107,20 @@ Use Postman - Create HTTP Service Example
       :align: center
       :scale: 50%
 
+
 #. Check our BIG-IP configuration via the UI:
 
    .. image:: ../../_static/class1/module5/lab2-image007.png
       :align: center
       :scale: 50%
+
+
+#. You can review the configuration via Postman (``Get HTTP Service`` in the same folder):
+
+   .. image:: ../../_static/class1/module5/lab2-image014.png
+      :align: center
+      :scale: 50%
+
 
 Use Newman
 ~~~~~~~~~~
@@ -116,6 +130,7 @@ Use Newman
    .. image:: ../../_static/class1/module5/lab1-image006.png
       :align: center
       :scale: 50%
+
 
 #. You already have a few scripts setup to deploy/delete services:
 
@@ -142,12 +157,14 @@ Use Newman - Create HTTP Service Example
       :align: center
       :scale: 50%
 
+
 #. We will launch the script called ``2_Create_HTTP_Service`` and review the
    output
 
    .. image:: ../../_static/class1/module5/lab2-image010.png
       :align: center
       :scale: 50%
+
 
 #. Here is the ``/var/log/restnoded/restnoded.log`` output on iWorkflow:
 
@@ -158,6 +175,7 @@ Use Newman - Create HTTP Service Example
       Sun, 29 Oct 2017 12:50:32 GMT - info: DEBUG: my-app-interfaceIPAM REST Call - onPost - the retrieved IP is: 10.1.20.104
       Sun, 29 Oct 2017 12:50:32 GMT - info: DEBUG: my-app-interface update service BODY is: "{ \"name\": \"my-web-app\", \"tenantTemplateReference\": { \"link\": \"https://localhost/mgmt/cm/cloud/tenant/templates/iapp/f5-http-lb\"}, \"tenantReference\": { \"link\": \"https://localhost/mgmt/cm/cloud/tenants/student\"},\"vars\": [ { \"name\" : \"pool__port\", \"value\" : \"80\"},{\"name\": \"pool__addr\",\"value\": \"10.1.20.104\"}], \"tables\": [\n\t{\n\t\t\"name\": \"pool__Members\",\n\t\t\"columns\": [\n\t\t\t\"IPAddress\",\n\t\t\t\"State\"\n\t\t],\n\t\t\"rows\": [\n\t\t\t[\n\t\t\t\t\"10.1.10.10\",\n\t\t\t\t\"enabled\"\n\t\t\t],\n\t\t\t[\n\t\t\t\t\"10.1.10.11\",\n\t\t\t\t\"enabled\"\n\t\t\t]\n\t\t]\n\t}\n],\"properties\": [{\"id\": \"cloudConnectorReference\",\"isRequired\": false, \"value\": \"https://localhost/mgmt/cm/cloud/connectors/local/58df07a5-f51c-45ac-a35b-406cfb35840c\"}],\"selfLink\": \"https://localhost/mgmt/cm/cloud/tenants/student/services/iapp/my-web-app\"}"
       Sun, 29 Oct 2017 12:50:32 GMT - info: DEBUG: my-app-interface - function RestPostRequest, Service created successfully
+
 
 #. You can check the service got deployed properly on iWorkflow (student tenant) and on your BIG-IP
 
@@ -210,6 +228,7 @@ We will launch the script called ``4_Delete_HTTP_Service`` and review the output
    :align: center
    :scale: 50%
 
+
 Here is the ``/var/log/restnoded/restnoded.log`` output on iWorkflow:
 
 .. code::
@@ -219,5 +238,11 @@ Here is the ``/var/log/restnoded/restnoded.log`` output on iWorkflow:
    Sun, 29 Oct 2017 13:00:54 GMT - info: DEBUG: my-app-interface - onDelete : VS_IP is: 10.1.20.104
    Sun, 29 Oct 2017 13:00:54 GMT - info: DEBUG: my-app-interface - onDelete : Service Deleted, release IP from IPAM: 10.1.20.104
 
+
 You can check the service got deleted properly on iWorkflow (student tenant)
 and on your BIG-IP
+
+.. NOTE:: In the postman collection we have also example on how to update the
+   deployed HTTP/TCP service. The folders are called ``Update-HTTP-Service`` and
+   ``Update-TCP-Service``. It shows how you can update an existing service to
+   disable the first server for example.

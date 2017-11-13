@@ -13,7 +13,7 @@ directory ``/var/config/rest/downloads``:
 .. code::
 
    # ls /var/config/rest/downloads/
-   my-app-interface-0.1-001.noarch.rpm  tmp
+   my-app-interface-1.0-002.noarch.rpm  tmp
 
 To install your RPM, you have two different options:
 
@@ -29,13 +29,16 @@ Perform the following steps to complete this task:
 #. Click on the Postman icon in the task bar (or on the Desktop)
 
    .. image:: ../../_static/class1/module5/lab1-image001.png
+      :scale: 50%
       :align: center
+
 
 #. You should see this:
 
    .. image:: ../../_static/class1/module5/lab1-image002.png
       :align: center
       :scale: 50%
+
 
 #. Click on the collection ``iWF-RPM-package-management`` and then on the
    ``2A_Install_RPM`` folder
@@ -80,32 +83,32 @@ Perform the following steps to complete this task:
    .. code::
 
       {
-        "packageFilePath": "/var/config/rest/downloads/my-app-interface-0.1-001.noarch.rpm",
-        "packageName": "my-app-interface-0.1-001.noarch",
+        "packageFilePath": "/var/config/rest/downloads/my-app-interface-1.0-002.noarch.rpm",
+        "packageName": "my-app-interface-1.0-002.noarch",
         "operation": "INSTALL",
         "packageManifest": {
             "tags": [
                 "IAPP"
             ]
         },
-        "id": "9bfc0b20-19e2-4565-9ffe-44221fba239e",
+        "id": "73a9097e-b78a-4693-8ebe-961e27049a84",
         "status": "FINISHED",
-        "startTime": "2017-10-29T02:37:46.504-0700",
-        "endTime": "2017-10-29T02:37:46.957-0700",
+        "startTime": "2017-11-13T06:45:20.957-0800",
+        "endTime": "2017-11-13T06:45:21.567-0800",
         "userReference": {
             "link": "https://localhost/mgmt/shared/authz/users/admin"
         },
         "identityReferences": [
             {
-                "link": "https://localhost/mgmt/shared/authz/users/admin"
-            }
+              "link": "https://localhost/mgmt/shared/authz/users/admin"
+           }
         ],
         "ownerMachineId": "075786c3-27a2-45da-8b06-86dcbb73a1c5",
         "generation": 3,
-        "lastUpdateMicros": 1509269866957258,
+        "lastUpdateMicros": 1510584321566822,
         "kind": "shared:iapp:package-management-tasks:iapppackagemanagementtaskstate",
-        "selfLink": "https://localhost/mgmt/shared/iapp/package-management-tasks/9bfc0b20-19e2-4565-9ffe-44221fba239e"
-      }
+        "selfLink": "https://localhost/mgmt/shared/iapp/package-management-tasks/73a9097e-b78a-4693-8ebe-961e27049a84"
+    }
 
 Use the newman script
 ~~~~~~~~~~~~~~~~~~~~~

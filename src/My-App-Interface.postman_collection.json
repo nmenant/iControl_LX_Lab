@@ -1,7 +1,7 @@
 {
 	"info": {
 		"name": "My-App-Interface",
-		"_postman_id": "daff55d1-3f20-4043-fbcc-829f56547522",
+		"_postman_id": "90bb0476-22e3-0b8c-18a8-2ba10097ba9d",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -101,7 +101,7 @@
 								"{{iwf_token}}"
 							]
 						},
-						"description": ""
+						"description": null
 					},
 					"response": []
 				},
@@ -132,7 +132,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"{{my-app-name}}\",\n\t\"template\" : \"f5-http-lb\",\n\t\"vars\": [\n                {\n                    \"name\": \"pool__port\",\n                    \"value\": \"{{service-port}}\"\n                }\n    ],\n    \"tables\": [{\n        \"name\": \"pool__Members\",\n        \"columns\": [\n            \"IPAddress\",\n            \"State\"\n        ],\n        \"rows\": [\n        \t[ \n        \t\t\"{{server1-addr}}\",\n        \t\t\"enabled\"\n        \t], [\n        \t\t\"{{server2-addr}}\",\n        \t\t\"enabled\"\n        \t]\n        ]\n    }]\n}"
+							"raw": "{\n  \"name\": \"{{my-app-name}}\",\n  \"clustername\": \"{{connector-name}}\",\n  \"template\" : \"f5-http-lb\",\n  \"app-data\": [\n                {\n                    \"name\": \"pool__port\",\n                    \"value\": \"{{service-port}}\"\n                }\n    ],\n    \"servers-data\": [{\n        \"name\": \"pool__Members\",\n        \"columns\": [\n            \"IPAddress\",\n            \"State\"\n        ],\n        \"rows\": [\n          [ \n            \"{{server1-addr}}\",\n            \"enabled\"\n          ], [\n            \"{{server2-addr}}\",\n            \"enabled\"\n          ]\n        ]\n    }]\n}"
 						},
 						"url": {
 							"raw": "https://{{iwf_mgmt}}/mgmt/shared/my-app-interface",
@@ -146,7 +146,245 @@
 								"my-app-interface"
 							]
 						},
-						"description": ""
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "GET HTTP Service ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"{{my-app-name}}\",\n  \"template\" : \"f5-http-lb\",\n  \"vars\": [\n                {\n                    \"name\": \"pool__port\",\n                    \"value\": \"{{service-port}}\"\n                }\n    ],\n    \"tables\": [{\n        \"name\": \"pool__Members\",\n        \"columns\": [\n            \"IPAddress\",\n            \"State\"\n        ],\n        \"rows\": [\n          [ \n            \"{{server1-addr}}\",\n            \"enabled\"\n          ], [\n            \"{{server2-addr}}\",\n            \"enabled\"\n          ]\n        ]\n    }]\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/my-app-interface/{{my-app-name}}",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"my-app-interface",
+								"{{my-app-name}}"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Update-Service-HTTP",
+			"description": "this folder will update a HTTP service automatically via the custom application interface",
+			"item": [
+				{
+					"name": "Request a Token from iWorkflow",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"",
+									"tests[\"response has token: \" +respData.token.token] = respData.token.token;",
+									"",
+									"postman.setEnvironmentVariable('iwf_token',respData.token.token);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": {{iwf_username}},\n  \"password\": {{iwf_password}},\n  \"loginProvidername\": \"tmos\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authn/login",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authn",
+								"login"
+							]
+						},
+						"description": "Using Basic Auth, request a token from the iWorkflow platform."
+					},
+					"response": []
+				},
+				{
+					"name": "Increase Auth Token Timeout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"tests[\"Auth Token timeout is: \" +respData.timeout] = respData.timeout;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"timeout\":\"36000\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authz/tokens/{{iwf_token}}",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authz",
+								"tokens",
+								"{{iwf_token}}"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Update HTTP Service - disable a server",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"{{my-app-name}}\",\n  \"clustername\": \"{{connector-name}}\",\n  \"template\" : \"f5-http-lb\",\n  \"app-data\": [\n                {\n                    \"name\": \"pool__port\",\n                    \"value\": \"{{service-port}}\"\n                }\n    ],\n    \"servers-data\": [{\n        \"name\": \"pool__Members\",\n        \"columns\": [\n            \"IPAddress\",\n            \"State\"\n        ],\n        \"rows\": [\n          [ \n            \"{{server1-addr}}\",\n            \"disabled\"\n          ], [\n            \"{{server2-addr}}\",\n            \"enabled\"\n          ]\n        ]\n    }]\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/my-app-interface",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"my-app-interface"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "GET HTTP Service ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"{{my-app-name}}\",\n  \"template\" : \"f5-http-lb\",\n  \"vars\": [\n                {\n                    \"name\": \"pool__port\",\n                    \"value\": \"{{service-port}}\"\n                }\n    ],\n    \"tables\": [{\n        \"name\": \"pool__Members\",\n        \"columns\": [\n            \"IPAddress\",\n            \"State\"\n        ],\n        \"rows\": [\n          [ \n            \"{{server1-addr}}\",\n            \"enabled\"\n          ], [\n            \"{{server2-addr}}\",\n            \"enabled\"\n          ]\n        ]\n    }]\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/my-app-interface/{{my-app-name}}",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"my-app-interface",
+								"{{my-app-name}}"
+							]
+						},
+						"description": null
 					},
 					"response": []
 				}
@@ -247,7 +485,7 @@
 								"{{iwf_token}}"
 							]
 						},
-						"description": ""
+						"description": null
 					},
 					"response": []
 				},
@@ -278,7 +516,380 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"{{my-app-name}}\",\n\t\"template\" : \"f5-fastl4-tcp-lb\",\n\t\"vars\": [\n                {\n                    \"name\": \"pool__port\",\n                    \"value\": \"{{service-port}}\"\n                }\n    ],\n    \"tables\": [{\n        \"name\": \"pool__Members\",\n        \"columns\": [\n        \"IPAddress\",\n        \"Port\",\n        \"State\"\n      ],\n      \"rows\": [\n        [\n          \"{{server1-addr}}\",\n          \"{{server1-port}}\",\n          \"enabled\"\n        ],\n        [\n          \"{{server2-addr}}\",\n          \"{{server2-port}}\",\n          \"enabled\"\n        ]\n      ]\n    }]\n}"
+							"raw": "{\n  \"name\": \"{{my-app-name}}\",\n  \"clustername\": \"BIG-IP-student\",\n  \"template\" : \"f5-fastl4-tcp-lb\",\n  \"app-data\": [\n                {\n                    \"name\": \"pool__port\",\n                    \"value\": \"{{service-port}}\"\n                }\n    ],\n    \"servers-data\": [{\n        \"name\": \"pool__Members\",\n        \"columns\": [\n        \"IPAddress\",\n        \"Port\",\n        \"State\"\n      ],\n      \"rows\": [\n        [\n          \"{{server1-addr}}\",\n          \"{{server1-port}}\",\n          \"enabled\"\n        ],\n        [\n          \"{{server2-addr}}\",\n          \"{{server2-port}}\",\n          \"enabled\"\n        ]\n      ]\n    }]\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/my-app-interface",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"my-app-interface"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "GET TCP Service",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"{{my-app-name}}\",\n  \"template\" : \"f5-http-lb\",\n  \"vars\": [\n                {\n                    \"name\": \"pool__port\",\n                    \"value\": \"{{service-port}}\"\n                }\n    ],\n    \"tables\": [{\n        \"name\": \"pool__Members\",\n        \"columns\": [\n            \"IPAddress\",\n            \"State\"\n        ],\n        \"rows\": [\n          [ \n            \"{{server1-addr}}\",\n            \"enabled\"\n          ], [\n            \"{{server2-addr}}\",\n            \"enabled\"\n          ]\n        ]\n    }]\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/my-app-interface/{{my-app-name}}",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"my-app-interface",
+								"{{my-app-name}}"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Update-Service-TCP",
+			"description": "this folder will update a TCP service automatically via the custom application interface",
+			"item": [
+				{
+					"name": "Request a Token from iWorkflow",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"",
+									"tests[\"response has token: \" +respData.token.token] = respData.token.token;",
+									"",
+									"postman.setEnvironmentVariable('iwf_token',respData.token.token);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": {{iwf_username}},\n  \"password\": {{iwf_password}},\n  \"loginProvidername\": \"tmos\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authn/login",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authn",
+								"login"
+							]
+						},
+						"description": "Using Basic Auth, request a token from the iWorkflow platform."
+					},
+					"response": []
+				},
+				{
+					"name": "Increase Auth Token Timeout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"tests[\"Auth Token timeout is: \" +respData.timeout] = respData.timeout;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"timeout\":\"36000\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authz/tokens/{{iwf_token}}",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authz",
+								"tokens",
+								"{{iwf_token}}"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Update TCP Service - disable a server",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"{{my-app-name}}\",\n  \"clustername\": \"BIG-IP-student\",\n  \"template\" : \"f5-fastl4-tcp-lb\",\n  \"app-data\": [\n                {\n                    \"name\": \"pool__port\",\n                    \"value\": \"{{service-port}}\"\n                }\n    ],\n    \"servers-data\": [{\n        \"name\": \"pool__Members\",\n        \"columns\": [\n        \"IPAddress\",\n        \"Port\",\n        \"State\"\n      ],\n      \"rows\": [\n        [\n          \"{{server1-addr}}\",\n          \"{{server1-port}}\",\n          \"disabled\"\n        ],\n        [\n          \"{{server2-addr}}\",\n          \"{{server2-port}}\",\n          \"enabled\"\n        ]\n      ]\n    }]\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/my-app-interface",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"my-app-interface"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "GET TCP Service",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"{{my-app-name}}\",\n  \"template\" : \"f5-http-lb\",\n  \"vars\": [\n                {\n                    \"name\": \"pool__port\",\n                    \"value\": \"{{service-port}}\"\n                }\n    ],\n    \"tables\": [{\n        \"name\": \"pool__Members\",\n        \"columns\": [\n            \"IPAddress\",\n            \"State\"\n        ],\n        \"rows\": [\n          [ \n            \"{{server1-addr}}\",\n            \"enabled\"\n          ], [\n            \"{{server2-addr}}\",\n            \"enabled\"\n          ]\n        ]\n    }]\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/my-app-interface/{{my-app-name}}",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"my-app-interface",
+								"{{my-app-name}}"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete-Service",
+			"description": null,
+			"item": [
+				{
+					"name": "Request a Token from iWorkflow",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"",
+									"tests[\"response has token: \" +respData.token.token] = respData.token.token;",
+									"",
+									"postman.setEnvironmentVariable('iwf_token',respData.token.token);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": {{iwf_username}},\n  \"password\": {{iwf_password}},\n  \"loginProvidername\": \"tmos\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authn/login",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authn",
+								"login"
+							]
+						},
+						"description": "Using Basic Auth, request a token from the iWorkflow platform."
+					},
+					"response": []
+				},
+				{
+					"name": "Increase Auth Token Timeout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"tests[\"Auth Token timeout is: \" +respData.timeout] = respData.timeout;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"timeout\":\"36000\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authz/tokens/{{iwf_token}}",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authz",
+								"tokens",
+								"{{iwf_token}}"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Service",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\" : \"{{my-app-name}}\"\r\n}"
 						},
 						"url": {
 							"raw": "https://{{iwf_mgmt}}/mgmt/shared/my-app-interface",
@@ -299,109 +910,8 @@
 			]
 		},
 		{
-			"name": "Delete-Service",
-			"description": "",
-			"item": [
-				{
-					"name": "Request a Token from iWorkflow",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"tests[\"Status code is 200\"] = responseCode.code === 200;",
-									"",
-									"var respData = JSON.parse(responseBody);",
-									"",
-									"tests[\"response has token: \" +respData.token.token] = respData.token.token;",
-									"",
-									"postman.setEnvironmentVariable('iwf_token',respData.token.token);",
-									""
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"username\": {{iwf_username}},\n  \"password\": {{iwf_password}},\n  \"loginProvidername\": \"tmos\"\n}"
-						},
-						"url": {
-							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authn/login",
-							"protocol": "https",
-							"host": [
-								"{{iwf_mgmt}}"
-							],
-							"path": [
-								"mgmt",
-								"shared",
-								"authn",
-								"login"
-							]
-						},
-						"description": "Using Basic Auth, request a token from the iWorkflow platform."
-					},
-					"response": []
-				},
-				{
-					"name": "Increase Auth Token Timeout",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"tests[\"Status code is 200\"] = responseCode.code === 200;",
-									"",
-									"var respData = JSON.parse(responseBody);",
-									"tests[\"Auth Token timeout is: \" +respData.timeout] = respData.timeout;",
-									""
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "X-F5-Auth-Token",
-								"value": "{{iwf_token}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"timeout\":\"36000\"\n}"
-						},
-						"url": {
-							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authz/tokens/{{iwf_token}}",
-							"protocol": "https",
-							"host": [
-								"{{iwf_mgmt}}"
-							],
-							"path": [
-								"mgmt",
-								"shared",
-								"authz",
-								"tokens",
-								"{{iwf_token}}"
-							]
-						},
-						"description": ""
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "Test-Interface",
-			"description": "",
+			"description": null,
 			"item": [
 				{
 					"name": "Request a Token from iWorkflow",
@@ -494,7 +1004,7 @@
 								"{{iwf_token}}"
 							]
 						},
-						"description": ""
+						"description": null
 					},
 					"response": []
 				},
@@ -525,7 +1035,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\" : \"{{my-app-name}}\"\n}"
+							"raw": "{\n  \"name\" : \"{{my-app-name}}\"\n}"
 						},
 						"url": {
 							"raw": "https://{{iwf_mgmt}}/mgmt/shared/my-app-interface/example",
@@ -540,7 +1050,7 @@
 								"example"
 							]
 						},
-						"description": ""
+						"description": null
 					},
 					"response": []
 				}

@@ -37,7 +37,7 @@ Perform the following steps to complete this task:
    ``/var/config/rest/iapps/HelloWorld/nodejs/``:
 
    ``nano /var/config/rest/iapps/HelloWorld/nodejs/hello_world.js``
-   
+
    .. NOTE:: If you have not used nano before:  After you paste in the contents below, you will type ``CTRL-X`` to exit the editor.  You will then be prompted to save the file, type ``Y`` to confirm.
 
 #. Copy/Paste the following content into your file:
@@ -81,8 +81,8 @@ Perform the following steps to complete this task:
    extension:
 
    ``restcurl shared/nodejs/loader-path-config -d '{"workerPath": "/var/config/rest/iapps/HelloWorld"}'``
-   
-   .. NOTE:: ``restcurl`` is a utility that allows you to communicate with iControl REST via the CLI.   
+
+   .. NOTE:: ``restcurl`` is a utility that allows you to communicate with iControl REST via the CLI.
 
    The output should look like this:
 

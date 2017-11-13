@@ -27,13 +27,13 @@ request (to deploy the service) could look like this:
    {
        "name": "{{my-app-name}}",
        "template" : "f5-http-lb",
-       "vars": [
+       "app-data": [
                    {
                        "name": "pool__port",
                        "value": "{{service-port}}"
                    }
        ],
-       "tables": [{
+       "servers-data": [{
            "name": "pool__Members",
            "columns": [
                "IPAddress",
@@ -50,6 +50,11 @@ request (to deploy the service) could look like this:
            ]
        }]
    }
+
+Here you may also see that this payload does not use any iWF paramters. It's a
+custom build payload that is easier for an application engineer to understand.
+He doesn't want to have a deep understanding of F5 solution to deploy services.
+It's not his area of expertise.
 
 An example of an attribute that a consumer shouldn't have to provide is our
 Virtual Server IP. The consumer doesn't own this segment of the network and
@@ -70,15 +75,15 @@ iWorkflow is already setup with 2 service templates:
 
 
 
-Our extension will do the following:
 
-* Receive POST/DELETE requests
+Our extension can do the following:
+
+* Receive GET/PUT/POST/DELETE requests
 * Retrieve an IP from our IPAM solution (we use an iRule to simulate this. It's
   on the BIG-IP)
-* Complete the received payload with the information needed by iWorkflow to
+* Translate the received payload with the information needed by iWorkflow to
   trigger those templates
-* Send an updated POST/DELETE requests to iWorkflow to deploy/delete the
-  relevant service
+
 
 **Exercises in this Module**
 

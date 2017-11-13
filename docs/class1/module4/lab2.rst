@@ -312,14 +312,14 @@ For this task, we will do 3 things:
 
 Perform the following tasks to complete this task:
 
-#. To add the http module to our extension we need to add the following at the
+#. To add the http module to our extension, we need to add the following at the
    top of your code
 
    .. code-block:: javascript
 
       var http = require('http');
 
-#. You can add this below this line:
+   Add this below this existing line:
 
    .. code-block:: javascript
 
