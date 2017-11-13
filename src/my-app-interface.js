@@ -481,7 +481,7 @@ ipam_extension.prototype.getExampleState = function () {
   return {
         "name": "my-app-name",
         "template": "f5-http-lb",
-        "clustername": "BIG-IP-student"
+        "clustername": "BIG-IP-student",
         "app-data": [
                     {
                         "name": "pool__port",

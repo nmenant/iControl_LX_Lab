@@ -83,7 +83,7 @@ Use Postman - Create HTTP Service Example
       :scale: 50%
 
 
-#. Here is the response from the service creation:
+#. Here is the response from the POST Request:
 
    .. image:: ../../_static/class1/module5/lab2-image005.png
       :align: center
@@ -94,11 +94,11 @@ Use Postman - Create HTTP Service Example
 
    .. code::
 
-      Sun, 29 Oct 2017 12:30:07 GMT - info: DEBUG: my-app-interfaceIPAM REST Call - onPost -
-      Sun, 29 Oct 2017 12:30:07 GMT - finest: socket 3 closed
-      Sun, 29 Oct 2017 12:30:07 GMT - info: DEBUG: my-app-interfaceIPAM REST Call - onPost - the retrieved IP is: 10.1.20.103
-      Sun, 29 Oct 2017 12:30:07 GMT - info: DEBUG: my-app-interface update service BODY is: "{ \"name\": \"my-application\", \"tenantTemplateReference               \": { \"link\": \"https://localhost/mgmt/cm/cloud/tenant/templates/iapp/f5-http-lb\"}, \"tenantReference\": { \"link\": \"https://localhost/mgmt               /cm/cloud/tenants/student\"},\"vars\": [ { \"name\" : \"pool__port\", \"value\" : \"80\"},{\"name\": \"pool__addr\",\"value\": \"10.1.20.103\"}]               , \"tables\": [\n\t{\n\t\t\"name\": \"pool__Members\",\n\t\t\"columns\": [\n\t\t\t\"IPAddress\",\n\t\t\t\"State\"\n\t\t],\n\t\t\"rows\": [\n\t\t               \t[\n\t\t\t\t\"10.1.10.10\",\n\t\t\t\t\"enabled\"\n\t\t\t],\n\t\t\t[\n\t\t\t\t\"10.1.10.10\",\n\t\t\t\t\"enabled\"\n\t\t\t]\n\t\t]\n\t}\n],\"pro               perties\": [{\"id\": \"cloudConnectorReference\",\"isRequired\": false, \"value\": \"https://localhost/mgmt/cm/cloud/connectors/local/58df07a5-f               51c-45ac-a35b-406cfb35840c\"}],\"selfLink\": \"https://localhost/mgmt/cm/cloud/tenants/student/services/iapp/my-application\"}"
-      Sun, 29 Oct 2017 12:30:07 GMT - info: DEBUG: my-app-interface - function RestPostRequest, Service created successfully
+      Mon, 13 Nov 2017 14:51:40 GMT - info: DEBUG: my-app-interface- onPost - the retrieved IP is: 10.1.20.100
+      Mon, 13 Nov 2017 14:51:40 GMT - info: DEBUG: my-app-interfaceretrieve connector ID - onPost - the connector name is : BIG-IP-student
+      Mon, 13 Nov 2017 14:51:40 GMT - info: DEBUG: my-app-interface onPost - connector ID is : 58df07a5-f51c-45ac-a35b-406cfb35840c
+      Mon, 13 Nov 2017 14:51:40 GMT - info: DEBUG: my-app-interface update service BODY is: "{ \"name\": \"my-application\", \"tenantTemplateReference\": { \"link\": \"https://localhost/mgmt/cm/cloud/tenant/templates/iapp/f5-http-lb\"}, \"tenantReference\": { \"link\": \"https://localhost/mgmt/cm/cloud/tenants/student\"},\"vars\": [ { \"name\" : \"pool__port\", \"value\" : \"80\"},{\"name\": \"pool__addr\",\"value\": \"10.1.20.100\"}], \"tables\": [\n\t{\n\t\t\"name\": \"pool__Members\",\n\t\t\"columns\": [\n\t\t\t\"IPAddress\",\n\t\t\t\"State\"\n\t\t],\n\t\t\"rows\": [\n\t\t\t[\n\t\t\t\t\"10.1.10.10\",\n\t\t\t\t\"enabled\"\n\t\t\t],\n\t\t\t[\n\t\t\t\t\"10.1.10.11\",\n\t\t\t\t\"enabled\"\n\t\t\t]\n\t\t]\n\t}\n],\"properties\": [{\"id\": \"cloudConnectorReference\",\"isRequired\": false, \"value\": \"https://localhost/mgmt/cm/cloud/connectors/local/58df07a5-f51c-45ac-a35b-406cfb35840c\"}],\"selfLink\": \"https://localhost/mgmt/cm/cloud/tenants/student/services/iapp/my-application\"}"
+      Mon, 13 Nov 2017 14:51:40 GMT - info: DEBUG: my-app-interface - function RestPostRequest, Service created successfully
 
 
 #. Logging as ``student`` on the iWorkflow UI:
