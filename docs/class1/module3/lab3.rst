@@ -92,7 +92,7 @@ operating state from a JSON file in GitHub:
 
    module.exports = HelloWorld;
 
-With these modifications, any time a HTTP GET is sent to
+With these modifications, anytime a HTTP GET is sent to
 ``/mgmt/ilxe_lab/hello_world`` it will reply with the JSON blob that was
 retrieved from GitHub when the worker was initially loaded.
 
