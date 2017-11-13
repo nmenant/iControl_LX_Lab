@@ -154,4 +154,4 @@ Perform the following steps to complete this task:
    URIs they have access to and also which HTTP Methods he can use against those
    URIs.
 
-.. _BIG-IP RBAC API: http://https://hive.f5.com/docs/DOC-45844
+.. _BIG-IP RBAC API: https://hive.f5.com/docs/DOC-45844
