@@ -480,14 +480,15 @@ ipam_extension.prototype.onDelete = function (restOperation) {
 ipam_extension.prototype.getExampleState = function () {
   return {
         "name": "my-app-name",
-        "template" : "f5-http-lb",
-        "vars": [
+        "template": "f5-http-lb",
+        "clustername": "BIG-IP-student"
+        "app-data": [
                     {
                         "name": "pool__port",
                         "value": "80"
                     }
         ],
-        "tables": [{
+        "servers-data": [{
             "name": "pool__Members",
             "columns": [
                 "IPAddress",

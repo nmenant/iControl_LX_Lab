@@ -75,7 +75,8 @@ iWorkflow is already setup with 2 service templates:
 
 
 
-Our extension will do the following:
+
+Our extension can do the following:
 
 * Receive GET/PUT/POST/DELETE requests
 * Retrieve an IP from our IPAM solution (we use an iRule to simulate this. It's

@@ -29,13 +29,16 @@ Perform the following steps to complete this task:
 #. Click on the Postman icon in the task bar (or on the Desktop)
 
    .. image:: ../../_static/class1/module5/lab1-image001.png
+      :scale: 50%
       :align: center
+
 
 #. You should see this:
 
    .. image:: ../../_static/class1/module5/lab1-image002.png
       :align: center
       :scale: 50%
+
 
 #. Click on the collection ``iWF-RPM-package-management`` and then on the
    ``2A_Install_RPM`` folder
