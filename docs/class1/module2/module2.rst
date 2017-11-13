@@ -20,7 +20,7 @@ platform, rather than on each individual BIG-IP.
    * `F5 iWorkflow <https://devcentral.f5.com/wiki/iWorkflow.HomePage.ashx>`_
    * `F5 BIG-IP <https://support.f5.com/csp/knowledge-center/software/BIG-IP?module=BIG-IP%20LTM>`_
 
-.. NOTE:: This lab is ``optional``. It gives you an example on what you can build/
+.. NOTE:: This lab is ``OPTIONAL``. It gives you an example of what you can build/
    implement with an iControl LX extension. It won't give you any knowledge on
    how to build your own extension or install one.
 
