@@ -45,21 +45,20 @@ Task 1 - Access UDF and Start Your Deployment
 
 Perform the following steps to complete this task:
 
-#. Connect to UDF and go to "Courses".
+#. Connect to UDF and go to "Blueprint".
 
    .. image:: ../../_static/class1/module0/lab1-image001.png
       :align: center
       :scale: 50%
 
-#. Search for a Course named ``intro to iControl LX extension``. There will be 2
-   classes at ISC around iControl LX extensions so make sure you select the
-   right session (based on the room name).
+#. Search for a Blueprint named ``intro to iControl LX extension``.
 
-#. Click the :guilabel:`Join` button and your deployment should start.
+#. Click the :guilabel:`Deploy` button and a deployment should be created.
+
+#. Go to "Deployments" and start the newly created deployment called ``intro to
+   iControl LX extension``.
 
 Task 2 - Wait for Your Deployment to Be Started
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Starting the deployment will take some time, be patient (5-10 minutes)
-
-
