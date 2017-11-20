@@ -139,10 +139,11 @@ Use Newman
    * ``4_Delete_HTTP_Service``: will delete the created HTTP based service
    * ``5_Delete_TCP_Service``: will delete the created TCP based service
 
-   .. NOTE:: If you want to change a little the service created, you can edit the
-      relevant bat script. You'll find all the parameters related to the service
-      in the script. You can open the folder containing all the scripts, right
-      click on the script you want to update and edit it with Notepad++
+   .. NOTE:: If you want to change the service that is created a little bit,
+      you can edit the relevant bat script. You’ll find all the parameters
+      related to the service in the script. You can open the folder containing
+      all the scripts, right click on the script you want to update and
+      edit it with ``Notepad++``
 
    .. image:: ../../_static/class1/module5/lab2-image003.png
       :align: center
@@ -242,7 +243,7 @@ Here is the ``/var/log/restnoded/restnoded.log`` output on iWorkflow:
 You can check the service got deleted properly on iWorkflow (student tenant)
 and on your BIG-IP
 
-.. NOTE:: In the postman collection we have also example on how to update the
-   deployed HTTP/TCP service. The folders are called ``Update-HTTP-Service`` and
-   ``Update-TCP-Service``. It shows how you can update an existing service to
-   disable the first server for example.
+.. NOTE:: In the postman collection we also have an example on how to update
+   the deployed HTTP/TCP service. The folders are called ``Update-HTTP-Service`` 
+   and ``Update-TCP-Service``. It shows how you can update an existing service
+   to disable the first server, for example.
